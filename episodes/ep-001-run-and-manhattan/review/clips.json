@@ -2,639 +2,639 @@
  {
   "id": "1a-1",
   "start": 0.0,
-  "end": 9.88,
+  "end": 8.38,
   "text": "Nutmeg is a warm, sweet spice. We grate it onto pies and eggnog, and for centuries people took it as medicine.",
   "beat": "1a",
   "kind": "Kitchen-table theme, warm cream. DATE: TODAY. REASON: -1 (all muted). UNCHANGED FROM v3 (owner loves it). A paper pie slice and a mug of egg"
  },
  {
   "id": "1a-2",
-  "start": 9.88,
-  "end": 14.24,
+  "start": 8.38,
+  "end": 12.92,
   "text": "Four hundred years ago, wars were fought over this seed.",
   "beat": "1a",
   "kind": "The pie, mug, jar, grater AND the seed LIFT off. NO seed animation in this shot (owner note r3: \"remove the animation of the seed, just show"
  },
  {
   "id": "1a-3",
-  "start": 14.24,
-  "end": 20.62,
+  "start": 12.92,
+  "end": 20.76,
   "text": "An indigenous people was massacred. Of every fifteen islanders, one remained.",
   "beat": "1a",
   "kind": "The swords LIFT off. The camera pushes in to the Banda shore. A row of 15 bandanese figures stands along it, male and female variants. From "
  },
  {
   "id": "1a-4",
-  "start": 20.62,
-  "end": 28.4,
+  "start": 20.76,
+  "end": 26.26,
   "text": "And later, it somehow ended up on a country's flag, on the other side of the world.",
   "beat": "1a",
   "kind": "The last figure LIFTS off. DATE: 1974. A Grenada flag rises right of centre and waves; the camera finds the small nutmeg in its green hoist "
  },
  {
   "id": "1a-5",
-  "start": 28.4,
-  "end": 37.36,
+  "start": 26.26,
+  "end": 34.12,
   "text": "And in the deal that kept this seed theirs, the Dutch signed away their claim to Manhattan.",
   "beat": "1a",
   "kind": "The flag LIFTS off. Navy paper world map. DATE: 1667. A small nutmeg seed sits on the Banda Islands (a plain cutout, no opening animation). "
  },
  {
   "id": "1b-1",
-  "start": 37.36,
-  "end": 46.6,
+  "start": 34.12,
+  "end": 41.36,
   "text": "So why would anyone kill for a seed? How did it end up on a flag, and tangled up with Manhattan?",
   "beat": "1b",
   "kind": "Cream. DATE: TODAY. REASON: -1. Serif headline card, one italic red word: \"Why *kill* for a seed?\". Below it two small cutouts pop in as the"
  },
  {
   "id": "1b-2",
-  "start": 46.6,
-  "end": 55.08,
+  "start": 41.36,
+  "end": 51.86,
   "text": "The story has five chapters. The seed. The route. The company. The island. And the treaty.",
   "beat": "1b",
   "kind": "The headline LIFTS off. Five large icons appear along a dotted line as each is named while the matching icon in the top-right reason bar lig"
  },
  {
   "id": "2a-1",
-  "start": 55.08,
-  "end": 64.34,
+  "start": 51.86,
+  "end": 62.18,
   "text": "Chapter one, the seed. Look at these island groups in eastern Indonesia, the Moluccas. Up north, Ternate and Tidore grew cloves.",
   "beat": "2a",
   "kind": "Cream. DATE: c. 1500. REASON: 0, THE SEED. A paper map of eastern Indonesia. The island groups draw on, each with its own outline and label:"
  },
  {
   "id": "2a-2",
-  "start": 64.34,
-  "end": 72.42,
+  "start": 62.18,
+  "end": 69.68,
   "text": "Down south lie the Banda Islands, a handful of small volcanic islands, with Run at the western end.",
   "beat": "2a",
   "kind": "The northern labels LIFT off. The camera pushes into the Banda group. Labels west to east: RUN, AI, GUNUNG API, BANDA NEIRA, and the long ar"
  },
  {
   "id": "2a-3",
-  "start": 72.42,
-  "end": 82.96,
+  "start": 69.68,
+  "end": 78.66,
   "text": "Split a fruit from this tree, and inside is a brown seed in a red, lacy net. The seed is nutmeg. The net is mace.",
   "beat": "2a",
   "kind": "A `nutmegTree` cutout grows on Banda. One fruit swings forward and splits open LIKE A FLOWER (owner note r3): the two shell halves turn outw"
  },
  {
   "id": "2a-4",
-  "start": 82.96,
-  "end": 88.42,
+  "start": 78.66,
+  "end": 83.9,
   "text": "For centuries, every nutmeg in the world came from these few islands.",
   "beat": "2a",
   "kind": "The tree LIFTS off. World map, cream. Every coastline greys out except the Banda group, which glows amber. Card: \"THE WORLD'S ONLY SOURCE\"."
  },
  {
   "id": "2a-5",
-  "start": 88.42,
-  "end": 94.75,
+  "start": 83.9,
+  "end": 89.84,
   "text": "A nutmeg tree takes seven to nine years to bear fruit.",
   "beat": "2a",
   "kind": "The card LIFTS off. A nutmeg tree stands large in the centre and grows from sapling to full tree as a horizontal timeline draws left to righ"
  },
  {
   "id": "2b-1",
-  "start": 94.75,
-  "end": 103.9,
+  "start": 89.84,
+  "end": 98.92,
   "text": "Chapter two, the route. Bandanese, Javanese and Malay boats carried nutmeg more than three thousand kilometers west, to Malacca.",
   "beat": "2b",
   "kind": "Cream. The map zooms out to the Indian Ocean. DATE: 1400s. REASON: 1, THE ROUTE. `Kit.priceClimb` starts: a red route draws west from BANDA "
  },
  {
   "id": "2b-2",
-  "start": 103.9,
-  "end": 111.72,
+  "start": 98.92,
+  "end": 106.49,
   "text": "From there, to India, Arabia, Egypt and Venice. About fourteen thousand kilometers in a straight line.",
   "beat": "2b",
   "kind": "The token travels on, pins popping in rhythm: CALICUT, ADEN, ALEXANDRIA, VENICE. A distance counter ticks to \"≈ 14,400 KM\"; mono label \"STRA"
  },
  {
   "id": "2b-3",
-  "start": 111.72,
-  "end": 117.2,
+  "start": 106.49,
+  "end": 112.42,
   "text": "At every port it changed hands, and every buyer added his own price.",
   "beat": "2b",
   "kind": "OWNER'S PICK: the price LADDER from the kit demo on Drive (`kit/compositions/demo-route.html`, `Kit.priceLadder`, eyebrow \"PRICE OF NUTMEG\","
  },
  {
   "id": "2b-4",
-  "start": 117.2,
-  "end": 128.3,
+  "start": 112.42,
+  "end": 121.9,
   "text": "By one historian's estimate, it sold in Europe for more than a hundred times its price in Banda. A two-dollar coffee, selling for two hundred.",
   "beat": "2b",
   "kind": "The last ladder bar (VENICE / EUROPE) shoots up past the others and its tag counts to \"×100+\", source line \"AMY JORDAN, 2016\". Beside it a p"
  },
  {
   "id": "2b-5",
-  "start": 128.3,
-  "end": 133.76,
+  "start": 121.9,
+  "end": 127.94,
   "text": "So whoever sailed straight to Banda would get rich.",
   "beat": "2b",
   "kind": "The whole price climb LIFTS off. A single dotted line draws straight from Banda around Africa to Europe, with a question mark on it."
  },
  {
   "id": "3a-1",
-  "start": 133.76,
-  "end": 139.1,
+  "start": 127.94,
+  "end": 133.44,
   "text": "Chapter three, the company. The Portuguese came first, in fifteen twelve.",
   "beat": "3a",
   "kind": "Cream. DATE: 1512. REASON: 2, THE COMPANY. A Portuguese ship cutout sails from MALACCA to BANDA, takes on sacks, and sails away again."
  },
  {
   "id": "3a-2",
-  "start": 139.1,
-  "end": 143.38,
+  "start": 133.44,
+  "end": 137.44,
   "text": "But when they tried to build a fort, the Bandanese attacked the builders.",
   "beat": "3a",
   "kind": "DATE: 1529. A Portuguese fort outline starts to draw itself on Banda; bandanese figures run at it from both sides; the outline tears and LIF"
  },
  {
   "id": "3a-3",
-  "start": 143.38,
-  "end": 153.04,
+  "start": 137.44,
+  "end": 145.06,
   "text": "There was no king to capture or win over, only village councils of rich men, known as the orang kaya.",
   "beat": "3a",
   "kind": "A ring of orangKaya figures (long indigo jackets, tall ochre head wraps) stands around a council mat; village pins dot the islands. At \"know"
  },
  {
   "id": "3a-4",
-  "start": 153.04,
-  "end": 157.72,
+  "start": 145.06,
+  "end": 149.9,
   "text": "So Portugal settled for buying Banda's nutmeg second-hand, in Malacca.",
   "beat": "3a",
   "kind": "The council LIFTS off. An arrow runs from Banda to MALACCA, labelled \"BOUGHT SECOND-HAND\"."
  },
  {
   "id": "3a-5",
-  "start": 157.72,
-  "end": 163.8,
+  "start": 149.9,
+  "end": 157.22,
   "text": "Then came the Dutch. In sixteen-oh-two, they founded the Dutch East India Company, the VOC.",
   "beat": "3a",
   "kind": "DATE: 1599, then 1602. Dutch East Indiaman cutouts arrive under `voc` flags. Centre, `Kit.vocLogo` (chamber A, ink) with `Kit.vocReveal`: th"
  },
  {
   "id": "3a-6",
-  "start": 163.8,
-  "end": 171.26,
+  "start": 157.22,
+  "end": 166.92,
   "text": "It could wage war, sign treaties, mint coins and build forts. A business with its own army.",
   "beat": "3a",
   "kind": "The logo holds, flags still waving. Four power icons stamp down around it as each is named: crossed swords, a treaty seal, a coin, a fort."
  },
  {
   "id": "3a-7",
-  "start": 171.26,
-  "end": 178.32,
+  "start": 166.92,
+  "end": 172.48,
   "text": "Its plan was not to join the relay. It was to own it.",
   "beat": "3a",
   "kind": "The icons LIFT off. The relay route from 2b redraws; its middle pins LIFT off one by one until a single orange line runs unbroken from Banda"
  },
  {
   "id": "3b-1",
-  "start": 178.32,
-  "end": 189.32,
+  "start": 172.48,
+  "end": 184.54,
   "text": "In sixteen-oh-nine, the Bandanese and the Dutch went to war. Forty-six Dutchmen died in an ambush. But the Dutch held on, and built a fort.",
   "beat": "3b",
   "kind": "Navy. DATE: 1609. REASON: 2, THE COMPANY. The orange line LIFTS off. The Banda map. Dutch ships with `voc` flags anchor off Banda Neira; a r"
  },
  {
   "id": "3b-2",
-  "start": 189.32,
-  "end": 198.57,
+  "start": 184.54,
+  "end": 193.22,
   "text": "On another island, Ai, English traders were still buying nutmeg from the Bandanese. And the Dutch wanted it all for themselves.",
   "beat": "3b",
   "kind": "The fort cutout \"FORT NASSAU · 1609\" stands on Banda Neira with a waving `voc` flag. The camera pans west to Ai, where a small trading post "
  },
  {
   "id": "3b-3",
-  "start": 198.57,
-  "end": 206.82,
+  "start": 193.22,
+  "end": 202.62,
   "text": "In sixteen sixteen, the Dutch took Ai. About four hundred islanders drowned fleeing across the water to Run.",
   "beat": "3b",
   "kind": "DATE: 1616. Dutch boats land on Ai; Ai's flag swaps from England to VOC. Bandanese figures in the swim pose cross the strait toward Run, hea"
  },
  {
   "id": "3b-4",
-  "start": 206.82,
-  "end": 215.55,
+  "start": 202.62,
+  "end": 211.75,
   "text": "Run was the farthest out, and next on the Dutch list. But the English got there first.",
   "beat": "3b",
   "kind": "The camera settles on Run, the outermost island; a pin and label RUN. NO checklist card. At \"the English got there first\", an English ship c"
  },
  {
   "id": "4a-1",
-  "start": 215.55,
-  "end": 231.86,
+  "start": 211.75,
+  "end": 226.8,
   "text": "Chapter four, the island. At the time, England's East India Company was not nearly as big as the VOC. It was a string of trading posts from India to Japan, and some years it sent a single ship.",
   "beat": "4a",
   "kind": "Cream. DATE: 1616. REASON: 3, THE ISLAND. A map from London to Asia. English trading-post pins pop, each with a small waving `england1616` f"
  },
  {
   "id": "4a-2",
-  "start": 231.86,
-  "end": 244.32,
+  "start": 226.8,
+  "end": 240.04,
   "text": "So when Run's leaders, having watched Ai fall, asked England for protection, the English base on Java sent what it had nearby: two ships, the Swan and the Defence.",
   "beat": "4a",
   "kind": "The London map LIFTS off. Close on Banda: Ai under a VOC flag; on Run, orangKaya figures look east toward it. A dotted line runs west to BAN"
  },
  {
   "id": "4a-3",
-  "start": 244.32,
-  "end": 247.14,
+  "start": 240.04,
+  "end": 242.68,
   "text": "In command was Nathaniel Courthope.",
   "beat": "4a",
   "kind": "A dark SHADOW SILHOUETTE of an Englishman (capotain hat, flat collar, doublet), solid ink-black, in an oval paper frame. NO \"no known portra"
  },
  {
   "id": "4a-4",
-  "start": 247.14,
-  "end": 256.24,
+  "start": 242.68,
+  "end": 250.12,
   "text": "In December sixteen sixteen, Run's chiefs came aboard and handed him a nutmeg tree, a clod of earth and a live goat.",
   "beat": "4a",
   "kind": "The portrait LIFTS off. DATE: DECEMBER 1616. The two ships anchor off Run, `england1616` flags waving. OrangKaya figures step onto the deck "
  },
  {
   "id": "4a-5",
-  "start": 256.24,
-  "end": 261.84,
+  "start": 250.12,
+  "end": 255.68,
   "text": "The English raised their flag on the island and fired thirty guns.",
   "beat": "4a",
   "kind": "An `england1616` flag runs up a pole on Run's shore and waves. Thirty small smoke puffs ripple along the ships' sides; counter \"30 GUNS\"."
  },
  {
   "id": "4a-6",
-  "start": 261.84,
-  "end": 268.74,
+  "start": 255.68,
+  "end": 260.64,
   "text": "In an English letter, they agreed to surrender their island to the king of England.",
   "beat": "4a",
   "kind": "A parchment scroll unrolls (`Kit.scrollPaper`) and types: \"…surrender their island … to our sovereign the king of England\"; the text scrolls"
  },
  {
   "id": "4a-7",
-  "start": 268.74,
-  "end": 275.47,
+  "start": 260.64,
+  "end": 267.58,
   "text": "To hold it, Courthope had thirty-nine men. The Dutch had an army.",
   "beat": "4a",
   "kind": "The scroll LIFTS off. Split frame. Left: Run with a waving `england1616` flag over a small fort and a waffle of 39 englishman figures. At \"T"
  },
  {
   "id": "4b-1",
-  "start": 275.47,
-  "end": 281.26,
+  "start": 267.58,
+  "end": 272.94,
   "text": "In January sixteen seventeen, three Dutch ships arrived to cut Run off.",
   "beat": "4b",
   "kind": "Navy. DATE: DECEMBER 1616. REASON: 3, THE ISLAND. Run, close. Cannon cutouts roll off the ships; englishman and bandanese figures haul them "
  },
  {
   "id": "4b-2",
-  "start": 281.26,
-  "end": 296.46,
+  "start": 272.94,
+  "end": 284.5,
   "text": "The Swan was taken after a ninety-minute fight. Then nine of his own men cut the Defence's cables and sailed her to the Dutch. Courthope had lost both his ships. But he didn't give up.",
   "beat": "4b",
   "kind": "DATE: 1617. The Swan, labelled, sails out; a Dutch ship closes; a clock card \"90 MINUTES\"; five englishman figures on deck turn red and fall"
  },
  {
   "id": "4b-3",
-  "start": 296.46,
-  "end": 305.62,
+  "start": 284.5,
+  "end": 293.48,
   "text": "His plan: hold on until help came. Small boats smuggled in sago, a palm flour, from the island of Seram.",
   "beat": "4b",
   "kind": "A day counter starts lower left: DAY 1. A ring of VOC ship cutouts circles Run at a distance. Canoe cutouts slip in from SERAM carrying sack"
  },
  {
   "id": "4b-4",
-  "start": 305.62,
-  "end": 311.66,
+  "start": 293.48,
+  "end": 299.12,
   "text": "England did send three relief ships. The Dutch captured two, and the third vanished.",
   "beat": "4b",
   "kind": "DATE: 1618. Three English relief-ship cutouts sail toward Banda; two are surrounded and their flags swap to VOC; the third LIFTS off the map"
  },
  {
   "id": "4b-5",
-  "start": 311.66,
-  "end": 321.41,
+  "start": 299.12,
+  "end": 308.9,
   "text": "In sixteen nineteen, London made peace with the Dutch in Europe, for a third of the spices. But on Run, Courthope held on.",
   "beat": "4b",
   "kind": "The relief ships LIFT off. DATE: 1619. Cream, London. An englishman and a dutchman in the sign pose over a scroll. Card: \"PEACE IN EUROPE · "
  },
  {
   "id": "4b-6",
-  "start": 321.41,
-  "end": 353.64,
+  "start": 308.9,
+  "end": 342.52,
   "text": "In October sixteen twenty, Courthope learned that Lonthor, the big island to the east, was ready to defy the Dutch and surrender to England too. He crossed at night in a small boat, with a few men, to accept it. But a spy, one account says, had warned the Dutch. On the way back, their boats were waiting in the dark. Courthope was shot in the chest, went over the side, and was never seen again.",
   "beat": "4b",
   "kind": "ONE continuous shot, about 30 s, no cut. Navy night. DATE: OCTOBER 1620. Map: Run, and east of it the long arc of LONTHOR; an orangKaya figu"
  },
  {
   "id": "4b-7",
-  "start": 353.64,
-  "end": 362.02,
+  "start": 342.52,
+  "end": 349.19,
   "text": "That same month, the head of the VOC in Asia wrote down his plan for Banda.",
   "beat": "4b",
   "kind": "The day counter stops: \"≈ 1,400 DAYS · NEARLY FOUR YEARS\". The 39-figure waffle LIFTS off; the English flag on Run lowers and LIFTS off. DAT"
  },
  {
   "id": "5a-1",
-  "start": 362.02,
-  "end": 370.68,
+  "start": 349.19,
+  "end": 359.66,
   "text": "His name was Jan Pieterszoon Coen. It was necessary, he wrote, to subjugate Banda again, and to populate it with other people.",
   "beat": "5a",
   "kind": "Navy. DATE: 1620. REASON: 3, THE ISLAND. `Kit.portrait` with `src: \"assets_r2/portraits/coen_waben_westfriesmuseum_1920px.jpg\"`, `fit: \"xMid"
  },
  {
   "id": "5a-2",
-  "start": 370.68,
-  "end": 376.8,
+  "start": 359.66,
+  "end": 365.62,
   "text": "His motto: \"Despair not, spare not your enemies.\"",
   "beat": "5a",
   "kind": "A second quote card slides under the first: \"Despair not, spare not your enemies\" · 1618."
  },
  {
   "id": "5a-3",
-  "start": 376.8,
-  "end": 389.72,
+  "start": 365.62,
+  "end": 379.04,
   "text": "He sailed from Batavia, on Java, with nineteen ships, sixteen hundred and fifty-five Dutch soldiers and two hundred and eighty-six Japanese mercenaries. His goal: total subjugation.",
   "beat": "5a",
   "kind": "The portrait and cards LIFT off. DATE: 1621. A route draws from BATAVIA (JAVA) to Banda. Along it: 19 ship icons under waving `voc` flags; a"
  },
  {
   "id": "5a-4",
-  "start": 389.72,
-  "end": 393.3,
-  "text": "The Dutch landed, and carried out the plan.",
+  "start": 379.04,
+  "end": 382.54,
+  "text": "In March sixteen twenty-one, the Dutch landed, and carried out the plan.",
   "beat": "5a",
   "kind": "DATE: MARCH 1621. The fleet LIFTS off. Dutch soldier figures march ashore on Lonthor and Banda Neira under waving `voc` flags. A row of oran"
  },
  {
   "id": "5a-5",
-  "start": 393.3,
-  "end": 400.22,
+  "start": 382.54,
+  "end": 391.1,
   "text": "In May, dozens of the orang kaya were killed, beheaded by Japanese mercenaries.",
   "beat": "5a",
   "kind": "DATE: MAY 1621. Three japaneseMercenary figures stand behind the row (no weapons drawn). The orangKaya figures turn red and fall, one at a t"
  },
  {
   "id": "5a-6",
-  "start": 400.22,
-  "end": 416.26,
+  "start": 391.1,
+  "end": 410.36,
   "text": "Before the conquest, about fifteen thousand people lived on Banda. Afterward, about one thousand. Some fourteen thousand were killed, starved, enslaved or driven away. Of every fifteen, one remained.",
   "beat": "5a",
   "kind": "A waffle of 15 bandanese figures, male and female, label \"EACH ≈ 1,000 PEOPLE\"; big counter \"≈ 15,000\". At \"about one thousand\", the counter"
  },
  {
   "id": "5a-7",
-  "start": 416.26,
-  "end": 424.48,
+  "start": 410.36,
+  "end": 417.34,
   "text": "Their land was cut into sixty-eight plantations, worked by enslaved people from across Asia.",
   "beat": "5a",
   "kind": "The last figure LIFTS off. The Banda map is cut by thin lines into 68 plots; arrows bring small figures in from across Asia. Card: \"68 PLANT"
  },
  {
   "id": "5b-1",
-  "start": 424.48,
-  "end": 437.37,
+  "start": 417.34,
+  "end": 428.44,
   "text": "On Run, the Dutch killed or enslaved the men and sent the women and children away. Then they cut down every nutmeg tree on the island.",
   "beat": "5b",
   "kind": "Navy. DATE: 1621. REASON: 3, THE ISLAND. Run alone on the map, dotted with small nutmeg-tree cutouts; a VOC flag on the beach. At \"Then they"
  },
  {
   "id": "5b-2",
-  "start": 437.37,
-  "end": 451.92,
+  "start": 428.44,
+  "end": 440.46,
   "text": "Why destroy what they came for? Couldn't they just hold Run? They did. But on paper, Run belonged to the king of England, and English ships kept coming back.",
   "beat": "5b",
   "kind": "Card: \"WHY NOT JUST HOLD IT?\". On Run the VOC flag waves. At \"But on paper\", a red arrow points in from the west, labelled \"ENGLISH CLAIM · "
  },
  {
   "id": "5b-3",
-  "start": 451.92,
-  "end": 464.82,
+  "start": 440.46,
+  "end": 451.54,
   "text": "Remember, a nutmeg tree takes seven to nine years to bear fruit. With no trees, an English return would find nothing to sell for years.",
   "beat": "5b",
   "kind": "The sapling counter from 2a returns: \"7–9 YEARS TO FIRST FRUIT\". Then cattle cutouts wander across the bare island."
  },
  {
   "id": "5b-4",
-  "start": 464.82,
-  "end": 477.69,
+  "start": 451.54,
+  "end": 463.86,
   "text": "Every year, Dutch officials sailed out to check that no one had come back to trade. The island was empty. The English claim was not.",
   "beat": "5b",
   "kind": "DATE: 1622, then 1640s, then 1660s. A small Dutch boat circles Run once at each date; a dutchman figure walks the bare island holding a ledg"
  },
  {
   "id": "6a-1",
-  "start": 477.69,
-  "end": 488.12,
+  "start": 463.86,
+  "end": 473.18,
   "text": "Chapter five, the treaty. On the other side of the world, in Manhattan, the Dutch had set up a colony by the mid-sixteen twenties.",
   "beat": "6a",
   "kind": "Cream. DATE: 1626. REASON: 4, THE TREATY. REUSE v3 shots 1a-6/1a-7, reversed: from the Banda Sea a dotted line runs across the globe west to"
  },
  {
   "id": "6a-2",
-  "start": 488.12,
-  "end": 496.86,
+  "start": 473.18,
+  "end": 481.64,
   "text": "A letter from sixteen twenty-six says they bought the island from the Native people for sixty guilders' worth of trade goods.",
   "beat": "6a",
   "kind": "A parchment scroll unrolls and types: \"Amsterdam, 5 November 1626… bought Manhattes Island from the Native People for 60 guilders worth of t"
  },
  {
   "id": "6a-3",
-  "start": 496.86,
-  "end": 512.19,
+  "start": 481.64,
+  "end": 498.21,
   "text": "The same ship carried seven thousand two hundred and forty-six beaver skins. One modern estimate puts the furs at close to a thousand times the island's price. In other words, they got Manhattan almost for free.",
   "beat": "6a",
   "kind": "The balance LIFTS off. A ship cutout; its hold fills with beaver-pelt icons as a counter runs to \"7,246\". At \"One modern estimate\", a card: "
  },
  {
   "id": "6a-4",
-  "start": 512.19,
-  "end": 523.39,
+  "start": 498.21,
+  "end": 511.03,
   "text": "Then, in sixteen sixty-four, an English squadron sailed in, and the Dutch governor surrendered, with no war declared. The town became New York.",
   "beat": "6a",
   "kind": "The ship LIFTS off. DATE: 1664. English squadron cutouts under waving `union1606` flags sail into the harbor; englishman figures on deck. Ta"
  },
  {
   "id": "6b-1",
-  "start": 523.39,
-  "end": 533.48,
+  "start": 511.03,
+  "end": 519.82,
   "text": "Three years later, in a new war, Dutch ships sailed up the Medway, a river in England, and burned the English fleet.",
   "beat": "6b",
   "kind": "Navy. DATE: 1667. REASON: 4, THE TREATY. A cutout map of the Medway estuary in England. Dutch ships under waving `dutchRepublic` flags sail "
  },
  {
   "id": "6b-2",
-  "start": 533.48,
-  "end": 539.68,
+  "start": 519.82,
+  "end": 526.66,
   "text": "Weeks later, in sixteen sixty-seven, English and Dutch envoys signed a peace in the Dutch town of Breda.",
   "beat": "6b",
   "kind": "DATE: 31 JULY 1667. The Medway LIFTS off. REUSE v3 shot 1a-5 (the Breda envoys): navy paper world map; two envoy figures in the \"sign\" pose "
  },
  {
   "id": "6b-3",
-  "start": 539.68,
-  "end": 545.94,
+  "start": 526.66,
+  "end": 533.96,
   "text": "It ran on an old Latin rule, uti possidetis. What you have, you hold.",
   "beat": "6b",
   "kind": "REUSE v3 shot 1b-2: the envoys step back; a parchment scroll unrolls (`Kit.scrollPaper`) and types \"UTI POSSIDETIS\", then \"WHAT YOU HAVE, YO"
  },
  {
   "id": "6b-4",
-  "start": 545.94,
-  "end": 555.72,
+  "start": 533.96,
+  "end": 545.28,
   "text": "The Dutch, who were winning, claimed the prizes: Run and Suriname. They let England keep New Netherland, by then New York.",
   "beat": "6b",
   "kind": "The scroll types two columns. THE DUTCH KEEP: RUN, SURINAME. ENGLAND KEEPS: NEW NETHERLAND (NEW YORK). A Suriname pin drops on South America"
  },
  {
   "id": "6b-5",
-  "start": 555.72,
-  "end": 561.3,
+  "start": 545.28,
+  "end": 549.88,
   "text": "In the end, the Dutch kept Run, an island about the size of Central Park,",
   "beat": "6b",
   "kind": "The scroll and envoys LIFT off. REUSE v3 shot 1a-8: Run fills the frame with a scale bar \"3 KM × 1 KM\". Manhattan slides in; Run lifts, trav"
  },
  {
   "id": "6b-6",
-  "start": 561.3,
-  "end": 564.36,
+  "start": 549.88,
+  "end": 553.06,
   "text": "and let Manhattan go.",
   "beat": "6b",
   "kind": "REUSE v3 shot 1a-9: Run slides back to the Banda Sea, Manhattan to the Hudson. A paper balance scale appears between them; Manhattan's pan r"
  },
  {
   "id": "6b-7",
-  "start": 564.36,
-  "end": 573.42,
+  "start": 553.06,
+  "end": 562.71,
   "text": "So what changed hands was not islands, but claims. England dropped its claim to Run. The Dutch dropped theirs to Manhattan.",
   "beat": "6b",
   "kind": "The scale LIFTS off. The two-island map. A red arrow labelled \"ENGLISH CLAIM, 1616\" runs from England to Run; a blue arrow labelled \"DUTCH C"
  },
  {
   "id": "6b-8",
-  "start": 573.42,
-  "end": 582.26,
+  "start": 562.71,
+  "end": 572.56,
   "text": "For the Dutch, that closed the last gap. Every nutmeg on the market now came from land they held.",
   "beat": "6b",
   "kind": "The orange VOC line from Banda to Amsterdam returns. A small red gap glows at Run, then closes. The VOC logo at Banda raises its two flags a"
  },
  {
   "id": "6b-9",
-  "start": 582.26,
-  "end": 587.05,
+  "start": 572.56,
+  "end": 578.27,
   "text": "The monopoly lasted about a hundred years.",
   "beat": "6b",
   "kind": "The orange line holds, whole. Then a hairline crack appears at its western end."
  },
  {
   "id": "7a-1",
-  "start": 587.05,
-  "end": 593.96,
-  "text": "France wanted into the nutmeg business. Pierre Poivre, who ran French Mauritius, had a bold idea.",
+  "start": 578.27,
+  "end": 588.18,
+  "text": "Then it cracked. France wanted into the nutmeg business. Pierre Poivre, who ran French Mauritius, had a bold idea.",
   "beat": "7a",
-  "kind": "Cream. DATE: 1760s. REASON: -1 (all muted). Map of the Indian Ocean, the orange VOC line unbroken, a pin on MAURITIUS. `Kit.portrait` with `"
+  "kind": "Cream. DATE: 1760s. REASON: -1 (all muted). (Section break: music resolved, ~3 s pause before.) At \"Then it cracked\", the hairline crack in "
  },
  {
   "id": "7a-2",
-  "start": 593.96,
-  "end": 598.32,
+  "start": 588.18,
+  "end": 592.3,
   "text": "Smuggle the seeds out of the Dutch spice islands.",
   "beat": "7a",
   "kind": "Small boat cutouts under French flags slip out of the Moluccas carrying potted seedlings; a dotted line runs to MAURITIUS. A small mono card"
  },
  {
   "id": "7a-3",
-  "start": 598.32,
-  "end": 603.66,
+  "start": 592.3,
+  "end": 597.7,
   "text": "By the early seventeen-seventies, his smuggled nutmeg was growing on Mauritius.",
   "beat": "7a",
   "kind": "DATE: EARLY 1770s. A garden cutout at PAMPLEMOUSSES, near Port Louis, with a small nutmeg sapling. The crack in the orange line widens sligh"
  },
  {
   "id": "7a-4",
-  "start": 603.66,
-  "end": 614.46,
+  "start": 597.7,
+  "end": 608.46,
   "text": "Then the tables turned again. Britain, by then the strongest power at sea, took the Banda Islands during its wars with France, around eighteen hundred.",
   "beat": "7a",
   "kind": "DATE: c. 1800. A paper table card flips over. British warship cutouts under waving `union1606` flags anchor at Banda; card \"THE WARS WITH FR"
  },
  {
   "id": "7a-5",
-  "start": 614.46,
-  "end": 626.78,
+  "start": 608.46,
+  "end": 622.06,
   "text": "They did the real damage. They dug up seedlings, packed them in soil, and shipped them to Penang, to Ceylon, to Singapore. From there, nutmeg reached Grenada, in the Caribbean.",
   "beat": "7a",
-  "kind": "Seedling pots packed with soil load onto a ship. Red arrows fan out from Banda: PENANG, CEYLON, SINGAPORE. Then one long arrow crosses to GR"
+  "kind": "WORD-SYNCED (owner note r4: this was out of sync). At \"dug up\", a sapling lifts out of the Banda soil; at \"packed them in soil\", it drops in"
  },
  {
   "id": "7a-6",
-  "start": 626.78,
-  "end": 637.47,
+  "start": 622.06,
+  "end": 632.9,
   "text": "Grenada became one of the world's biggest nutmeg producers. At independence, in nineteen seventy-four, it put the seed on its flag.",
   "beat": "7a",
   "kind": "DATE: 1974. The arrows LIFT off. The Grenada flag from 1a rises large and waves; the camera pushes into the green hoist triangle, onto the n"
  },
  {
   "id": "7b-1",
-  "start": 637.47,
-  "end": 654.5,
-  "text": "In sixteen twenty-six, a kilo of nutmeg cost about four guilders in Amsterdam, nearly a week's pay for a labourer. By one inflation estimate, that's roughly seventy-five dollars. Today, the farmer who grows a kilo gets about six.",
+  "start": 632.9,
+  "end": 651.74,
+  "text": "Now, back to the kitchen. In sixteen twenty-six, a kilo of nutmeg cost about four guilders in Amsterdam, nearly a week's pay for a labourer. By one inflation estimate, that's roughly seventy-five dollars. Today, the farmer who grows a kilo gets about six.",
   "beat": "7b",
-  "kind": "Kitchen-table theme. DATE: TODAY. REASON: -1. Two paper price cards. First, left: \"1626 · ONE KILO ≈ 4 GUILDERS · ≈ A LABOURER'S WEEK OF PAY"
+  "kind": "Kitchen-table theme. DATE: TODAY. REASON: -1. (Section break before.) At \"Now, back to the kitchen\", the kitchen table, mug and grater from "
  },
  {
   "id": "7b-2",
-  "start": 654.5,
-  "end": 666.32,
+  "start": 651.74,
+  "end": 662.06,
   "text": "The fight for this seed cost Courthope his life, and Run every tree. The Bandanese went from about fifteen thousand people to about one thousand.",
   "beat": "7b",
   "kind": "The price cards LIFT off. Navy. Big and clear, side by side, filling most of the frame: at \"Courthope\", a LARGE englishman figure (Courthope"
  },
  {
   "id": "7b-3",
-  "start": 666.32,
-  "end": 680.46,
+  "start": 662.06,
+  "end": 674.24,
   "text": "Some survivors had to flee their islands, and took their culture and language with them. They sailed east, to the Kei Islands, where two villages still speak their language and keep their culture alive.",
   "beat": "7b",
   "kind": "Everything LIFTS off. The Banda map; a small boat with a bandanese man and woman leaves Banda and sails east, a dotted line drawing behind i"
  },
  {
   "id": "7b-4",
-  "start": 680.46,
-  "end": 684.02,
+  "start": 674.24,
+  "end": 677.42,
   "text": "Run's nutmeg trees have grown back.",
   "beat": "7b",
   "kind": "Back to the opening two-island map from 1a, cream. On Run, nutmeg-tree cutouts grow back one by one; small counter \"POP. 1,572\". On the left"
  },
  {
   "id": "7b-5",
-  "start": 684.02,
-  "end": 693.74,
+  "start": 677.42,
+  "end": 686.86,
   "text": "Today, Manhattan's economy makes about a trillion dollars a year. Run's whole nutmeg harvest is worth about ten seconds of that.",
   "beat": "7b",
   "kind": "REUSE v3 shot 1b-1, cream: two paper counters side by side. Left, under a Manhattan cutout: \"≈ $1 TRILLION A YEAR\" (source tag \"BEA, 2024\")."
  },
  {
   "id": "7b-6",
-  "start": 693.74,
-  "end": 706.48,
+  "start": 686.86,
+  "end": 697.64,
   "text": "So, was it worth it? Who got the better deal: the Dutch, with Run, or the English, with Manhattan? It's up for debate. Tell us in the comments.",
   "beat": "7b",
   "kind": "The paper balance from chapter five returns between the islands: Run under a waving `dutchRepublic` flag, Manhattan under a waving `union160"
  },
  {
   "id": "7b-7",
-  "start": 706.48,
-  "end": 713.74,
+  "start": 697.64,
+  "end": 703.16,
   "text": "Next time you grate a pinch onto your eggnog, remember what that seed once cost.",
   "beat": "7b",
   "kind": "NO Run-over-Manhattan move (owner note r3: removed). The balance LIFTS off and a slow dissolve goes straight to the kitchen table: the mug o"
  },
  {
   "id": "7b-8",
-  "start": 713.74,
-  "end": 727.23,
+  "start": 703.16,
+  "end": 714.8,
   "text": "This is Story of Everything. We cover stories like this from around the world, three times a week. Like and subscribe for more.",
   "beat": "7b",
   "kind": "End card: the channel logo, wordmark \"STORY OF EVERYTHING\", moves from bottom-right to centre; like and subscribe button cutouts slide in be"
