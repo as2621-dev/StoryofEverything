@@ -1,0 +1,375 @@
+{
+ "paper_slide": [
+  {
+   "file": "paper_slide_1.mp3",
+   "duration": 1.181,
+   "license": "cc0",
+   "credit": "\"Paper slide\" by Kingofgamers_cz, CC0, https://freesound.org/people/Kingofgamers_cz/sounds/352914",
+   "title": "Paper slide"
+  },
+  {
+   "file": "paper_slide_2.mp3",
+   "duration": 1.152,
+   "license": "cc0",
+   "credit": "\"Sliding Envelope.wav\" by MTJohnson, CC0, https://freesound.org/people/MTJohnson/sounds/444431",
+   "title": "Sliding Envelope.wav"
+  },
+  {
+   "file": "paper_slide_3.mp3",
+   "duration": 1.389,
+   "license": "cc0",
+   "credit": "\"paper slide.wav\" by semccab, CC0, https://freesound.org/people/semccab/sounds/154403",
+   "title": "paper slide.wav"
+  }
+ ],
+ "paper_rustle": [
+  {
+   "file": "paper_rustle_1.mp3",
+   "duration": 1.129,
+   "license": "cc0",
+   "credit": "\"Paper Rustle\" by BenjaminNelan, CC0, https://freesound.org/people/BenjaminNelan/sounds/353125",
+   "title": "Paper Rustle"
+  },
+  {
+   "file": "paper_rustle_2.mp3",
+   "duration": 1.995,
+   "license": "by",
+   "credit": "\"Paper Rustle and Plop on Wooden Table\" by djlprojects, CC BY 3.0, https://freesound.org/people/djlprojects/sounds/432917",
+   "title": "Paper Rustle and Plop on Wooden Table"
+  }
+ ],
+ "stamp": [
+  {
+   "file": "stamp_1.mp3",
+   "duration": 0.708,
+   "license": "cc0",
+   "credit": "\"Thump.mp3\" by mpuffenbarger, CC0, https://freesound.org/people/mpuffenbarger/sounds/683031",
+   "title": "Thump.mp3"
+  },
+  {
+   "file": "stamp_2x.mp3",
+   "duration": 0.582,
+   "license": "cc0",
+   "title": "Stamp",
+   "credit": "\"Stamp\" by kermite607, CC0, https://freesound.org/people/kermite607/sounds/362624"
+  },
+  {
+   "file": "stamp_3x.mp3",
+   "duration": 0.978,
+   "license": "by",
+   "title": "thick-stamp-sub.wav",
+   "credit": "\"thick-stamp-sub.wav\" by newagesoup, CC BY 4.0, https://freesound.org/people/newagesoup/sounds/347323"
+  }
+ ],
+ "quill": [
+  {
+   "file": "quill_1x.mp3",
+   "duration": 4.559,
+   "license": "cc0",
+   "title": "Pen Writing On Paper",
+   "credit": "\"Pen Writing On Paper\" by 851189, CC0, https://freesound.org/people/851189/sounds/449504"
+  },
+  {
+   "file": "quill_2x.mp3",
+   "duration": 4.115,
+   "license": "cc0",
+   "title": "scribble.mp3",
+   "credit": "\"scribble.mp3\" by indigosierra, CC0, https://freesound.org/people/indigosierra/sounds/82610"
+  }
+ ],
+ "scroll": [
+  {
+   "file": "scroll_2.mp3",
+   "duration": 3.175,
+   "license": "cc0",
+   "credit": "\"Scroll.wav\" by justeluis, CC0, https://freesound.org/people/justeluis/sounds/185051",
+   "title": "Scroll.wav"
+  }
+ ],
+ "waves": [
+  {
+   "file": "waves_1.mp3",
+   "duration": 37.778,
+   "license": "cc0",
+   "credit": "\"Calm Ocean Breeze Simulation\" by ALLANZ10D, CC0, https://freesound.org/people/ALLANZ10D/sounds/235428",
+   "title": "Calm Ocean Breeze Simulation"
+  },
+  {
+   "file": "waves_2.mp3",
+   "duration": 20.618,
+   "license": "cc0",
+   "credit": "\"Waves\" by amccoy711, CC0, https://freesound.org/people/amccoy711/sounds/388408",
+   "title": "Waves"
+  }
+ ],
+ "splash": [
+  {
+   "file": "splash_1.mp3",
+   "duration": 2.321,
+   "license": "cc0",
+   "credit": "\"Water splash 5.wav\" by deleted_user_2104797, CC0, https://freesound.org/people/deleted_user_2104797/sounds/164596",
+   "title": "Water splash 5.wav"
+  },
+  {
+   "file": "splash_2.mp3",
+   "duration": 2.445,
+   "license": "by",
+   "credit": "\"Water Splash 1\" by qubodup, CC BY 4.0, https://freesound.org/people/qubodup/sounds/210428",
+   "title": "Water Splash 1"
+  }
+ ],
+ "cannon": [
+  {
+   "file": "cannon_1.mp3",
+   "duration": 1.621,
+   "license": "cc0",
+   "credit": "\"Cannon shot\" by SamsterBirdies, CC0, https://freesound.org/people/SamsterBirdies/sounds/467883",
+   "title": "Cannon shot"
+  }
+ ],
+ "musket": [
+  {
+   "file": "musket_1.mp3",
+   "duration": 1.906,
+   "license": "cc0",
+   "credit": "\"Musket Explosion\" by Willlewis, CC0, https://freesound.org/people/Willlewis/sounds/244345",
+   "title": "Musket Explosion"
+  },
+  {
+   "file": "musket_2.mp3",
+   "duration": 2.4,
+   "license": "cc0",
+   "credit": "\"Musket Shot.wav\" by mlsulli, CC0, https://freesound.org/people/mlsulli/sounds/234869",
+   "title": "Musket Shot.wav"
+  }
+ ],
+ "ship_creak": [
+  {
+   "file": "ship_creak_2.mp3",
+   "duration": 2.191,
+   "license": "cc0",
+   "credit": "\"Creaking Wood\" by Breviceps, CC0, https://freesound.org/people/Breviceps/sounds/456814",
+   "title": "Creaking Wood"
+  }
+ ],
+ "coins": [
+  {
+   "file": "coins_1.mp3",
+   "duration": 0.801,
+   "license": "cc0",
+   "credit": "\"coindrop1.wav\" by jmaimarc, CC0, https://freesound.org/people/jmaimarc/sounds/19778",
+   "title": "coindrop1.wav"
+  },
+  {
+   "file": "coins_2.mp3",
+   "duration": 0.316,
+   "license": "cc0",
+   "credit": "\"Coin Dropped\" by kermite607, CC0, https://freesound.org/people/kermite607/sounds/368203",
+   "title": "Coin Dropped"
+  },
+  {
+   "file": "coins_3.mp3",
+   "duration": 0.662,
+   "license": "cc0",
+   "credit": "\"coins-falling-013.wav\" by Gerent, CC0, https://freesound.org/people/Gerent/sounds/558992",
+   "title": "coins-falling-013.wav"
+  }
+ ],
+ "tree_fall": [
+  {
+   "file": "tree_fall_1.mp3",
+   "duration": 4.519,
+   "license": "cc0",
+   "credit": "\"A Tree Falling Down.wav\" by ecfike, CC0, https://freesound.org/people/ecfike/sounds/139952",
+   "title": "A Tree Falling Down.wav"
+  },
+  {
+   "file": "tree_fall_2.mp3",
+   "duration": 6.125,
+   "license": "cc0",
+   "credit": "\"timber tree falling 2\" by matt_beer, CC0, https://freesound.org/people/matt_beer/sounds/515312",
+   "title": "timber tree falling 2"
+  }
+ ],
+ "clock_tick": [
+  {
+   "file": "clock_tick_1.mp3",
+   "duration": 5.915,
+   "license": "cc0",
+   "credit": "\"Clock ticking\" by olver, CC0, https://freesound.org/people/olver/sounds/130388",
+   "title": "Clock ticking"
+  }
+ ],
+ "flag": [
+  {
+   "file": "flag_1.mp3",
+   "duration": 0.747,
+   "license": "cc0",
+   "credit": "\"cloth flap\" by ssierra1202, CC0, https://freesound.org/people/ssierra1202/sounds/391945",
+   "title": "cloth flap"
+  }
+ ],
+ "gulls": [
+  {
+   "file": "gulls_1.mp3",
+   "duration": 5.558,
+   "license": "by",
+   "credit": "\"Gull at the coast 824AM 210303_0264.wav\" by klankbeeld, CC BY 4.0, https://freesound.org/people/klankbeeld/sounds/623933",
+   "title": "Gull at the coast 824AM 210303_0264.wav"
+  }
+ ],
+ "march": [
+  {
+   "file": "march_1.mp3",
+   "duration": 1.375,
+   "license": "cc0",
+   "credit": "\"Footsteps on Forest Ground\" by Snudio_Records, CC0, https://freesound.org/people/Snudio_Records/sounds/267492",
+   "title": "Footsteps on Forest Ground"
+  },
+  {
+   "file": "march_2.mp3",
+   "duration": 9.76,
+   "license": "cc0",
+   "credit": "\"Walking through gravel\" by el_boss, CC0, https://freesound.org/people/el_boss/sounds/561501",
+   "title": "Walking through gravel"
+  }
+ ],
+ "grater": [
+  {
+   "file": "grater_1.mp3",
+   "duration": 2.454,
+   "license": "cc0",
+   "credit": "\"cheese_grater_03.wav\" by Noisehag, CC0, https://freesound.org/people/Noisehag/sounds/110547",
+   "title": "cheese_grater_03.wav"
+  },
+  {
+   "file": "grater_2.mp3",
+   "duration": 1.804,
+   "license": "cc0",
+   "credit": "\"cheese_grater_02.wav\" by Noisehag, CC0, https://freesound.org/people/Noisehag/sounds/110546",
+   "title": "cheese_grater_02.wav"
+  }
+ ],
+ "mug": [
+  {
+   "file": "mug_1.mp3",
+   "duration": 0.729,
+   "license": "by",
+   "credit": "\"Ceramic Set Down\" by f4ngy, CC BY 4.0, https://freesound.org/people/f4ngy/sounds/240782",
+   "title": "Ceramic Set Down"
+  },
+  {
+   "file": "mug_2.mp3",
+   "duration": 0.919,
+   "license": "by",
+   "credit": "\"Ceramic Set Down 2\" by f4ngy, CC BY 4.0, https://freesound.org/people/f4ngy/sounds/240783",
+   "title": "Ceramic Set Down 2"
+  }
+ ],
+ "fire": [
+  {
+   "file": "fire_1.mp3",
+   "duration": 2.87,
+   "license": "cc0",
+   "credit": "\"Fire Crackling\" by AntumDeluge, CC0, https://freesound.org/people/AntumDeluge/sounds/188038",
+   "title": "Fire Crackling"
+  }
+ ],
+ "sword": [
+  {
+   "file": "sword_1.mp3",
+   "duration": 2.798,
+   "license": "cc0",
+   "credit": "\"Sword Unsheath\" by lucabia, CC0, https://freesound.org/people/lucabia/sounds/276872",
+   "title": "Sword Unsheath"
+  }
+ ],
+ "thud": [
+  {
+   "file": "thud_1x.mp3",
+   "duration": 0.369,
+   "license": "cc0",
+   "title": "Book Dropping 2.wav",
+   "credit": "\"Book Dropping 2.wav\" by LightDJ, CC0, https://freesound.org/people/LightDJ/sounds/267482"
+  },
+  {
+   "file": "thud_2x.mp3",
+   "duration": 0.611,
+   "license": "cc0",
+   "title": "Book Falling.wav",
+   "credit": "\"Book Falling.wav\" by justeluis, CC0, https://freesound.org/people/justeluis/sounds/185041"
+  }
+ ],
+ "ui_whoosh": [
+  {
+   "file": "whoosh.mp3",
+   "license": "pixabay",
+   "title": "soft whoosh, scene change",
+   "credit": "Pixabay Content License"
+  }
+ ],
+ "ui_whoosh_short": [
+  {
+   "file": "whoosh-short.mp3",
+   "license": "pixabay",
+   "title": "short whoosh",
+   "credit": "Pixabay Content License"
+  }
+ ],
+ "ui_whoosh_cinematic": [
+  {
+   "file": "whoosh-cinematic.mp3",
+   "license": "pixabay",
+   "title": "big cinematic whoosh",
+   "credit": "Pixabay Content License"
+  }
+ ],
+ "ui_pop": [
+  {
+   "file": "pop.mp3",
+   "license": "pixabay",
+   "title": "pin or label pop",
+   "credit": "Pixabay Content License"
+  }
+ ],
+ "ui_click_soft": [
+  {
+   "file": "click-soft.mp3",
+   "license": "pixabay",
+   "title": "soft click",
+   "credit": "Pixabay Content License"
+  }
+ ],
+ "ui_impact_bass_1": [
+  {
+   "file": "impact-bass-1.mp3",
+   "license": "pixabay",
+   "title": "low impact boom",
+   "credit": "Pixabay Content License"
+  }
+ ],
+ "ui_impact_bass_2": [
+  {
+   "file": "impact-bass-2.mp3",
+   "license": "pixabay",
+   "title": "low impact boom 2",
+   "credit": "Pixabay Content License"
+  }
+ ],
+ "ui_riser": [
+  {
+   "file": "riser.mp3",
+   "license": "pixabay",
+   "title": "10 s riser",
+   "credit": "Pixabay Content License"
+  }
+ ],
+ "ui_typing": [
+  {
+   "file": "typing.mp3",
+   "license": "pixabay",
+   "title": "typewriter typing",
+   "credit": "Pixabay Content License"
+  }
+ ]
+}

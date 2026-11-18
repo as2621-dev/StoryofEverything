@@ -1,0 +1,298 @@
+<title>The nutmeg, cut v4 review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an editor's cutting list. Each shot is a row: clip on the left, a large note pad on the right. */
+:root {
+  --bg: #eceeed; --panel: #f8f9f8; --ink: #17191a; --muted: #5d6366; --line: #cfd4d3;
+  --red: #b3261e; --red-soft: #f6dcd9; --ok: #2f6b3f; --ok-soft: #dcebdf;
+  --f-head: "Archivo Narrow", "Arial Narrow", system-ui, sans-serif;
+  --f-text: "Source Serif 4", Georgia, serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121415; --panel: #1b1e1f; --ink: #e8eaea; --muted: #9aa1a3; --line: #2e3335;
+  --red: #ef6a5f; --red-soft: #3a1f1d; --ok: #7cc18e; --ok-soft: #1d2e22; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121415; --panel: #1b1e1f; --ink: #e8eaea; --muted: #9aa1a3; --line: #2e3335;
+  --red: #ef6a5f; --red-soft: #3a1f1d; --ok: #7cc18e; --ok-soft: #1d2e22; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-head); }
+.wrap { max-width: 1320px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 80px; }
+header.top { display: grid; gap: 10px; padding-bottom: 18px; border-bottom: 2px solid var(--ink); }
+h1 { font-size: clamp(26px, 4vw, 40px); margin: 0; letter-spacing: .01em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--red); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; color: var(--muted); font-size: 15px; }
+.meta a { color: var(--red); font-weight: 700; }
+.tools { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; padding-block: 12px; border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.count { font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.count b { color: var(--red); font-weight: 500; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { font: 600 14px var(--f-head); padding: 6px 12px; background: var(--panel); color: var(--ink); border: 0; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+label.chk { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; cursor: pointer; }
+.status { margin-left: auto; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.status.bad { color: var(--red); }
+h2.sec { font-size: 20px; margin: 34px 0 6px; display: flex; gap: 10px; align-items: baseline; }
+h2.sec span { font-family: var(--f-mono); font-size: 13px; color: var(--red); font-weight: 500; }
+.shot { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px; padding: 18px 0;
+  border-bottom: 1px solid var(--line); scroll-margin-top: 70px; }
+.shot.playing .clip video { outline: 3px solid var(--red); outline-offset: 2px; }
+.clip { display: grid; gap: 8px; min-width: 0; }
+.clip video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 4px; display: block; }
+.tag { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.tag .id { color: var(--ink); font-weight: 500; font-size: 15px; }
+.tag .tc { color: var(--red); }
+.line { font-family: var(--f-text); font-size: 16px; line-height: 1.5; margin: 0; max-width: 65ch; }
+.note { display: grid; gap: 8px; align-content: start; min-width: 0; }
+textarea { width: 100%; box-sizing: border-box; min-height: 190px; resize: vertical; padding: 12px 14px;
+  font: 16px/1.5 var(--f-text); color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+textarea:focus { outline: 2px solid var(--red); outline-offset: 1px; border-color: transparent; }
+textarea:disabled { opacity: .6; }
+.foot { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.pill { padding: 2px 8px; border-radius: 99px; font-weight: 500; }
+.pill.open { background: var(--red-soft); color: var(--red); }
+.pill.done { background: var(--ok-soft); color: var(--ok); }
+.reply { font-family: var(--f-text); font-size: 15px; line-height: 1.45; background: var(--ok-soft); color: var(--ink);
+  border-radius: 6px; padding: 8px 12px; margin: 0; }
+.reply b { font-family: var(--f-head); color: var(--ok); }
+.mic { font: 600 13px var(--f-head); padding: 5px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+.mic.rec { background: var(--red); color: #fff; border-color: var(--red); }
+.partial { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin: 0; }
+.hist { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.hist summary { cursor: pointer; padding: 4px 0; list-style: none; }
+.hist summary::-webkit-details-marker { display: none; }
+.hist summary::before { content: "▸ "; }
+.hist[open] summary::before { content: "▾ "; }
+.hist .h { display: grid; gap: 4px; padding: 8px 0 4px; border-top: 1px dashed var(--line); }
+.hist .q { font-family: var(--f-text); font-size: 15px; line-height: 1.45; margin: 0; color: var(--ink); }
+.hist .q b, .hist .reply b { font-family: var(--f-head); font-weight: 700; }
+.hist .reply { margin: 0; }
+button:focus-visible, a:focus-visible, video:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+@media (max-width: 760px) { .shot { grid-template-columns: minmax(0, 1fr); } textarea { min-height: 140px; } .status { margin-left: 0; width: 100%; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1 id="h1"></h1>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="tools">
+    <div class="seg" role="group" aria-label="Show">
+      <button id="f-all" aria-pressed="true">All shots</button>
+      <button id="f-noted" aria-pressed="false">With notes</button>
+      <button id="f-open" aria-pressed="false">Open notes</button>
+    </div>
+    <label class="chk"><input type="checkbox" id="auto" checked> Play next clip automatically</label>
+    <span class="count" id="count"></span>
+    <span class="status" id="status">Connecting to the notes store…</span>
+  </div>
+  <main id="list"></main>
+</div>
+
+<script>
+const DATA = {"title": "The nutmeg, cut v4", "drive": "https://drive.google.com/file/d/1hqy-BrKdx5mPZ6Ve_3He4j9CED5fBWsE/view?usp=drivesdk", "total": 727.23, "shots": [{"id": "1a-1", "n": 1, "sec": "1a", "secTitle": "", "start": 0.0, "dur": 9.88, "kind": "Kitchen-table theme, warm cream. DATE: TODAY. REASON: -1 (all muted). UNCHANGED FROM v3 (owner loves it). A paper pie slice and a mug of egg", "line": "Nutmeg is a warm, sweet spice. We grate it onto pies and eggnog, and for centuries people took it as medicine.", "clip": "v4/clips/1a-1.mp4", "poster": "v4/posters/1a-1.jpg"}, {"id": "1a-2", "n": 2, "sec": "1a", "secTitle": "", "start": 9.88, "dur": 4.36, "kind": "The pie, mug, jar, grater AND the seed LIFT off. NO seed animation in this shot (owner note r3: \"remove the animation of the seed, just show", "line": "Four hundred years ago, wars were fought over this seed.", "clip": "v4/clips/1a-2.mp4", "poster": "v4/posters/1a-2.jpg"}, {"id": "1a-3", "n": 3, "sec": "1a", "secTitle": "", "start": 14.24, "dur": 6.38, "kind": "The swords LIFT off. The camera pushes in to the Banda shore. A row of 15 bandanese figures stands along it, male and female variants. From ", "line": "An indigenous people was massacred. Of every fifteen islanders, one remained.", "clip": "v4/clips/1a-3.mp4", "poster": "v4/posters/1a-3.jpg"}, {"id": "1a-4", "n": 4, "sec": "1a", "secTitle": "", "start": 20.62, "dur": 7.78, "kind": "The last figure LIFTS off. DATE: 1974. A Grenada flag rises right of centre and waves; the camera finds the small nutmeg in its green hoist ", "line": "And later, it somehow ended up on a country's flag, on the other side of the world.", "clip": "v4/clips/1a-4.mp4", "poster": "v4/posters/1a-4.jpg"}, {"id": "1a-5", "n": 5, "sec": "1a", "secTitle": "", "start": 28.4, "dur": 8.96, "kind": "The flag LIFTS off. Navy paper world map. DATE: 1667. A small nutmeg seed sits on the Banda Islands (a plain cutout, no opening animation). ", "line": "And in the deal that kept this seed theirs, the Dutch signed away their claim to Manhattan.", "clip": "v4/clips/1a-5.mp4", "poster": "v4/posters/1a-5.jpg"}, {"id": "1b-1", "n": 6, "sec": "1b", "secTitle": "", "start": 37.36, "dur": 9.24, "kind": "Cream. DATE: TODAY. REASON: -1. Serif headline card, one italic red word: \"Why *kill* for a seed?\". Below it two small cutouts pop in as the", "line": "So why would anyone kill for a seed? How did it end up on a flag, and tangled up with Manhattan?", "clip": "v4/clips/1b-1.mp4", "poster": "v4/posters/1b-1.jpg"}, {"id": "1b-2", "n": 7, "sec": "1b", "secTitle": "", "start": 46.6, "dur": 8.48, "kind": "The headline LIFTS off. Five large icons appear along a dotted line as each is named while the matching icon in the top-right reason bar lig", "line": "The story has five chapters. The seed. The route. The company. The island. And the treaty.", "clip": "v4/clips/1b-2.mp4", "poster": "v4/posters/1b-2.jpg"}, {"id": "2a-1", "n": 8, "sec": "2a", "secTitle": "", "start": 55.08, "dur": 9.26, "kind": "Cream. DATE: c. 1500. REASON: 0, THE SEED. A paper map of eastern Indonesia. The island groups draw on, each with its own outline and label:", "line": "Chapter one, the seed. Look at these island groups in eastern Indonesia, the Moluccas. Up north, Ternate and Tidore grew cloves.", "clip": "v4/clips/2a-1.mp4", "poster": "v4/posters/2a-1.jpg"}, {"id": "2a-2", "n": 9, "sec": "2a", "secTitle": "", "start": 64.34, "dur": 8.08, "kind": "The northern labels LIFT off. The camera pushes into the Banda group. Labels west to east: RUN, AI, GUNUNG API, BANDA NEIRA, and the long ar", "line": "Down south lie the Banda Islands, a handful of small volcanic islands, with Run at the western end.", "clip": "v4/clips/2a-2.mp4", "poster": "v4/posters/2a-2.jpg"}, {"id": "2a-3", "n": 10, "sec": "2a", "secTitle": "", "start": 72.42, "dur": 10.54, "kind": "A `nutmegTree` cutout grows on Banda. One fruit swings forward and splits open LIKE A FLOWER (owner note r3): the two shell halves turn outw", "line": "Split a fruit from this tree, and inside is a brown seed in a red, lacy net. The seed is nutmeg. The net is mace.", "clip": "v4/clips/2a-3.mp4", "poster": "v4/posters/2a-3.jpg"}, {"id": "2a-4", "n": 11, "sec": "2a", "secTitle": "", "start": 82.96, "dur": 5.46, "kind": "The tree LIFTS off. World map, cream. Every coastline greys out except the Banda group, which glows amber. Card: \"THE WORLD'S ONLY SOURCE\".", "line": "For centuries, every nutmeg in the world came from these few islands.", "clip": "v4/clips/2a-4.mp4", "poster": "v4/posters/2a-4.jpg"}, {"id": "2a-5", "n": 12, "sec": "2a", "secTitle": "", "start": 88.42, "dur": 6.33, "kind": "The card LIFTS off. A nutmeg tree stands large in the centre and grows from sapling to full tree as a horizontal timeline draws left to righ", "line": "A nutmeg tree takes seven to nine years to bear fruit.", "clip": "v4/clips/2a-5.mp4", "poster": "v4/posters/2a-5.jpg"}, {"id": "2b-1", "n": 13, "sec": "2b", "secTitle": "", "start": 94.75, "dur": 9.15, "kind": "Cream. The map zooms out to the Indian Ocean. DATE: 1400s. REASON: 1, THE ROUTE. `Kit.priceClimb` starts: a red route draws west from BANDA ", "line": "Chapter two, the route. Bandanese, Javanese and Malay boats carried nutmeg more than three thousand kilometers west, to Malacca.", "clip": "v4/clips/2b-1.mp4", "poster": "v4/posters/2b-1.jpg"}, {"id": "2b-2", "n": 14, "sec": "2b", "secTitle": "", "start": 103.9, "dur": 7.82, "kind": "The token travels on, pins popping in rhythm: CALICUT, ADEN, ALEXANDRIA, VENICE. A distance counter ticks to \"≈ 14,400 KM\"; mono label \"STRA", "line": "From there, to India, Arabia, Egypt and Venice. About fourteen thousand kilometers in a straight line.", "clip": "v4/clips/2b-2.mp4", "poster": "v4/posters/2b-2.jpg"}, {"id": "2b-3", "n": 15, "sec": "2b", "secTitle": "", "start": 111.72, "dur": 5.48, "kind": "OWNER'S PICK: the price LADDER from the kit demo on Drive (`kit/compositions/demo-route.html`, `Kit.priceLadder`, eyebrow \"PRICE OF NUTMEG\",", "line": "At every port it changed hands, and every buyer added his own price.", "clip": "v4/clips/2b-3.mp4", "poster": "v4/posters/2b-3.jpg"}, {"id": "2b-4", "n": 16, "sec": "2b", "secTitle": "", "start": 117.2, "dur": 11.1, "kind": "The last ladder bar (VENICE / EUROPE) shoots up past the others and its tag counts to \"×100+\", source line \"AMY JORDAN, 2016\". Beside it a p", "line": "By one historian's estimate, it sold in Europe for more than a hundred times its price in Banda. A two-dollar coffee, selling for two hundred.", "clip": "v4/clips/2b-4.mp4", "poster": "v4/posters/2b-4.jpg"}, {"id": "2b-5", "n": 17, "sec": "2b", "secTitle": "", "start": 128.3, "dur": 5.46, "kind": "The whole price climb LIFTS off. A single dotted line draws straight from Banda around Africa to Europe, with a question mark on it.", "line": "So whoever sailed straight to Banda would get rich.", "clip": "v4/clips/2b-5.mp4", "poster": "v4/posters/2b-5.jpg"}, {"id": "3a-1", "n": 18, "sec": "3a", "secTitle": "", "start": 133.76, "dur": 5.34, "kind": "Cream. DATE: 1512. REASON: 2, THE COMPANY. A Portuguese ship cutout sails from MALACCA to BANDA, takes on sacks, and sails away again.", "line": "Chapter three, the company. The Portuguese came first, in fifteen twelve.", "clip": "v4/clips/3a-1.mp4", "poster": "v4/posters/3a-1.jpg"}, {"id": "3a-2", "n": 19, "sec": "3a", "secTitle": "", "start": 139.1, "dur": 4.28, "kind": "DATE: 1529. A Portuguese fort outline starts to draw itself on Banda; bandanese figures run at it from both sides; the outline tears and LIF", "line": "But when they tried to build a fort, the Bandanese attacked the builders.", "clip": "v4/clips/3a-2.mp4", "poster": "v4/posters/3a-2.jpg"}, {"id": "3a-3", "n": 20, "sec": "3a", "secTitle": "", "start": 143.38, "dur": 9.66, "kind": "A ring of orangKaya figures (long indigo jackets, tall ochre head wraps) stands around a council mat; village pins dot the islands. At \"know", "line": "There was no king to capture or win over, only village councils of rich men, known as the orang kaya.", "clip": "v4/clips/3a-3.mp4", "poster": "v4/posters/3a-3.jpg"}, {"id": "3a-4", "n": 21, "sec": "3a", "secTitle": "", "start": 153.04, "dur": 4.68, "kind": "The council LIFTS off. An arrow runs from Banda to MALACCA, labelled \"BOUGHT SECOND-HAND\".", "line": "So Portugal settled for buying Banda's nutmeg second-hand, in Malacca.", "clip": "v4/clips/3a-4.mp4", "poster": "v4/posters/3a-4.jpg"}, {"id": "3a-5", "n": 22, "sec": "3a", "secTitle": "", "start": 157.72, "dur": 6.08, "kind": "DATE: 1599, then 1602. Dutch East Indiaman cutouts arrive under `voc` flags. Centre, `Kit.vocLogo` (chamber A, ink) with `Kit.vocReveal`: th", "line": "Then came the Dutch. In sixteen-oh-two, they founded the Dutch East India Company, the VOC.", "clip": "v4/clips/3a-5.mp4", "poster": "v4/posters/3a-5.jpg"}, {"id": "3a-6", "n": 23, "sec": "3a", "secTitle": "", "start": 163.8, "dur": 7.46, "kind": "The logo holds, flags still waving. Four power icons stamp down around it as each is named: crossed swords, a treaty seal, a coin, a fort.", "line": "It could wage war, sign treaties, mint coins and build forts. A business with its own army.", "clip": "v4/clips/3a-6.mp4", "poster": "v4/posters/3a-6.jpg"}, {"id": "3a-7", "n": 24, "sec": "3a", "secTitle": "", "start": 171.26, "dur": 7.06, "kind": "The icons LIFT off. The relay route from 2b redraws; its middle pins LIFT off one by one until a single orange line runs unbroken from Banda", "line": "Its plan was not to join the relay. It was to own it.", "clip": "v4/clips/3a-7.mp4", "poster": "v4/posters/3a-7.jpg"}, {"id": "3b-1", "n": 25, "sec": "3b", "secTitle": "", "start": 178.32, "dur": 11.0, "kind": "Navy. DATE: 1609. REASON: 2, THE COMPANY. The orange line LIFTS off. The Banda map. Dutch ships with `voc` flags anchor off Banda Neira; a r", "line": "In sixteen-oh-nine, the Bandanese and the Dutch went to war. Forty-six Dutchmen died in an ambush. But the Dutch held on, and built a fort.", "clip": "v4/clips/3b-1.mp4", "poster": "v4/posters/3b-1.jpg"}, {"id": "3b-2", "n": 26, "sec": "3b", "secTitle": "", "start": 189.32, "dur": 9.25, "kind": "The fort cutout \"FORT NASSAU · 1609\" stands on Banda Neira with a waving `voc` flag. The camera pans west to Ai, where a small trading post ", "line": "On another island, Ai, English traders were still buying nutmeg from the Bandanese. And the Dutch wanted it all for themselves.", "clip": "v4/clips/3b-2.mp4", "poster": "v4/posters/3b-2.jpg"}, {"id": "3b-3", "n": 27, "sec": "3b", "secTitle": "", "start": 198.57, "dur": 8.25, "kind": "DATE: 1616. Dutch boats land on Ai; Ai's flag swaps from England to VOC. Bandanese figures in the swim pose cross the strait toward Run, hea", "line": "In sixteen sixteen, the Dutch took Ai. About four hundred islanders drowned fleeing across the water to Run.", "clip": "v4/clips/3b-3.mp4", "poster": "v4/posters/3b-3.jpg"}, {"id": "3b-4", "n": 28, "sec": "3b", "secTitle": "", "start": 206.82, "dur": 8.73, "kind": "The camera settles on Run, the outermost island; a pin and label RUN. NO checklist card. At \"the English got there first\", an English ship c", "line": "Run was the farthest out, and next on the Dutch list. But the English got there first.", "clip": "v4/clips/3b-4.mp4", "poster": "v4/posters/3b-4.jpg"}, {"id": "4a-1", "n": 29, "sec": "4a", "secTitle": "", "start": 215.55, "dur": 16.31, "kind": "Cream. DATE: 1616. REASON: 3, THE ISLAND. A map from London to Asia. English trading-post pins pop, each with a small waving `england1616` f", "line": "Chapter four, the island. At the time, England's East India Company was not nearly as big as the VOC. It was a string of trading posts from India to Japan, and some years it sent a single ship.", "clip": "v4/clips/4a-1.mp4", "poster": "v4/posters/4a-1.jpg"}, {"id": "4a-2", "n": 30, "sec": "4a", "secTitle": "", "start": 231.86, "dur": 12.46, "kind": "The London map LIFTS off. Close on Banda: Ai under a VOC flag; on Run, orangKaya figures look east toward it. A dotted line runs west to BAN", "line": "So when Run's leaders, having watched Ai fall, asked England for protection, the English base on Java sent what it had nearby: two ships, the Swan and the Defence.", "clip": "v4/clips/4a-2.mp4", "poster": "v4/posters/4a-2.jpg"}, {"id": "4a-3", "n": 31, "sec": "4a", "secTitle": "", "start": 244.32, "dur": 2.82, "kind": "A dark SHADOW SILHOUETTE of an Englishman (capotain hat, flat collar, doublet), solid ink-black, in an oval paper frame. NO \"no known portra", "line": "In command was Nathaniel Courthope.", "clip": "v4/clips/4a-3.mp4", "poster": "v4/posters/4a-3.jpg"}, {"id": "4a-4", "n": 32, "sec": "4a", "secTitle": "", "start": 247.14, "dur": 9.1, "kind": "The portrait LIFTS off. DATE: DECEMBER 1616. The two ships anchor off Run, `england1616` flags waving. OrangKaya figures step onto the deck ", "line": "In December sixteen sixteen, Run's chiefs came aboard and handed him a nutmeg tree, a clod of earth and a live goat.", "clip": "v4/clips/4a-4.mp4", "poster": "v4/posters/4a-4.jpg"}, {"id": "4a-5", "n": 33, "sec": "4a", "secTitle": "", "start": 256.24, "dur": 5.6, "kind": "An `england1616` flag runs up a pole on Run's shore and waves. Thirty small smoke puffs ripple along the ships' sides; counter \"30 GUNS\".", "line": "The English raised their flag on the island and fired thirty guns.", "clip": "v4/clips/4a-5.mp4", "poster": "v4/posters/4a-5.jpg"}, {"id": "4a-6", "n": 34, "sec": "4a", "secTitle": "", "start": 261.84, "dur": 6.9, "kind": "A parchment scroll unrolls (`Kit.scrollPaper`) and types: \"…surrender their island … to our sovereign the king of England\"; the text scrolls", "line": "In an English letter, they agreed to surrender their island to the king of England.", "clip": "v4/clips/4a-6.mp4", "poster": "v4/posters/4a-6.jpg"}, {"id": "4a-7", "n": 35, "sec": "4a", "secTitle": "", "start": 268.74, "dur": 6.73, "kind": "The scroll LIFTS off. Split frame. Left: Run with a waving `england1616` flag over a small fort and a waffle of 39 englishman figures. At \"T", "line": "To hold it, Courthope had thirty-nine men. The Dutch had an army.", "clip": "v4/clips/4a-7.mp4", "poster": "v4/posters/4a-7.jpg"}, {"id": "4b-1", "n": 36, "sec": "4b", "secTitle": "", "start": 275.47, "dur": 5.79, "kind": "Navy. DATE: DECEMBER 1616. REASON: 3, THE ISLAND. Run, close. Cannon cutouts roll off the ships; englishman and bandanese figures haul them ", "line": "In January sixteen seventeen, three Dutch ships arrived to cut Run off.", "clip": "v4/clips/4b-1.mp4", "poster": "v4/posters/4b-1.jpg"}, {"id": "4b-2", "n": 37, "sec": "4b", "secTitle": "", "start": 281.26, "dur": 15.2, "kind": "DATE: 1617. The Swan, labelled, sails out; a Dutch ship closes; a clock card \"90 MINUTES\"; five englishman figures on deck turn red and fall", "line": "The Swan was taken after a ninety-minute fight. Then nine of his own men cut the Defence's cables and sailed her to the Dutch. Courthope had lost both his ships. But he didn't give up.", "clip": "v4/clips/4b-2.mp4", "poster": "v4/posters/4b-2.jpg"}, {"id": "4b-3", "n": 38, "sec": "4b", "secTitle": "", "start": 296.46, "dur": 9.16, "kind": "A day counter starts lower left: DAY 1. A ring of VOC ship cutouts circles Run at a distance. Canoe cutouts slip in from SERAM carrying sack", "line": "His plan: hold on until help came. Small boats smuggled in sago, a palm flour, from the island of Seram.", "clip": "v4/clips/4b-3.mp4", "poster": "v4/posters/4b-3.jpg"}, {"id": "4b-4", "n": 39, "sec": "4b", "secTitle": "", "start": 305.62, "dur": 6.04, "kind": "DATE: 1618. Three English relief-ship cutouts sail toward Banda; two are surrounded and their flags swap to VOC; the third LIFTS off the map", "line": "England did send three relief ships. The Dutch captured two, and the third vanished.", "clip": "v4/clips/4b-4.mp4", "poster": "v4/posters/4b-4.jpg"}, {"id": "4b-5", "n": 40, "sec": "4b", "secTitle": "", "start": 311.66, "dur": 9.75, "kind": "The relief ships LIFT off. DATE: 1619. Cream, London. An englishman and a dutchman in the sign pose over a scroll. Card: \"PEACE IN EUROPE · ", "line": "In sixteen nineteen, London made peace with the Dutch in Europe, for a third of the spices. But on Run, Courthope held on.", "clip": "v4/clips/4b-5.mp4", "poster": "v4/posters/4b-5.jpg"}, {"id": "4b-6", "n": 41, "sec": "4b", "secTitle": "", "start": 321.41, "dur": 32.23, "kind": "ONE continuous shot, about 30 s, no cut. Navy night. DATE: OCTOBER 1620. Map: Run, and east of it the long arc of LONTHOR; an orangKaya figu", "line": "In October sixteen twenty, Courthope learned that Lonthor, the big island to the east, was ready to defy the Dutch and surrender to England too. He crossed at night in a small boat, with a few men, to accept it. But a spy, one account says, had warned the Dutch. On the way back, their boats were waiting in the dark. Courthope was shot in the chest, went over the side, and was never seen again.", "clip": "v4/clips/4b-6.mp4", "poster": "v4/posters/4b-6.jpg"}, {"id": "4b-7", "n": 42, "sec": "4b", "secTitle": "", "start": 353.64, "dur": 8.38, "kind": "The day counter stops: \"≈ 1,400 DAYS · NEARLY FOUR YEARS\". The 39-figure waffle LIFTS off; the English flag on Run lowers and LIFTS off. DAT", "line": "That same month, the head of the VOC in Asia wrote down his plan for Banda.", "clip": "v4/clips/4b-7.mp4", "poster": "v4/posters/4b-7.jpg"}, {"id": "5a-1", "n": 43, "sec": "5a", "secTitle": "", "start": 362.02, "dur": 8.66, "kind": "Navy. DATE: 1620. REASON: 3, THE ISLAND. `Kit.portrait` with `src: \"assets_r2/portraits/coen_waben_westfriesmuseum_1920px.jpg\"`, `fit: \"xMid", "line": "His name was Jan Pieterszoon Coen. It was necessary, he wrote, to subjugate Banda again, and to populate it with other people.", "clip": "v4/clips/5a-1.mp4", "poster": "v4/posters/5a-1.jpg"}, {"id": "5a-2", "n": 44, "sec": "5a", "secTitle": "", "start": 370.68, "dur": 6.12, "kind": "A second quote card slides under the first: \"Despair not, spare not your enemies\" · 1618.", "line": "His motto: \"Despair not, spare not your enemies.\"", "clip": "v4/clips/5a-2.mp4", "poster": "v4/posters/5a-2.jpg"}, {"id": "5a-3", "n": 45, "sec": "5a", "secTitle": "", "start": 376.8, "dur": 12.92, "kind": "The portrait and cards LIFT off. DATE: 1621. A route draws from BATAVIA (JAVA) to Banda. Along it: 19 ship icons under waving `voc` flags; a", "line": "He sailed from Batavia, on Java, with nineteen ships, sixteen hundred and fifty-five Dutch soldiers and two hundred and eighty-six Japanese mercenaries. His goal: total subjugation.", "clip": "v4/clips/5a-3.mp4", "poster": "v4/posters/5a-3.jpg"}, {"id": "5a-4", "n": 46, "sec": "5a", "secTitle": "", "start": 389.72, "dur": 3.58, "kind": "DATE: MARCH 1621. The fleet LIFTS off. Dutch soldier figures march ashore on Lonthor and Banda Neira under waving `voc` flags. A row of oran", "line": "The Dutch landed, and carried out the plan.", "clip": "v4/clips/5a-4.mp4", "poster": "v4/posters/5a-4.jpg"}, {"id": "5a-5", "n": 47, "sec": "5a", "secTitle": "", "start": 393.3, "dur": 6.92, "kind": "DATE: MAY 1621. Three japaneseMercenary figures stand behind the row (no weapons drawn). The orangKaya figures turn red and fall, one at a t", "line": "In May, dozens of the orang kaya were killed, beheaded by Japanese mercenaries.", "clip": "v4/clips/5a-5.mp4", "poster": "v4/posters/5a-5.jpg"}, {"id": "5a-6", "n": 48, "sec": "5a", "secTitle": "", "start": 400.22, "dur": 16.04, "kind": "A waffle of 15 bandanese figures, male and female, label \"EACH ≈ 1,000 PEOPLE\"; big counter \"≈ 15,000\". At \"about one thousand\", the counter", "line": "Before the conquest, about fifteen thousand people lived on Banda. Afterward, about one thousand. Some fourteen thousand were killed, starved, enslaved or driven away. Of every fifteen, one remained.", "clip": "v4/clips/5a-6.mp4", "poster": "v4/posters/5a-6.jpg"}, {"id": "5a-7", "n": 49, "sec": "5a", "secTitle": "", "start": 416.26, "dur": 8.22, "kind": "The last figure LIFTS off. The Banda map is cut by thin lines into 68 plots; arrows bring small figures in from across Asia. Card: \"68 PLANT", "line": "Their land was cut into sixty-eight plantations, worked by enslaved people from across Asia.", "clip": "v4/clips/5a-7.mp4", "poster": "v4/posters/5a-7.jpg"}, {"id": "5b-1", "n": 50, "sec": "5b", "secTitle": "", "start": 424.48, "dur": 12.89, "kind": "Navy. DATE: 1621. REASON: 3, THE ISLAND. Run alone on the map, dotted with small nutmeg-tree cutouts; a VOC flag on the beach. At \"Then they", "line": "On Run, the Dutch killed or enslaved the men and sent the women and children away. Then they cut down every nutmeg tree on the island.", "clip": "v4/clips/5b-1.mp4", "poster": "v4/posters/5b-1.jpg"}, {"id": "5b-2", "n": 51, "sec": "5b", "secTitle": "", "start": 437.37, "dur": 14.55, "kind": "Card: \"WHY NOT JUST HOLD IT?\". On Run the VOC flag waves. At \"But on paper\", a red arrow points in from the west, labelled \"ENGLISH CLAIM · ", "line": "Why destroy what they came for? Couldn't they just hold Run? They did. But on paper, Run belonged to the king of England, and English ships kept coming back.", "clip": "v4/clips/5b-2.mp4", "poster": "v4/posters/5b-2.jpg"}, {"id": "5b-3", "n": 52, "sec": "5b", "secTitle": "", "start": 451.92, "dur": 12.9, "kind": "The sapling counter from 2a returns: \"7–9 YEARS TO FIRST FRUIT\". Then cattle cutouts wander across the bare island.", "line": "Remember, a nutmeg tree takes seven to nine years to bear fruit. With no trees, an English return would find nothing to sell for years.", "clip": "v4/clips/5b-3.mp4", "poster": "v4/posters/5b-3.jpg"}, {"id": "5b-4", "n": 53, "sec": "5b", "secTitle": "", "start": 464.82, "dur": 12.87, "kind": "DATE: 1622, then 1640s, then 1660s. A small Dutch boat circles Run once at each date; a dutchman figure walks the bare island holding a ledg", "line": "Every year, Dutch officials sailed out to check that no one had come back to trade. The island was empty. The English claim was not.", "clip": "v4/clips/5b-4.mp4", "poster": "v4/posters/5b-4.jpg"}, {"id": "6a-1", "n": 54, "sec": "6a", "secTitle": "", "start": 477.69, "dur": 10.43, "kind": "Cream. DATE: 1626. REASON: 4, THE TREATY. REUSE v3 shots 1a-6/1a-7, reversed: from the Banda Sea a dotted line runs across the globe west to", "line": "Chapter five, the treaty. On the other side of the world, in Manhattan, the Dutch had set up a colony by the mid-sixteen twenties.", "clip": "v4/clips/6a-1.mp4", "poster": "v4/posters/6a-1.jpg"}, {"id": "6a-2", "n": 55, "sec": "6a", "secTitle": "", "start": 488.12, "dur": 8.74, "kind": "A parchment scroll unrolls and types: \"Amsterdam, 5 November 1626… bought Manhattes Island from the Native People for 60 guilders worth of t", "line": "A letter from sixteen twenty-six says they bought the island from the Native people for sixty guilders' worth of trade goods.", "clip": "v4/clips/6a-2.mp4", "poster": "v4/posters/6a-2.jpg"}, {"id": "6a-3", "n": 56, "sec": "6a", "secTitle": "", "start": 496.86, "dur": 15.33, "kind": "The balance LIFTS off. A ship cutout; its hold fills with beaver-pelt icons as a counter runs to \"7,246\". At \"One modern estimate\", a card: ", "line": "The same ship carried seven thousand two hundred and forty-six beaver skins. One modern estimate puts the furs at close to a thousand times the island's price. In other words, they got Manhattan almost for free.", "clip": "v4/clips/6a-3.mp4", "poster": "v4/posters/6a-3.jpg"}, {"id": "6a-4", "n": 57, "sec": "6a", "secTitle": "", "start": 512.19, "dur": 11.2, "kind": "The ship LIFTS off. DATE: 1664. English squadron cutouts under waving `union1606` flags sail into the harbor; englishman figures on deck. Ta", "line": "Then, in sixteen sixty-four, an English squadron sailed in, and the Dutch governor surrendered, with no war declared. The town became New York.", "clip": "v4/clips/6a-4.mp4", "poster": "v4/posters/6a-4.jpg"}, {"id": "6b-1", "n": 58, "sec": "6b", "secTitle": "", "start": 523.39, "dur": 10.09, "kind": "Navy. DATE: 1667. REASON: 4, THE TREATY. A cutout map of the Medway estuary in England. Dutch ships under waving `dutchRepublic` flags sail ", "line": "Three years later, in a new war, Dutch ships sailed up the Medway, a river in England, and burned the English fleet.", "clip": "v4/clips/6b-1.mp4", "poster": "v4/posters/6b-1.jpg"}, {"id": "6b-2", "n": 59, "sec": "6b", "secTitle": "", "start": 533.48, "dur": 6.2, "kind": "DATE: 31 JULY 1667. The Medway LIFTS off. REUSE v3 shot 1a-5 (the Breda envoys): navy paper world map; two envoy figures in the \"sign\" pose ", "line": "Weeks later, in sixteen sixty-seven, English and Dutch envoys signed a peace in the Dutch town of Breda.", "clip": "v4/clips/6b-2.mp4", "poster": "v4/posters/6b-2.jpg"}, {"id": "6b-3", "n": 60, "sec": "6b", "secTitle": "", "start": 539.68, "dur": 6.26, "kind": "REUSE v3 shot 1b-2: the envoys step back; a parchment scroll unrolls (`Kit.scrollPaper`) and types \"UTI POSSIDETIS\", then \"WHAT YOU HAVE, YO", "line": "It ran on an old Latin rule, uti possidetis. What you have, you hold.", "clip": "v4/clips/6b-3.mp4", "poster": "v4/posters/6b-3.jpg"}, {"id": "6b-4", "n": 61, "sec": "6b", "secTitle": "", "start": 545.94, "dur": 9.78, "kind": "The scroll types two columns. THE DUTCH KEEP: RUN, SURINAME. ENGLAND KEEPS: NEW NETHERLAND (NEW YORK). A Suriname pin drops on South America", "line": "The Dutch, who were winning, claimed the prizes: Run and Suriname. They let England keep New Netherland, by then New York.", "clip": "v4/clips/6b-4.mp4", "poster": "v4/posters/6b-4.jpg"}, {"id": "6b-5", "n": 62, "sec": "6b", "secTitle": "", "start": 555.72, "dur": 5.58, "kind": "The scroll and envoys LIFT off. REUSE v3 shot 1a-8: Run fills the frame with a scale bar \"3 KM × 1 KM\". Manhattan slides in; Run lifts, trav", "line": "In the end, the Dutch kept Run, an island about the size of Central Park,", "clip": "v4/clips/6b-5.mp4", "poster": "v4/posters/6b-5.jpg"}, {"id": "6b-6", "n": 63, "sec": "6b", "secTitle": "", "start": 561.3, "dur": 3.06, "kind": "REUSE v3 shot 1a-9: Run slides back to the Banda Sea, Manhattan to the Hudson. A paper balance scale appears between them; Manhattan's pan r", "line": "and let Manhattan go.", "clip": "v4/clips/6b-6.mp4", "poster": "v4/posters/6b-6.jpg"}, {"id": "6b-7", "n": 64, "sec": "6b", "secTitle": "", "start": 564.36, "dur": 9.06, "kind": "The scale LIFTS off. The two-island map. A red arrow labelled \"ENGLISH CLAIM, 1616\" runs from England to Run; a blue arrow labelled \"DUTCH C", "line": "So what changed hands was not islands, but claims. England dropped its claim to Run. The Dutch dropped theirs to Manhattan.", "clip": "v4/clips/6b-7.mp4", "poster": "v4/posters/6b-7.jpg"}, {"id": "6b-8", "n": 65, "sec": "6b", "secTitle": "", "start": 573.42, "dur": 8.84, "kind": "The orange VOC line from Banda to Amsterdam returns. A small red gap glows at Run, then closes. The VOC logo at Banda raises its two flags a", "line": "For the Dutch, that closed the last gap. Every nutmeg on the market now came from land they held.", "clip": "v4/clips/6b-8.mp4", "poster": "v4/posters/6b-8.jpg"}, {"id": "6b-9", "n": 66, "sec": "6b", "secTitle": "", "start": 582.26, "dur": 4.79, "kind": "The orange line holds, whole. Then a hairline crack appears at its western end.", "line": "The monopoly lasted about a hundred years.", "clip": "v4/clips/6b-9.mp4", "poster": "v4/posters/6b-9.jpg"}, {"id": "7a-1", "n": 67, "sec": "7a", "secTitle": "", "start": 587.05, "dur": 6.91, "kind": "Cream. DATE: 1760s. REASON: -1 (all muted). Map of the Indian Ocean, the orange VOC line unbroken, a pin on MAURITIUS. `Kit.portrait` with `", "line": "France wanted into the nutmeg business. Pierre Poivre, who ran French Mauritius, had a bold idea.", "clip": "v4/clips/7a-1.mp4", "poster": "v4/posters/7a-1.jpg"}, {"id": "7a-2", "n": 68, "sec": "7a", "secTitle": "", "start": 593.96, "dur": 4.36, "kind": "Small boat cutouts under French flags slip out of the Moluccas carrying potted seedlings; a dotted line runs to MAURITIUS. A small mono card", "line": "Smuggle the seeds out of the Dutch spice islands.", "clip": "v4/clips/7a-2.mp4", "poster": "v4/posters/7a-2.jpg"}, {"id": "7a-3", "n": 69, "sec": "7a", "secTitle": "", "start": 598.32, "dur": 5.34, "kind": "DATE: EARLY 1770s. A garden cutout at PAMPLEMOUSSES, near Port Louis, with a small nutmeg sapling. The crack in the orange line widens sligh", "line": "By the early seventeen-seventies, his smuggled nutmeg was growing on Mauritius.", "clip": "v4/clips/7a-3.mp4", "poster": "v4/posters/7a-3.jpg"}, {"id": "7a-4", "n": 70, "sec": "7a", "secTitle": "", "start": 603.66, "dur": 10.8, "kind": "DATE: c. 1800. A paper table card flips over. British warship cutouts under waving `union1606` flags anchor at Banda; card \"THE WARS WITH FR", "line": "Then the tables turned again. Britain, by then the strongest power at sea, took the Banda Islands during its wars with France, around eighteen hundred.", "clip": "v4/clips/7a-4.mp4", "poster": "v4/posters/7a-4.jpg"}, {"id": "7a-5", "n": 71, "sec": "7a", "secTitle": "", "start": 614.46, "dur": 12.32, "kind": "Seedling pots packed with soil load onto a ship. Red arrows fan out from Banda: PENANG, CEYLON, SINGAPORE. Then one long arrow crosses to GR", "line": "They did the real damage. They dug up seedlings, packed them in soil, and shipped them to Penang, to Ceylon, to Singapore. From there, nutmeg reached Grenada, in the Caribbean.", "clip": "v4/clips/7a-5.mp4", "poster": "v4/posters/7a-5.jpg"}, {"id": "7a-6", "n": 72, "sec": "7a", "secTitle": "", "start": 626.78, "dur": 10.69, "kind": "DATE: 1974. The arrows LIFT off. The Grenada flag from 1a rises large and waves; the camera pushes into the green hoist triangle, onto the n", "line": "Grenada became one of the world's biggest nutmeg producers. At independence, in nineteen seventy-four, it put the seed on its flag.", "clip": "v4/clips/7a-6.mp4", "poster": "v4/posters/7a-6.jpg"}, {"id": "7b-1", "n": 73, "sec": "7b", "secTitle": "", "start": 637.47, "dur": 17.03, "kind": "Kitchen-table theme. DATE: TODAY. REASON: -1. Two paper price cards. First, left: \"1626 · ONE KILO ≈ 4 GUILDERS · ≈ A LABOURER'S WEEK OF PAY", "line": "In sixteen twenty-six, a kilo of nutmeg cost about four guilders in Amsterdam, nearly a week's pay for a labourer. By one inflation estimate, that's roughly seventy-five dollars. Today, the farmer who grows a kilo gets about six.", "clip": "v4/clips/7b-1.mp4", "poster": "v4/posters/7b-1.jpg"}, {"id": "7b-2", "n": 74, "sec": "7b", "secTitle": "", "start": 654.5, "dur": 11.82, "kind": "The price cards LIFT off. Navy. Big and clear, side by side, filling most of the frame: at \"Courthope\", a LARGE englishman figure (Courthope", "line": "The fight for this seed cost Courthope his life, and Run every tree. The Bandanese went from about fifteen thousand people to about one thousand.", "clip": "v4/clips/7b-2.mp4", "poster": "v4/posters/7b-2.jpg"}, {"id": "7b-3", "n": 75, "sec": "7b", "secTitle": "", "start": 666.32, "dur": 14.14, "kind": "Everything LIFTS off. The Banda map; a small boat with a bandanese man and woman leaves Banda and sails east, a dotted line drawing behind i", "line": "Some survivors had to flee their islands, and took their culture and language with them. They sailed east, to the Kei Islands, where two villages still speak their language and keep their culture alive.", "clip": "v4/clips/7b-3.mp4", "poster": "v4/posters/7b-3.jpg"}, {"id": "7b-4", "n": 76, "sec": "7b", "secTitle": "", "start": 680.46, "dur": 3.56, "kind": "Back to the opening two-island map from 1a, cream. On Run, nutmeg-tree cutouts grow back one by one; small counter \"POP. 1,572\". On the left", "line": "Run's nutmeg trees have grown back.", "clip": "v4/clips/7b-4.mp4", "poster": "v4/posters/7b-4.jpg"}, {"id": "7b-5", "n": 77, "sec": "7b", "secTitle": "", "start": 684.02, "dur": 9.72, "kind": "REUSE v3 shot 1b-1, cream: two paper counters side by side. Left, under a Manhattan cutout: \"≈ $1 TRILLION A YEAR\" (source tag \"BEA, 2024\").", "line": "Today, Manhattan's economy makes about a trillion dollars a year. Run's whole nutmeg harvest is worth about ten seconds of that.", "clip": "v4/clips/7b-5.mp4", "poster": "v4/posters/7b-5.jpg"}, {"id": "7b-6", "n": 78, "sec": "7b", "secTitle": "", "start": 693.74, "dur": 12.74, "kind": "The paper balance from chapter five returns between the islands: Run under a waving `dutchRepublic` flag, Manhattan under a waving `union160", "line": "So, was it worth it? Who got the better deal: the Dutch, with Run, or the English, with Manhattan? It's up for debate. Tell us in the comments.", "clip": "v4/clips/7b-6.mp4", "poster": "v4/posters/7b-6.jpg"}, {"id": "7b-7", "n": 79, "sec": "7b", "secTitle": "", "start": 706.48, "dur": 7.26, "kind": "NO Run-over-Manhattan move (owner note r3: removed). The balance LIFTS off and a slow dissolve goes straight to the kitchen table: the mug o", "line": "Next time you grate a pinch onto your eggnog, remember what that seed once cost.", "clip": "v4/clips/7b-7.mp4", "poster": "v4/posters/7b-7.jpg"}, {"id": "7b-8", "n": 80, "sec": "7b", "secTitle": "", "start": 713.74, "dur": 13.49, "kind": "End card: the channel logo, wordmark \"STORY OF EVERYTHING\", moves from bottom-right to centre; like and subscribe button cutouts slide in be", "line": "This is Story of Everything. We cover stories like this from around the world, three times a week. Like and subscribe for more.", "clip": "v4/clips/7b-8.mp4", "poster": "v4/posters/7b-8.jpg"}], "collection": "notes-v4", "prev": "notes-v3"};
+const prevBy = {};       // this version's shot id -> earlier notes that point at it
+const $ = (s, el = document) => el.querySelector(s);
+const tc = t => { const m = Math.floor(t / 60), s = t - m * 60; return m + ":" + s.toFixed(1).padStart(4, "0"); };
+const docs = {};          // shot id -> stored doc body
+const rowsById = {};
+let db = null, canWrite = true, filter = "all", dictating = false;
+function pauseAll() { document.querySelectorAll("video").forEach(v => v.pause()); }
+
+document.title = DATA.title + " review";
+$("#h1").innerHTML = "";
+$("#h1").append(DATA.title + " ", Object.assign(document.createElement("em"), { textContent: "clip review" }));
+const meta = $("#meta");
+meta.append(`${DATA.shots.length} shots · ${tc(DATA.total)} · type a note beside any clip; it saves by itself`);
+if (DATA.drive) { const a = document.createElement("a"); a.href = DATA.drive; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Full-quality cut on Google Drive"; meta.append(a); }
+
+function status(msg, bad) { const s = $("#status"); s.textContent = msg; s.classList.toggle("bad", !!bad); }
+
+let lastSec = null;
+const list = $("#list");
+DATA.shots.forEach((s, i) => {
+  if (s.sec !== lastSec) {
+    lastSec = s.sec;
+    const h = document.createElement("h2"); h.className = "sec";
+    h.append(Object.assign(document.createElement("span"), { textContent: "Section " + s.sec }), s.secTitle);
+    list.append(h);
+  }
+  const row = document.createElement("article"); row.className = "shot"; row.id = s.id;
+  row.innerHTML = `
+    <div class="clip">
+      <video controls preload="none" playsinline poster="${s.poster}" src="${s.clip}"></video>
+      <div class="tag"><span class="id"></span><span class="tc"></span><span class="kind"></span></div>
+      <p class="line"></p>
+    </div>
+    <div class="note">
+      <textarea id="note-${s.id}" placeholder="What should change in this shot? Script, image, marks, motion, sound, timing…"></textarea>
+      <div class="foot"><span class="saved"></span><span class="state"></span><button type="button" class="mic" hidden>Dictate</button></div>
+      <p class="partial" hidden></p>
+      <p class="reply" hidden></p>
+      <details class="hist" hidden><summary></summary><div class="hlist"></div></details>
+    </div>`;
+  $(".id", row).textContent = "Shot " + s.n + " · " + s.id;
+  $(".tc", row).textContent = tc(s.start) + " – " + tc(s.start + s.dur);
+  $(".kind", row).textContent = s.kind;
+  $(".line", row).textContent = s.line;
+  const ta = $("textarea", row);
+  let timer = null;
+  ta.addEventListener("focus", pauseAll);
+  ta.addEventListener("input", () => { $(".saved", row).textContent = "typing…"; clearTimeout(timer); timer = setTimeout(() => save(s, row), 1200); });
+  ta.addEventListener("blur", () => { if (timer) { clearTimeout(timer); timer = null; save(s, row); } });
+  const v = $("video", row);
+  v.addEventListener("play", () => { document.querySelectorAll("video").forEach(o => { if (o !== v) o.pause(); }); document.querySelectorAll(".shot.playing").forEach(r => r.classList.remove("playing")); row.classList.add("playing"); });
+  v.addEventListener("ended", () => {
+    row.classList.remove("playing");
+    // Reason: never move on while a note is being typed or dictated.
+    if (!$("#auto").checked || (document.activeElement && document.activeElement.tagName === "TEXTAREA") || dictating) return;
+    let j = i + 1; while (j < DATA.shots.length && rowsById[DATA.shots[j].id].hidden) j++;
+    if (j >= DATA.shots.length) return;
+    const next = rowsById[DATA.shots[j].id];
+    next.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+    $("video", next).play().catch(() => {});
+  });
+  rowsById[s.id] = row;
+  list.append(row);
+});
+
+
+const pending = {}, inflight = {};
+async function save(s, row) {
+  if (!db || !canWrite) { $(".saved", row).textContent = db ? "read-only" : "not saved: notes store unavailable"; return; }
+  const body = { shot: s.id, n: s.n, tc: tc(s.start), text: $("textarea", row).value };
+  const old = docs[s.id];
+  if (old && old.text === body.text) { $(".saved", row).textContent = old.updatedAt ? "saved" : ""; return; }
+  if (inflight[s.id]) { pending[s.id] = true; return; }
+  inflight[s.id] = true;
+  body.updatedAt = new Date().toISOString();
+  body.status = body.text.trim() ? (old && old.status === "done" && old.text === body.text ? "done" : "open") : "empty";
+  $(".saved", row).textContent = "saving…";
+  try {
+    const ref = db.collection(DATA.collection || "notes").doc(s.id);
+    if (old) await ref.update(body); else await ref.set(body);
+    docs[s.id] = { ...(old || {}), ...body };
+    $(".saved", row).textContent = "saved " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    paint(s.id);
+  } catch (e) {
+    if (e && e.code === "invalid_argument" && !old) { canWrite = false; status("You can read these notes but not write them.", true); }
+    $(".saved", row).textContent = "not saved (" + (e && e.code || "error") + ")";
+  } finally {
+    inflight[s.id] = false;
+    if (pending[s.id]) { pending[s.id] = false; save(s, row); }
+  }
+}
+
+function paint(id) {
+  const row = rowsById[id], d = docs[id];
+  if (!row) return;
+  const ta = $("textarea", row);
+  if (d && document.activeElement !== ta && !inflight[id]) {
+    ta.value = d.text || "";
+  }
+  const st = $(".state", row);
+  st.textContent = ""; st.className = "state";
+  if (d && (d.status === "open" || d.status === "done")) { st.textContent = d.status === "done" ? "done" : "open"; st.className = "state pill " + d.status; }
+  const rep = $(".reply", row);
+  if (d && d.reply) { rep.hidden = false; rep.innerHTML = ""; rep.append(Object.assign(document.createElement("b"), { textContent: "Claude: " }), d.reply); } else rep.hidden = true;
+  applyFilter();
+}
+
+function hasNote(id) { const d = docs[id]; return d && (d.text || "").trim(); }
+function applyFilter() {
+  let noted = 0, open = 0;
+  DATA.shots.forEach(s => {
+    const n = hasNote(s.id), o = n && docs[s.id].status !== "done";
+    if (n) noted++; if (o) open++;
+    rowsById[s.id].hidden = filter === "noted" ? !n : filter === "open" ? !o : false;
+  });
+  document.querySelectorAll("h2.sec").forEach(h => {
+    let el = h.nextElementSibling, any = false;
+    while (el && el.tagName !== "H2") { if (!el.hidden) any = true; el = el.nextElementSibling; }
+    h.hidden = !any;
+  });
+  $("#count").innerHTML = "";
+  $("#count").append("Notes: ", Object.assign(document.createElement("b"), { textContent: open + " open" }), " · " + (noted - open) + " done");
+}
+["all", "noted", "open"].forEach(f => $("#f-" + f).addEventListener("click", () => {
+  filter = f; ["all", "noted", "open"].forEach(g => $("#f-" + g).setAttribute("aria-pressed", g === f ? "true" : "false")); applyFilter();
+}));
+applyFilter();
+
+// ---- Dictate button on every box: Claude's own speech-to-text, a fallback for outside dictation tools ----
+(async () => {
+  let dict = null;
+  try { dict = window.claude ? await window.claude.use("dictation") : null; } catch { dict = null; }
+  if (!dict) return;
+  let target = null;   // the row being dictated into
+  document.querySelectorAll(".mic").forEach(b => b.hidden = false);
+  dict.onPartial(({ text }) => { if (!target) return; const p = $(".partial", target); p.hidden = !text; p.textContent = text; });
+  dict.onFinal(({ text }) => {
+    if (!text || !target) return;
+    const ta = $("textarea", target), sep = ta.value && !/\s$/.test(ta.value) ? " " : "";
+    ta.value = ta.value + sep + text.trim();
+    ta.dispatchEvent(new Event("input"));
+    $(".partial", target).hidden = true;
+  });
+  dict.onState(({ state, reason }) => {
+    dictating = state !== "idle";
+    document.querySelectorAll(".mic").forEach(b => { const on = dictating && target && b.closest(".shot") === target; b.textContent = on ? "Stop" : "Dictate"; b.classList.toggle("rec", on); });
+    if (state === "idle") {
+      if (target) { $(".partial", target).hidden = true; $("textarea", target).dispatchEvent(new Event("blur")); }
+      target = null;
+      if (reason === "not_granted" || reason === "unavailable") document.querySelectorAll(".mic").forEach(b => b.hidden = true);
+    }
+  });
+  document.querySelectorAll(".mic").forEach(b => b.addEventListener("click", () => {
+    if (dictating) { dict.stop().catch(() => {}); return; }
+    pauseAll(); target = b.closest(".shot");
+    dict.start().catch(() => {});
+  }));
+})();
+
+(async () => {
+  try { db = window.claude ? await window.claude.use("db") : null; } catch { db = null; }
+  if (!db) { status("Notes store unavailable here: open this page on claude.ai, signed in, to save notes.", true); return; }
+  const loading = setTimeout(() => status("Notes store not answering yet; notes typed now may not save.", true), 10000);
+  db.collection(DATA.collection || "notes").onSnapshot(snap => {
+    if (!snap.metadata.fromCache) { clearTimeout(loading); status("Notes save automatically"); }
+    snap.docChanges().forEach(ch => {
+      if (ch.type === "removed") delete docs[ch.doc.id]; else docs[ch.doc.id] = ch.doc.data();
+      paint(ch.doc.id);
+    });
+  }, e => { clearTimeout(loading); status("Notes store stopped (" + e.code + "). Reload the page.", true); });
+  // Earlier round's notes sit under the shot they now belong to, folded: a note's `next` lists this version's shot ids.
+  if (DATA.prev) db.collection(DATA.prev).onSnapshot(snap => {
+    Object.keys(prevBy).forEach(k => delete prevBy[k]);
+    snap.docs.map(d => d.data()).filter(d => (d.text || "").trim()).forEach(d => {
+      (Array.isArray(d.next) && d.next.length ? d.next : [d.shot]).forEach(id => { if (rowsById[id]) (prevBy[id] = prevBy[id] || []).push(d); });
+    });
+    DATA.shots.forEach(s => {
+      const box = $(".hist", rowsById[s.id]), ps = prevBy[s.id] || [];
+      box.hidden = ps.length === 0;
+      if (!ps.length) return;
+      const done = ps.filter(d => d.status === "done").length;
+      $("summary", box).textContent = "Last round: " + ps.length + (ps.length === 1 ? " note" : " notes") + " · " + (done === ps.length ? "all changed" : (ps.length - done) + " still open");
+      const hl = $(".hlist", box); hl.innerHTML = "";
+      ps.sort((x, y) => (x.n || 0) - (y.n || 0)).forEach(d => {
+        const w = document.createElement("div"); w.className = "h";
+        const q = document.createElement("p"); q.className = "q";
+        q.append(Object.assign(document.createElement("b"), { textContent: "You said (old shot " + d.n + "): " }), d.text);
+        const r = document.createElement("p"); r.className = "reply";
+        r.append(Object.assign(document.createElement("b"), { textContent: "What changed: " }), d.reply || "Not changed yet.");
+        w.append(q, r); hl.append(w);
+      });
+    });
+  }, () => {});
+  try {
+    const user = window.claude ? await window.claude.use("user") : null;
+    const w = user && user.can ? await user.can("data.write") : null;
+    if (w === false) { canWrite = false; document.querySelectorAll("textarea").forEach(t => t.disabled = true); status("You can read these notes but not write them."); }
+  } catch {}
+})();
+</script>

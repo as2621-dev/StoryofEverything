@@ -1,0 +1,37 @@
+<template>
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="demo-banda" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-50m.js"></script>
+  <script src="assets/vendor/land-110m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-composition-id="demo-banda"]');
+      const tl = gsap.timeline({ paused: true });
+      const st = Kit.stage(root, { theme: "cream", active: 2, disclaimer: "Banda Islands · schematic" });
+      st.fadeIn(tl, 0, 0.5);
+      const isl = Kit.islands(st.svg, { center: [129.83, -4.533], scale: 4400, x: 1010, y: 600 });
+
+      const title = Kit.title(st, "The *Banda* Islands", { x: 66, y: 132, size: 68, kicker: "4.5° S · 129.9° E" });
+      title.in(tl, 0.5);
+      ["lonthor", "api", "neira", "ai", "run", "nailaka"].forEach((k, i) => isl.islands[k].label.in(tl, 0.9 + i * 0.1));
+      Kit.scaleBar(isl, [1560, 990], 5, isl.pxPerKm).in(tl, 1.4);
+
+      isl.highlight(tl, 2.4, "run");
+      const c = Kit.card(st, { x: 90, y: 790, w: 470, eyebrow: "Pulau Run · 1616", big: "3 *km* long", small: "England's only nutmeg island" });
+      c.in(tl, 3.2, "place");
+      Kit.stamp(st, "TRADED · 1667", { x: 430, y: 540, rotate: -6 }).in(tl, 4.8);
+      tl.to({}, { duration: 0.01 }, 8.49);
+      window.__timelines["demo-banda"] = tl;
+    })();
+  </script>
+</template>

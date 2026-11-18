@@ -1,0 +1,16 @@
+# media and build outputs stay out of git (rebuildable or on Drive)
+episodes/*/build*/
+episodes/*/audio/
+episodes/*/out/
+episodes/*/review/v*/
+episodes/*/assets_r2/
+episodes/*/r1/
+episodes/*/r2/
+*.mp4
+*.wav
+*.mp3
+*.mov
+node_modules/
+.hyperframes/
+__pycache__/
+.env

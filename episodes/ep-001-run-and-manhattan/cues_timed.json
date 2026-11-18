@@ -1,0 +1,902 @@
+[
+ {
+  "section": "1a",
+  "para": 0,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Kitchen-table theme, warm cream. DATE: TODAY. REASON: -1 (all muted). UNCHANGED FROM v3 (owner loves it). A paper pie slice and a mug of eggnog sit centre; a small grater and a brown nutmeg seed slide in from the right; paper flakes drift onto the pie and the foam. At \"as medicine\", a small apothecary jar slides in beside them.",
+  "t": 0.0,
+  "para_start": 0.0,
+  "para_end": 7.84
+ },
+ {
+  "section": "1a",
+  "para": 1,
+  "kind": "visual",
+  "anchor": "Four hundred years ago,",
+  "text": "The pie, mug, jar, grater AND the seed LIFT off. NO seed animation in this shot (owner note r3: \"remove the animation of the seed, just show the sword\"). Navy night. DATE: 1600s. The flat paper map of eastern Indonesia slides in, BANDA ISLANDS labelled. At \"wars were fought\", the crossed-sword icon from v3 stamps down big over Banda: that is the war. Nothing else.",
+  "t": 8.38,
+  "para_start": 8.47,
+  "para_end": 12.43
+ },
+ {
+  "section": "1a",
+  "para": 2,
+  "kind": "visual",
+  "anchor": "An indigenous people",
+  "text": "The swords LIFT off. The camera pushes in to the Banda shore. A row of 15 bandanese figures stands along it, male and female variants. From \"massacred\" on, fourteen turn red and fall, one after another, slowly; each fallen figure LIFTS off. By \"one remained\", only ONE figure stands. NO numbers or labels on screen: only the people falling.",
+  "t": 12.92,
+  "para_start": 13.12,
+  "para_end": 18.65
+ },
+ {
+  "section": "1a",
+  "para": 3,
+  "kind": "pause",
+  "anchor": null,
+  "text": "2s",
+  "t": 25.9,
+  "para_start": 20.65,
+  "para_end": 25.9
+ },
+ {
+  "section": "1a",
+  "para": 3,
+  "kind": "visual",
+  "anchor": "And later,",
+  "text": "The last figure LIFTS off. DATE: 1974. A Grenada flag rises right of centre and waves; the camera finds the small nutmeg in its green hoist triangle.",
+  "t": 20.76,
+  "para_start": 20.65,
+  "para_end": 25.9
+ },
+ {
+  "section": "1a",
+  "para": 4,
+  "kind": "visual",
+  "anchor": "And in the deal",
+  "text": "The flag LIFTS off. Navy paper world map. DATE: 1667. A small nutmeg seed sits on the Banda Islands (a plain cutout, no opening animation). At \"the Dutch\", a Manhattan cutout slides in at the mouth of the Hudson, label MANHATTAN. At \"signed away\", a treaty seal stamps across Manhattan: \"SIGNED AWAY\", and Manhattan slides off west while the seed on Banda glows amber.",
+  "t": 26.26,
+  "para_start": 26.35,
+  "para_end": 32.12
+ },
+ {
+  "section": "1a",
+  "para": 4,
+  "kind": "pause",
+  "anchor": null,
+  "text": "PAUSE 2s",
+  "t": 32.12,
+  "para_start": 26.35,
+  "para_end": 32.12
+ },
+ {
+  "section": "1b",
+  "para": 5,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Cream. DATE: TODAY. REASON: -1. Serif headline card, one italic red word: \"Why *kill* for a seed?\". Below it two small cutouts pop in as they are named: a flag, then Manhattan.",
+  "t": 34.12,
+  "para_start": 34.12,
+  "para_end": 40.93
+ },
+ {
+  "section": "1b",
+  "para": 6,
+  "kind": "visual",
+  "anchor": "The story has",
+  "text": "The headline LIFTS off. Five large icons appear along a dotted line as each is named while the matching icon in the top-right reason bar lights with its label: THE SEED, THE ROUTE, THE COMPANY, THE ISLAND, THE TREATY. Then the big icons shrink up into the bar; REASON returns to -1.",
+  "t": 41.36,
+  "para_start": 41.38,
+  "para_end": 48.66
+ },
+ {
+  "section": "2a",
+  "para": 7,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Cream. DATE: c. 1500. REASON: 0, THE SEED. A paper map of eastern Indonesia. The island groups draw on, each with its own outline and label: a bracket over all of them, THE MOLUCCAS; in the north, TERNATE and TIDORE with a clove icon; in the south, THE BANDA ISLANDS with a nutmeg icon.",
+  "t": 51.86,
+  "para_start": 51.86,
+  "para_end": 61.6
+ },
+ {
+  "section": "2a",
+  "para": 8,
+  "kind": "visual",
+  "anchor": "Down south",
+  "text": "The northern labels LIFT off. The camera pushes into the Banda group. Labels west to east: RUN, AI, GUNUNG API, BANDA NEIRA, and the long arc of LONTHOR. Scale bar: \"ABOUT 20 KM\".",
+  "t": 62.18,
+  "para_start": 62.05,
+  "para_end": 68.86
+ },
+ {
+  "section": "2a",
+  "para": 9,
+  "kind": "visual",
+  "anchor": "Split a fruit",
+  "text": "A `nutmegTree` cutout grows on Banda. One fruit swings forward and splits open LIKE A FLOWER (owner note r3): the two shell halves turn outward, each rotating 90° about its own vertical hinge so they open away from the centre like petals (the reverse of v3's direction), revealing a brown seed in a red lacy net. Labels draw on: NUTMEG (the seed), MACE (the red net).",
+  "t": 69.68,
+  "para_start": 69.48,
+  "para_end": 77.88
+ },
+ {
+  "section": "2a",
+  "para": 10,
+  "kind": "visual",
+  "anchor": "For centuries,",
+  "text": "The tree LIFTS off. World map, cream. Every coastline greys out except the Banda group, which glows amber. Card: \"THE WORLD'S ONLY SOURCE\".",
+  "t": 78.66,
+  "para_start": 78.52,
+  "para_end": 83.16
+ },
+ {
+  "section": "2a",
+  "para": 11,
+  "kind": "visual",
+  "anchor": "A nutmeg tree takes",
+  "text": "The card LIFTS off. A nutmeg tree stands large in the centre and grows from sapling to full tree as a horizontal timeline draws left to right beneath it: YEAR 0 · YEAR 3 · YEAR 7–9 \"FIRST FRUIT\" (fruit pops onto the branches here) · YEAR 20 \"FULL CROP\". A marker slides along the line in step with the tree's growth.",
+  "t": 83.9,
+  "para_start": 83.62,
+  "para_end": 86.64
+ },
+ {
+  "section": "2b",
+  "para": 12,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Cream. The map zooms out to the Indian Ocean. DATE: 1400s. REASON: 1, THE ROUTE. `Kit.priceClimb` starts: a red route draws west from BANDA and a nutmeg-seed token rides it to MALACCA, with small dhow cutouts on the leg. Counter: \"> 3,000 KM\". First price tag at Banda: \"×1\".",
+  "t": 89.84,
+  "para_start": 89.84,
+  "para_end": 98.13
+ },
+ {
+  "section": "2b",
+  "para": 13,
+  "kind": "visual",
+  "anchor": "From there,",
+  "text": "The token travels on, pins popping in rhythm: CALICUT, ADEN, ALEXANDRIA, VENICE. A distance counter ticks to \"≈ 14,400 KM\"; mono label \"STRAIGHT LINE · REAL ROUTES WERE LONGER\".",
+  "t": 98.92,
+  "para_start": 98.84,
+  "para_end": 106.05
+ },
+ {
+  "section": "2b",
+  "para": 14,
+  "kind": "visual",
+  "anchor": "At every port",
+  "text": "OWNER'S PICK: the price LADDER from the kit demo on Drive (`kit/compositions/demo-route.html`, `Kit.priceLadder`, eyebrow \"PRICE OF NUTMEG\", small \"EACH HAND TAKES ITS CUT\"). Bars rise one per port, each taller than the last, BANDA → MALACCA → CALICUT → ADEN → ALEXANDRIA → VENICE, the route drawn above them. No numbers at the middle ports (none are sourced): only BANDA \"×1\".",
+  "t": 106.49,
+  "para_start": 106.69,
+  "para_end": 111.61
+ },
+ {
+  "section": "2b",
+  "para": 15,
+  "kind": "visual",
+  "anchor": "By one historian's",
+  "text": "The last ladder bar (VENICE / EUROPE) shoots up past the others and its tag counts to \"×100+\", source line \"AMY JORDAN, 2016\". Beside it a paper coffee cup: \"$2\" swells to \"$200+\".",
+  "t": 112.42,
+  "para_start": 112.42,
+  "para_end": 121.26
+ },
+ {
+  "section": "2b",
+  "para": 16,
+  "kind": "visual",
+  "anchor": "So whoever",
+  "text": "The whole price climb LIFTS off. A single dotted line draws straight from Banda around Africa to Europe, with a question mark on it.",
+  "t": 121.9,
+  "para_start": 121.8,
+  "para_end": 124.74
+ },
+ {
+  "section": "3a",
+  "para": 17,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Cream. DATE: 1512. REASON: 2, THE COMPANY. A Portuguese ship cutout sails from MALACCA to BANDA, takes on sacks, and sails away again.",
+  "t": 127.94,
+  "para_start": 127.94,
+  "para_end": 132.97
+ },
+ {
+  "section": "3a",
+  "para": 18,
+  "kind": "visual",
+  "anchor": "But when they tried",
+  "text": "DATE: 1529. A Portuguese fort outline starts to draw itself on Banda; bandanese figures run at it from both sides; the outline tears and LIFTS away.",
+  "t": 133.44,
+  "para_start": 133.42,
+  "para_end": 144.17
+ },
+ {
+  "section": "3a",
+  "para": 18,
+  "kind": "visual",
+  "anchor": "There was no king",
+  "text": "A ring of orangKaya figures (long indigo jackets, tall ochre head wraps) stands around a council mat; village pins dot the islands. At \"known as the orang kaya\", the card stamps on large: \"ORANG KAYA · 'RICH MEN' · VILLAGE COUNCILS\".",
+  "t": 137.44,
+  "para_start": 133.42,
+  "para_end": 144.17
+ },
+ {
+  "section": "3a",
+  "para": 19,
+  "kind": "visual",
+  "anchor": "So Portugal",
+  "text": "The council LIFTS off. An arrow runs from Banda to MALACCA, labelled \"BOUGHT SECOND-HAND\".",
+  "t": 145.06,
+  "para_start": 144.95,
+  "para_end": 149.04
+ },
+ {
+  "section": "3a",
+  "para": 20,
+  "kind": "visual",
+  "anchor": "Then came the Dutch",
+  "text": "DATE: 1599, then 1602. Dutch East Indiaman cutouts arrive under `voc` flags. Centre, `Kit.vocLogo` (chamber A, ink) with `Kit.vocReveal`: the V, O and C draw on like ink, the parchment seal stamps behind them, and two VOC flags rise behind the seal, PERFECTLY SYMMETRIC about the vertical centre line: the right flag is the exact mirror image of the left (mirrored pole, cloth and wave phase), both waving in mirror. Caption: \"DUTCH EAST INDIA COMPANY · 20 MARCH 1602\".",
+  "t": 149.9,
+  "para_start": 149.79,
+  "para_end": 165.8
+ },
+ {
+  "section": "3a",
+  "para": 20,
+  "kind": "visual",
+  "anchor": "It could wage war,",
+  "text": "The logo holds, flags still waving. Four power icons stamp down around it as each is named: crossed swords, a treaty seal, a coin, a fort.",
+  "t": 157.22,
+  "para_start": 149.79,
+  "para_end": 165.8
+ },
+ {
+  "section": "3a",
+  "para": 21,
+  "kind": "visual",
+  "anchor": "Its plan",
+  "text": "The icons LIFT off. The relay route from 2b redraws; its middle pins LIFT off one by one until a single orange line runs unbroken from Banda to Amsterdam. The VOC logo shrinks to sit at the Banda end.",
+  "t": 166.92,
+  "para_start": 166.8,
+  "para_end": 170.88
+ },
+ {
+  "section": "3b",
+  "para": 22,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Navy. DATE: 1609. REASON: 2, THE COMPANY. The orange line LIFTS off. The Banda map. Dutch ships with `voc` flags anchor off Banda Neira; a row of dutchman figures on the shore; bandanese figures close in from the trees. Several dutchman figures turn red and fall, then LIFT off; counter \"46 DUTCH KILLED\". At \"the Dutch held on\", the VOC flag plants on Banda Neira.",
+  "t": 172.48,
+  "para_start": 172.48,
+  "para_end": 183.5
+ },
+ {
+  "section": "3b",
+  "para": 23,
+  "kind": "visual",
+  "anchor": "On another island,",
+  "text": "The fort cutout \"FORT NASSAU · 1609\" stands on Banda Neira with a waving `voc` flag. The camera pans west to Ai, where a small trading post flies an `england1616` flag; an englishman figure hands coins to a bandanese figure, who hands back a nutmeg sack.",
+  "t": 184.54,
+  "para_start": 184.47,
+  "para_end": 192.31
+ },
+ {
+  "section": "3b",
+  "para": 24,
+  "kind": "visual",
+  "anchor": "In sixteen sixteen,",
+  "text": "DATE: 1616. Dutch boats land on Ai; Ai's flag swaps from England to VOC. Bandanese figures in the swim pose cross the strait toward Run, heading west, stroke by stroke through moving paper water. MANY more swimmers than before (about 30 on screen): wave after wave of them turn red mid-strait and sink below the waterline, then LIFT away. Counter: \"≈ 400 DROWNED\". The survivors reach Run's beach.",
+  "t": 193.22,
+  "para_start": 193.22,
+  "para_end": 200.64
+ },
+ {
+  "section": "3b",
+  "para": 25,
+  "kind": "pause",
+  "anchor": null,
+  "text": "2s",
+  "t": 208.55,
+  "para_start": 202.64,
+  "para_end": 208.55
+ },
+ {
+  "section": "3b",
+  "para": 25,
+  "kind": "visual",
+  "anchor": "Run was the farthest",
+  "text": "The camera settles on Run, the outermost island; a pin and label RUN. NO checklist card. At \"the English got there first\", an English ship cutout under a waving `england1616` flag appears on the western horizon.",
+  "t": 202.62,
+  "para_start": 202.64,
+  "para_end": 208.55
+ },
+ {
+  "section": "4a",
+  "para": 26,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Cream. DATE: 1616. REASON: 3, THE ISLAND. A map from London to Asia. English trading-post pins pop, each with a small waving `england1616` flag: SURAT (INDIA), BANTAM (JAVA), MACASSAR, HIRADO (JAPAN). Card: \"A STRING OF TRADING POSTS\". At \"a single ship\", one lone ship icon sails from a LONDON pin; opposite it, the VOC logo with its two flags waving above a crowd of ship icons; the two flags are mirror images about the logo's vertical centre line, exactly as in 3a.",
+  "t": 211.75,
+  "para_start": 211.75,
+  "para_end": 225.7
+ },
+ {
+  "section": "4a",
+  "para": 27,
+  "kind": "visual",
+  "anchor": "So when Run's",
+  "text": "The London map LIFTS off. Close on Banda: Ai under a VOC flag; on Run, orangKaya figures look east toward it. A dotted line runs west to BANTAM; two ship cutouts, labelled SWAN and DEFENCE, sail from it.",
+  "t": 226.8,
+  "para_start": 226.68,
+  "para_end": 239.3
+ },
+ {
+  "section": "4a",
+  "para": 28,
+  "kind": "visual",
+  "anchor": "In command",
+  "text": "A dark SHADOW SILHOUETTE of an Englishman (capotain hat, flat collar, doublet), solid ink-black, in an oval paper frame. NO \"no known portrait\" text anywhere. Name plate: \"NATHANIEL COURTHOPE · ENGLISH EAST INDIA COMPANY\".",
+  "t": 240.12,
+  "para_start": 240.04,
+  "para_end": 241.83
+ },
+ {
+  "section": "4a",
+  "para": 29,
+  "kind": "visual",
+  "anchor": "In December",
+  "text": "The portrait LIFTS off. DATE: DECEMBER 1616. The two ships anchor off Run, `england1616` flags waving. OrangKaya figures step onto the deck and lay down, one by one as named: a nutmeg sapling, a clod of earth, a goat cutout.",
+  "t": 254.42,
+  "para_start": 242.68,
+  "para_end": 254.77
+ },
+ {
+  "section": "4a",
+  "para": 29,
+  "kind": "visual",
+  "anchor": "The English raised",
+  "text": "An `england1616` flag runs up a pole on Run's shore and waves. Thirty small smoke puffs ripple along the ships' sides; counter \"30 GUNS\".",
+  "t": 250.12,
+  "para_start": 242.68,
+  "para_end": 254.77
+ },
+ {
+  "section": "4a",
+  "para": 30,
+  "kind": "visual",
+  "anchor": "In an English letter",
+  "text": "A parchment scroll unrolls (`Kit.scrollPaper`) and types: \"…surrender their island … to our sovereign the king of England\"; the text scrolls up so the line sits centre. No \"Puloroon\" anywhere.",
+  "t": 255.68,
+  "para_start": 255.59,
+  "para_end": 259.65
+ },
+ {
+  "section": "4a",
+  "para": 31,
+  "kind": "visual",
+  "anchor": "To hold it,",
+  "text": "The scroll LIFTS off. Split frame. Left: Run with a waving `england1616` flag over a small fort and a waffle of 39 englishman figures. At \"The Dutch had an army\", right: the VOC logo with its two mirrored flags waving, rows of dutchman soldier figures and ship icons stacking up beneath it, many times larger.",
+  "t": 260.64,
+  "para_start": 260.59,
+  "para_end": 265.98
+ },
+ {
+  "section": "4b",
+  "para": 32,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Navy. DATE: DECEMBER 1616. REASON: 3, THE ISLAND. Run, close. Cannon cutouts roll off the ships; englishman and bandanese figures haul them uphill (walk). Two small fort cutouts draw on, three gun icons each. At \"three Dutch ships\", DATE: JANUARY 1617, and three Dutch ships under waving `voc` flags anchor offshore, between Run and the open sea.",
+  "t": 267.58,
+  "para_start": 267.58,
+  "para_end": 271.74
+ },
+ {
+  "section": "4b",
+  "para": 33,
+  "kind": "visual",
+  "anchor": "The Swan was taken",
+  "text": "DATE: 1617. The Swan, labelled, sails out; a Dutch ship closes; a clock card \"90 MINUTES\"; five englishman figures on deck turn red and fall, then LIFT off; her flag swaps to VOC. At \"Then nine\", DATE: MARCH 1617, and nine sailor figures on the Defence; her cable snaps and she sails east to the Dutch. Card: \"9 MEN · MUTINY\". The sea off Run is empty; card \"BOTH SHIPS LOST\". At \"he didn't give up\", the English flag on Run's shore rises again and waves.",
+  "t": 272.94,
+  "para_start": 272.55,
+  "para_end": 283.4
+ },
+ {
+  "section": "4b",
+  "para": 34,
+  "kind": "visual",
+  "anchor": "His plan:",
+  "text": "A day counter starts lower left: DAY 1. A ring of VOC ship cutouts circles Run at a distance. Canoe cutouts slip in from SERAM carrying sacks marked SAGO. The counter climbs: DAY 365… DAY 730.",
+  "t": 284.5,
+  "para_start": 284.39,
+  "para_end": 292.77
+ },
+ {
+  "section": "4b",
+  "para": 35,
+  "kind": "visual",
+  "anchor": "England did send",
+  "text": "DATE: 1618. Three English relief-ship cutouts sail toward Banda; two are surrounded and their flags swap to VOC; the third LIFTS off the map with a small \"?\". Card: \"2 CAPTURED · 1 VANISHED\".",
+  "t": 293.48,
+  "para_start": 293.74,
+  "para_end": 308.64
+ },
+ {
+  "section": "4b",
+  "para": 35,
+  "kind": "visual",
+  "anchor": "In sixteen nineteen,",
+  "text": "The relief ships LIFT off. DATE: 1619. Cream, London. An englishman and a dutchman in the sign pose over a scroll. Card: \"PEACE IN EUROPE · ONE-THIRD OF THE SPICES TO ENGLAND\". At \"But on Run\", the camera swings back to Run: the English flag still waving, englishman and bandanese figures at the guns, the day counter still climbing.",
+  "t": 308.9,
+  "para_start": 293.74,
+  "para_end": 308.64
+ },
+ {
+  "section": "4b",
+  "para": 36,
+  "kind": "visual",
+  "anchor": "In October sixteen twenty,",
+  "text": "ONE continuous shot, about 30 s, no cut. Navy night. DATE: OCTOBER 1620. Map: Run, and east of it the long arc of LONTHOR; an orangKaya figure waits on Lonthor's shore under a small `england1616` flag. Card: \"READY TO DEFY THE DUTCH\". At \"He crossed\", a small boat with a few englishman figures rows from Run to Lonthor under a paper moon. At \"But a spy\", a dutchman figure slips from the Run shore toward a Dutch ship (small tag \"A SPY · ONE ACCOUNT\"). At \"On the way back\", the boat rows back west; Dutch boat silhouettes close in from the dark; small musket flashes. At \"shot in the chest\", the englishman figure at the stern turns red and falls over the side; a single splash ring spreads and fades. Paraphrase card: \"SHOT IN THE CHEST · OVER THE SIDE · NEVER SEEN AGAIN\", source tag \"SWORN STATEMENTS, 1622\".",
+  "t": 308.9,
+  "para_start": 309.09,
+  "para_end": 340.02
+ },
+ {
+  "section": "4b",
+  "para": 37,
+  "kind": "pause",
+  "anchor": null,
+  "text": "2s",
+  "t": 347.59,
+  "para_start": 342.02,
+  "para_end": 347.59
+ },
+ {
+  "section": "4b",
+  "para": 37,
+  "kind": "visual",
+  "anchor": "That same month",
+  "text": "The day counter stops: \"≈ 1,400 DAYS · NEARLY FOUR YEARS\". The 39-figure waffle LIFTS off; the English flag on Run lowers and LIFTS off. DATE: 26 OCTOBER 1620. A letter cutout slides in, sealed with orange wax stamped with the VOC monogram.",
+  "t": 342.52,
+  "para_start": 342.02,
+  "para_end": 347.59
+ },
+ {
+  "section": "5a",
+  "para": 38,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Navy. DATE: 1620. REASON: 3, THE ISLAND. `Kit.portrait` with `src: \"assets_r2/portraits/coen_waben_westfriesmuseum_1920px.jpg\"`, `fit: \"xMidYMin slice\"`, black and white; plate \"JAN PIETERSZOON COEN · VOC GOVERNOR-GENERAL\"; credit \"Jacques Waben, c. 1625. Westfries Museum, Hoorn\". The letter opens beside it; one line is drawn over in red: \"to once again subjugate Banda, and populate it with other people\".",
+  "t": 349.19,
+  "para_start": 349.19,
+  "para_end": 364.76
+ },
+ {
+  "section": "5a",
+  "para": 38,
+  "kind": "visual",
+  "anchor": "His motto:",
+  "text": "A second quote card slides under the first: \"Despair not, spare not your enemies\" · 1618.",
+  "t": 359.66,
+  "para_start": 349.19,
+  "para_end": 364.76
+ },
+ {
+  "section": "5a",
+  "para": 39,
+  "kind": "visual",
+  "anchor": "He sailed",
+  "text": "The portrait and cards LIFT off. DATE: 1621. A route draws from BATAVIA (JAVA) to Banda. Along it: 19 ship icons under waving `voc` flags; a crowd row of dutchman figures, \"1,655 DUTCH SOLDIERS\"; a row of japaneseMercenary figures, \"286 JAPANESE MERCENARIES\". At \"His goal\", a red stamp lands across the route: \"TOTAL SUBJUGATION\". DATE: 1621 and VOC flags run up across Lonthor.",
+  "t": 365.62,
+  "para_start": 365.51,
+  "para_end": 378.42
+ },
+ {
+  "section": "5a",
+  "para": 40,
+  "kind": "visual",
+  "anchor": "In March sixteen",
+  "text": "DATE: MARCH 1621. The fleet LIFTS off. Dutch soldier figures march ashore on Lonthor and Banda Neira under waving `voc` flags. A row of orangKaya figures stands on Banda Neira. NO portrait.",
+  "t": 379.04,
+  "para_start": 379.04,
+  "para_end": 388.88
+ },
+ {
+  "section": "5a",
+  "para": 40,
+  "kind": "visual",
+  "anchor": "In May,",
+  "text": "DATE: MAY 1621. Three japaneseMercenary figures stand behind the row (no weapons drawn). The orangKaya figures turn red and fall, one at a time, slowly; then all LIFT off together.",
+  "t": 382.54,
+  "para_start": 379.04,
+  "para_end": 388.88
+ },
+ {
+  "section": "5a",
+  "para": 41,
+  "kind": "pause",
+  "anchor": null,
+  "text": "2s",
+  "t": 408.3,
+  "para_start": 390.88,
+  "para_end": 408.3
+ },
+ {
+  "section": "5a",
+  "para": 41,
+  "kind": "visual",
+  "anchor": "Before the conquest,",
+  "text": "A waffle of 15 bandanese figures, male and female, label \"EACH ≈ 1,000 PEOPLE\"; big counter \"≈ 15,000\". At \"about one thousand\", the counter runs down to \"≈ 1,000\". At \"Some fourteen thousand\", fourteen figures go, as each fate is named: turn red and fall (killed), slump (starved), walk off west in a line (enslaved), row away east (driven away); a sum card writes \"15,000 − 1,000 = 14,000 GONE\". Each group LIFTS off when its word ends. At \"Of every fifteen\", one figure remains, alone, centre.",
+  "t": 391.1,
+  "para_start": 390.88,
+  "para_end": 408.3
+ },
+ {
+  "section": "5a",
+  "para": 42,
+  "kind": "pause",
+  "anchor": null,
+  "text": "2s",
+  "t": 415.74,
+  "para_start": 410.3,
+  "para_end": 415.74
+ },
+ {
+  "section": "5a",
+  "para": 42,
+  "kind": "visual",
+  "anchor": "Their land",
+  "text": "The last figure LIFTS off. The Banda map is cut by thin lines into 68 plots; arrows bring small figures in from across Asia. Card: \"68 PLANTATIONS\".",
+  "t": 410.36,
+  "para_start": 410.3,
+  "para_end": 415.74
+ },
+ {
+  "section": "5b",
+  "para": 43,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Navy. DATE: 1621. REASON: 3, THE ISLAND. Run alone on the map, dotted with small nutmeg-tree cutouts; a VOC flag on the beach. At \"Then they cut down\", the trees tip over and LIFT off, one after another, until the island is bare.",
+  "t": 417.34,
+  "para_start": 417.34,
+  "para_end": 426.24
+ },
+ {
+  "section": "5b",
+  "para": 44,
+  "kind": "pause",
+  "anchor": null,
+  "text": "2s",
+  "t": 439.69,
+  "para_start": 428.24,
+  "para_end": 439.69
+ },
+ {
+  "section": "5b",
+  "para": 44,
+  "kind": "visual",
+  "anchor": "Why destroy",
+  "text": "Card: \"WHY NOT JUST HOLD IT?\". On Run the VOC flag waves. At \"But on paper\", a red arrow points in from the west, labelled \"ENGLISH CLAIM · 1616\", and small English ship cutouts appear on the horizon with dates: 1622, 1638.",
+  "t": 428.44,
+  "para_start": 428.24,
+  "para_end": 439.69
+ },
+ {
+  "section": "5b",
+  "para": 45,
+  "kind": "visual",
+  "anchor": "Remember,",
+  "text": "The sapling counter from 2a returns: \"7–9 YEARS TO FIRST FRUIT\". Then cattle cutouts wander across the bare island.",
+  "t": 440.46,
+  "para_start": 440.69,
+  "para_end": 450.32
+ },
+ {
+  "section": "5b",
+  "para": 46,
+  "kind": "visual",
+  "anchor": "Every year,",
+  "text": "DATE: 1622, then 1640s, then 1660s. A small Dutch boat circles Run once at each date; a dutchman figure walks the bare island holding a ledger. Card: \"INSPECTED EVERY YEAR\". At \"The English claim\", the red arrow from the west glows and points on across the map toward the Atlantic.",
+  "t": 451.54,
+  "para_start": 451.32,
+  "para_end": 460.66
+ },
+ {
+  "section": "6a",
+  "para": 47,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Cream. DATE: 1626. REASON: 4, THE TREATY. REUSE v3 shots 1a-6/1a-7, reversed: from the Banda Sea a dotted line runs across the globe west to the mouth of the Hudson, counter \"≈ 15,000 KM\"; an amber pin drops on the Hudson, label MANHATTAN. A small Dutch fort cutout appears on the island's southern tip, flying a plain orange-white-blue Dutch flag (no VOC monogram: New Netherland belonged to the West India Company, not the VOC).",
+  "t": 463.86,
+  "para_start": 463.86,
+  "para_end": 472.62
+ },
+ {
+  "section": "6a",
+  "para": 48,
+  "kind": "visual",
+  "anchor": "A letter",
+  "text": "A parchment scroll unrolls and types: \"Amsterdam, 5 November 1626… bought Manhattes Island from the Native People for 60 guilders worth of trade\". Tag: \"PIETER SCHAGHEN'S LETTER · THE ONLY RECORD · NO DEED SURVIVES\".",
+  "t": 473.18,
+  "para_start": 473.16,
+  "para_end": 480.75
+ },
+ {
+  "section": "6a",
+  "para": 49,
+  "kind": "visual",
+  "anchor": "The same ship",
+  "text": "The balance LIFTS off. A ship cutout; its hold fills with beaver-pelt icons as a counter runs to \"7,246\". At \"One modern estimate\", a card: \"THE FURS ≈ 50,000–60,000 GUILDERS · MODERN ESTIMATE\", and a scale bar \"60\" against \"≈ 1,000×\". At \"almost for free\", a red stamp on Manhattan: \"ALMOST FREE\".",
+  "t": 481.64,
+  "para_start": 481.57,
+  "para_end": 497.24
+ },
+ {
+  "section": "6a",
+  "para": 50,
+  "kind": "visual",
+  "anchor": "Then, in sixteen sixty-four,",
+  "text": "The ship LIFTS off. DATE: 1664. English squadron cutouts under waving `union1606` flags sail into the harbor; englishman figures on deck. Tag: \"PEACETIME\". The label NEW AMSTERDAM flips to NEW YORK.",
+  "t": 498.21,
+  "para_start": 498.21,
+  "para_end": 509.43
+ },
+ {
+  "section": "6b",
+  "para": 51,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Navy. DATE: 1667. REASON: 4, THE TREATY. A cutout map of the Medway estuary in England. Dutch ships under waving `dutchRepublic` flags sail upriver; English ship silhouettes catch fire in red.",
+  "t": 511.03,
+  "para_start": 511.03,
+  "para_end": 518.54
+ },
+ {
+  "section": "6b",
+  "para": 52,
+  "kind": "visual",
+  "anchor": "Weeks later,",
+  "text": "DATE: 31 JULY 1667. The Medway LIFTS off. REUSE v3 shot 1a-5 (the Breda envoys): navy paper world map; two envoy figures in the \"sign\" pose over the North Sea, a treaty scroll between them. Left: an englishman with an `england1616` pennant on top. Right: a dutchman with a `dutchRepublic` pennant on top. Labels in their flag colours: ENGLAND (red), THE DUTCH REPUBLIC (blue). Both pennants wave. Title: \"TREATY OF BREDA\".",
+  "t": 519.82,
+  "para_start": 519.54,
+  "para_end": 544.46
+ },
+ {
+  "section": "6b",
+  "para": 52,
+  "kind": "visual",
+  "anchor": "It ran on",
+  "text": "REUSE v3 shot 1b-2: the envoys step back; a parchment scroll unrolls (`Kit.scrollPaper`) and types \"UTI POSSIDETIS\", then \"WHAT YOU HAVE, YOU HOLD\".",
+  "t": 526.66,
+  "para_start": 519.54,
+  "para_end": 544.46
+ },
+ {
+  "section": "6b",
+  "para": 52,
+  "kind": "visual",
+  "anchor": "The Dutch, who were",
+  "text": "The scroll types two columns. THE DUTCH KEEP: RUN, SURINAME. ENGLAND KEEPS: NEW NETHERLAND (NEW YORK). A Suriname pin drops on South America.",
+  "t": 533.96,
+  "para_start": 519.54,
+  "para_end": 544.46
+ },
+ {
+  "section": "6b",
+  "para": 53,
+  "kind": "visual",
+  "anchor": "In the end,",
+  "text": "The scroll and envoys LIFT off. REUSE v3 shot 1a-8: Run fills the frame with a scale bar \"3 KM × 1 KM\". Manhattan slides in; Run lifts, travels on top of Manhattan and settles over the green outline of Central Park; the shapes nearly match. Card: \"ABOUT THE SIZE OF CENTRAL PARK\".",
+  "t": 545.28,
+  "para_start": 545.2,
+  "para_end": 551.96
+ },
+ {
+  "section": "6b",
+  "para": 53,
+  "kind": "visual",
+  "anchor": "and let Manhattan go",
+  "text": "REUSE v3 shot 1a-9: Run slides back to the Banda Sea, Manhattan to the Hudson. A paper balance scale appears between them; Manhattan's pan rises, Run's sinks, and a single amber pin lands on Run.",
+  "t": 549.88,
+  "para_start": 545.2,
+  "para_end": 551.96
+ },
+ {
+  "section": "6b",
+  "para": 54,
+  "kind": "visual",
+  "anchor": "So what changed",
+  "text": "The scale LIFTS off. The two-island map. A red arrow labelled \"ENGLISH CLAIM, 1616\" runs from England to Run; a blue arrow labelled \"DUTCH CLAIM\" runs from the Netherlands to Manhattan. At \"England dropped\", the red arrow LIFTS off; at \"The Dutch dropped\", the blue arrow LIFTS off.",
+  "t": 553.06,
+  "para_start": 552.96,
+  "para_end": 562.26
+ },
+ {
+  "section": "6b",
+  "para": 55,
+  "kind": "visual",
+  "anchor": "For the Dutch,",
+  "text": "The orange VOC line from Banda to Amsterdam returns. A small red gap glows at Run, then closes. The VOC logo at Banda raises its two flags and they wave.",
+  "t": 562.71,
+  "para_start": 562.71,
+  "para_end": 570.55
+ },
+ {
+  "section": "6b",
+  "para": 56,
+  "kind": "pause",
+  "anchor": null,
+  "text": "2s",
+  "t": 575.07,
+  "para_start": 572.55,
+  "para_end": 575.07
+ },
+ {
+  "section": "6b",
+  "para": 56,
+  "kind": "visual",
+  "anchor": "The monopoly lasted",
+  "text": "The orange line holds, whole. Then a hairline crack appears at its western end.",
+  "t": 572.56,
+  "para_start": 572.55,
+  "para_end": 575.07
+ },
+ {
+  "section": "7a",
+  "para": 57,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Cream. DATE: 1760s. REASON: -1 (all muted). (Section break: music resolved, ~3 s pause before.) At \"Then it cracked\", the hairline crack in the orange VOC line from 6b splits open. Map of the Indian Ocean, the orange VOC line, a pin on MAURITIUS. `Kit.portrait` with `src: \"assets_r2/portraits/poivre_grognard_1783.jpg\"`, black and white; plate \"PIERRE POIVRE · FRENCH INTENDANT OF MAURITIUS\"; credit \"Engraving by Grognard, 1783. Bibliothèque nationale de France\". Behind the portrait a `franceRoyal` flag with `lis: true` (white with gold lilies) rises and waves.",
+  "t": 578.27,
+  "para_start": 578.27,
+  "para_end": 587.66
+ },
+ {
+  "section": "7a",
+  "para": 58,
+  "kind": "visual",
+  "anchor": "Smuggle the seeds",
+  "text": "Small boat cutouts under French flags slip out of the Moluccas carrying potted seedlings; a dotted line runs to MAURITIUS. A small mono card pins to the portrait frame: \"POIVRE = 'PEPPER'\".",
+  "t": 588.18,
+  "para_start": 588.11,
+  "para_end": 591.38
+ },
+ {
+  "section": "7a",
+  "para": 59,
+  "kind": "visual",
+  "anchor": "By the early",
+  "text": "DATE: EARLY 1770s. A garden cutout at PAMPLEMOUSSES, near Port Louis, with a small nutmeg sapling. The crack in the orange line widens slightly. Then the portrait, French flag and garden LIFT off.",
+  "t": 592.3,
+  "para_start": 592.0,
+  "para_end": 596.75
+ },
+ {
+  "section": "7a",
+  "para": 60,
+  "kind": "visual",
+  "anchor": "Then the tables",
+  "text": "DATE: c. 1800. A paper table card flips over. British warship cutouts under waving `union1606` flags anchor at Banda; card \"THE WARS WITH FRANCE\"; at dawn a line of sailor figures climbs to the pentagon of FORT BELGICA; the VOC flag lowers and the British flag rises. Shown ONCE (one taking).",
+  "t": 597.7,
+  "para_start": 597.6,
+  "para_end": 607.73
+ },
+ {
+  "section": "7a",
+  "para": 61,
+  "kind": "visual",
+  "anchor": "They did the real",
+  "text": "WORD-SYNCED (owner note r4: this was out of sync). At \"dug up\", a sapling lifts out of the Banda soil; at \"packed them in soil\", it drops into a soil pot that loads onto a ship. Then ONE red arrow per place, each landing ON its word: at \"Penang\" the arrow reaches PENANG, at \"Ceylon\" CEYLON, at \"Singapore\" SINGAPORE. At \"Grenada\", one long arrow crosses to GRENADA in the Caribbean.",
+  "t": 608.46,
+  "para_start": 608.42,
+  "para_end": 620.85
+ },
+ {
+  "section": "7a",
+  "para": 62,
+  "kind": "visual",
+  "anchor": "Grenada became",
+  "text": "DATE: 1974. The arrows LIFT off. The Grenada flag from 1a rises large and waves; the camera pushes into the green hoist triangle, onto the nutmeg. The reason bar lights all five icons for a beat, then mutes.",
+  "t": 622.06,
+  "para_start": 621.81,
+  "para_end": 629.7
+ },
+ {
+  "section": "7a",
+  "para": 62,
+  "kind": "pause",
+  "anchor": null,
+  "text": "PAUSE 2s",
+  "t": 629.7,
+  "para_start": 621.81,
+  "para_end": 629.7
+ },
+ {
+  "section": "7b",
+  "para": 63,
+  "kind": "visual",
+  "anchor": null,
+  "text": "Kitchen-table theme. DATE: TODAY. REASON: -1. (Section break before.) At \"Now, back to the kitchen\", the kitchen table, mug and grater from 1a slide back in; then two paper price cards. First, left: \"1626 · ONE KILO ≈ 4 GUILDERS · ≈ A LABOURER'S WEEK OF PAY\", beside a sailor figure standing in for the labourer. At \"By one inflation estimate\", it adds a line in red: \"≈ $75 TODAY · INFLATION-ADJUSTED, ROUGH ESTIMATE\". At \"Today, the farmer\", the right card lands: \"TODAY · ≈ $6 A KILO TO THE FARMER\". A paper bar pair: $75 vs $6.",
+  "t": 632.9,
+  "para_start": 632.9,
+  "para_end": 650.73
+ },
+ {
+  "section": "7b",
+  "para": 64,
+  "kind": "visual",
+  "anchor": "The fight for",
+  "text": "The price cards LIFT off. Navy. Big and clear, side by side, filling most of the frame: at \"Courthope\", a LARGE englishman figure (Courthope's silhouette) turns red and falls, and stays visible lying full-length; at \"Run every tree\", a LARGE nutmeg-tree cutout tips over and lies full-length beside him; at \"fifteen thousand\", the 15-figure row from 5a with one left. Small labels: \"COURTHOPE · 1620\", \"RUN · EVERY TREE\", \"≈ 15,000 → ≈ 1,000\".",
+  "t": 651.74,
+  "para_start": 651.67,
+  "para_end": 673.71
+ },
+ {
+  "section": "7b",
+  "para": 64,
+  "kind": "visual",
+  "anchor": "Some survivors",
+  "text": "Everything LIFTS off. The Banda map; a small boat with a bandanese man and woman leaves Banda and sails east, a dotted line drawing behind it, to the KEI ISLANDS; two village pins on Kei Besar: BANDA ELI, BANDA ELAT. At \"still speak\", card: \"BANDA LANGUAGE · ≈ 3,000 SPEAKERS (1987)\". (No distance shown: unverified.)",
+  "t": 662.06,
+  "para_start": 651.67,
+  "para_end": 673.71
+ },
+ {
+  "section": "7b",
+  "para": 65,
+  "kind": "visual",
+  "anchor": "Run's nutmeg",
+  "text": "Back to the opening two-island map from 1a, cream. On Run, nutmeg-tree cutouts grow back one by one; small counter \"POP. 1,572\". On the left, Manhattan, labelled NEW YORK.",
+  "t": 674.24,
+  "para_start": 674.5,
+  "para_end": 676.9
+ },
+ {
+  "section": "7b",
+  "para": 66,
+  "kind": "visual",
+  "anchor": "Today, Manhattan's",
+  "text": "REUSE v3 shot 1b-1, cream: two paper counters side by side. Left, under a Manhattan cutout: \"≈ $1 TRILLION A YEAR\" (source tag \"BEA, 2024\"). Right, under a Run cutout and a nutmeg sack: \"≈ 50 TONNES OF NUTMEG\". At \"ten seconds\", a stopwatch ticks 0 to 10 while a coin stack under Manhattan grows to match Run's sack. Card: \"RUN'S WHOLE HARVEST ≈ 10 SECONDS OF MANHATTAN\". Then the counters LIFT off.",
+  "t": 677.42,
+  "para_start": 677.35,
+  "para_end": 685.8
+ },
+ {
+  "section": "7b",
+  "para": 67,
+  "kind": "visual",
+  "anchor": "So, was it",
+  "text": "The paper balance from chapter five returns between the islands: Run under a waving `dutchRepublic` flag, Manhattan under a waving `union1606` flag. The pans wobble and never settle. Question card: \"WHO GOT THE BETTER DEAL?\".",
+  "t": 686.86,
+  "para_start": 686.67,
+  "para_end": 696.66
+ },
+ {
+  "section": "7b",
+  "para": 68,
+  "kind": "visual",
+  "anchor": "Next time",
+  "text": "NO Run-over-Manhattan move (owner note r3: removed). The balance LIFTS off and a slow dissolve goes straight to the kitchen table: the mug of eggnog, a pinch of nutmeg falling onto the foam. Hold.",
+  "t": 697.64,
+  "para_start": 697.53,
+  "para_end": 702.12
+ },
+ {
+  "section": "7b",
+  "para": 69,
+  "kind": "visual",
+  "anchor": "This is Story",
+  "text": "End card: the channel logo, wordmark \"STORY OF EVERYTHING\", moves from bottom-right to centre; like and subscribe button cutouts slide in beneath it.",
+  "t": 703.16,
+  "para_start": 703.11,
+  "para_end": 710.81
+ },
+ {
+  "section": "7b",
+  "para": 69,
+  "kind": "pause",
+  "anchor": null,
+  "text": "PAUSE 3s",
+  "t": 710.81,
+  "para_start": 703.11,
+  "para_end": 710.81
+ }
+]
