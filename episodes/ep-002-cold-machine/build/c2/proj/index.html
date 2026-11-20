@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #192733; }
+      #root { position: absolute; inset: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Story of Everything ep-002, chapter c2 (sections 2a "The ice", 2b "Downhill"): 2733 frames at 30 fps. -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="91.0833" data-width="1920" data-height="1080">
+      <div id="c2-ice" data-composition-id="c2-ice" data-composition-src="compositions/c2-ice.html"
+        data-start="0" data-duration="61.6" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 1"></div>
+      <div id="c2-hill" data-composition-id="c2-hill" data-composition-src="compositions/c2-hill.html"
+        data-start="61.2" data-duration="29.8833" data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 2"></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+[
+ {
+  "t": 0.6,
+  "sfx": "fridge_hum",
+  "note": "fridge running bed under the kitchen scene",
+  "gain_db": -14,
+  "dur": 19.8
+ },
+ {
+  "t": 0.7,
+  "sfx": "paper_slide",
+  "note": "paper hand slides in behind the fridge",
+  "gain_db": -8
+ },
+ {
+  "t": 7.1,
+  "sfx": "ui_whoosh_short",
+  "note": "heat lines rise off the coils on 'warm'",
+  "gain_db": -9
+ },
+ {
+  "t": 8.46,
+  "sfx": "fridge_door",
+  "note": "side panel lifts: fridge becomes a cutaway",
+  "gain_db": -6
+ },
+ {
+  "t": 9.75,
+  "sfx": "glass_clink",
+  "note": "milk bottle placed on the shelf",
+  "gain_db": -8
+ },
+ {
+  "t": 11.55,
+  "sfx": "ui_whoosh_short",
+  "note": "heat arrow draws from the milk to the coils",
+  "gain_db": -9
+ },
+ {
+  "t": 18.75,
+  "sfx": "ui_pop",
+  "note": "label HEAT lands on the arrow",
+  "gain_db": -6
+ },
+ {
+  "t": 20.45,
+  "sfx": "paper_slide",
+  "note": "fridge lifts off",
+  "gain_db": -6
+ },
+ {
+  "t": 25.75,
+  "sfx": "paper_slide",
+  "note": "snowy peak placed on the bench",
+  "gain_db": -7
+ },
+ {
+  "t": 26.75,
+  "sfx": "paper_rustle",
+  "note": "basket of snow slides down the mountain",
+  "gain_db": -9
+ },
+ {
+  "t": 29.35,
+  "sfx": "ice_crack",
+  "note": "thin sheet of ice forms on the dish",
+  "gain_db": -6
+ },
+ {
+  "t": 31.7,
+  "sfx": "paper_rustle",
+  "note": "mountain and dish lift off",
+  "gain_db": -8
+ },
+ {
+  "t": 34.5,
+  "sfx": "paper_slide",
+  "note": "headline card placed",
+  "gain_db": -7
+ },
+ {
+  "t": 39.45,
+  "sfx": "paper_slide",
+  "note": "paper Earth placed under the card",
+  "gain_db": -8
+ },
+ {
+  "t": 43.95,
+  "sfx": "ui_pop",
+  "note": "icon: the ice",
+  "gain_db": -8
+ },
+ {
+  "t": 45.45,
+  "sfx": "ui_pop",
+  "note": "icon: the trick",
+  "gain_db": -8
+ },
+ {
+  "t": 46.95,
+  "sfx": "ui_pop",
+  "note": "icon: the loop",
+  "gain_db": -8
+ },
+ {
+  "t": 48.35,
+  "sfx": "ui_pop",
+  "note": "icon: the poison",
+  "gain_db": -8
+ },
+ {
+  "t": 50.55,
+  "sfx": "ui_pop",
+  "note": "icon: the sky",
+  "gain_db": -8
+ },
+ {
+  "t": 51.55,
+  "sfx": "ui_whoosh_short",
+  "note": "big icons shrink up into the bar",
+  "gain_db": -8
+ }
+]

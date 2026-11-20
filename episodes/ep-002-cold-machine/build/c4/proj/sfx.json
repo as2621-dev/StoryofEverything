@@ -1,0 +1,23 @@
+[
+  { "t": 2.95, "sfx": "paper_slide", "note": "Perkins portrait placed", "gain_db": -6 },
+  { "t": 5.4, "sfx": "scroll", "note": "patent scroll unrolls", "gain_db": -6 },
+  { "t": 7.8, "sfx": "glass_clink", "note": "Cullen jar returns", "gain_db": -8 },
+  { "t": 12.75, "sfx": "paper_slide", "note": "loop diagram placed, pipe draws on", "gain_db": -6 },
+  { "t": 17.8, "sfx": "boil", "note": "evaporator: drops boil into puffs", "gain_db": -10, "dur": 5.0 },
+  { "t": 25.2, "sfx": "pump", "note": "compressor piston starts squeezing", "gain_db": -8 },
+  { "t": 29.0, "sfx": "paper_slide", "note": "bicycle pump cutout", "gain_db": -8 },
+  { "t": 37.1, "sfx": "ui_whoosh_short", "note": "heat arrows flow out of the condenser", "gain_db": -8 },
+  { "t": 41.9, "sfx": "hiss", "note": "drops squeeze through the narrow tube", "gain_db": -10 },
+  { "t": 44.2, "sfx": "ui_click_soft", "note": "pressure gauge needle drops", "gain_db": -6 },
+  { "t": 47.2, "sfx": "paper_slide", "note": "hill slides in", "gain_db": -8 },
+  { "t": 47.5, "sfx": "ui_whoosh_short", "note": "HEAT ball pushed uphill", "gain_db": -8 },
+  { "t": 50.06, "sfx": "fridge_hum", "note": "kitchen fridge slides back in", "gain_db": -10, "dur": 7.0 },
+  { "t": 57.5, "sfx": "paper_slide", "note": "Hague's model placed", "gain_db": -6 },
+  { "t": 66.65, "sfx": "paper_slide", "note": "1850s ice machine placed", "gain_db": -6 },
+  { "t": 67.0, "sfx": "stamp", "note": "SOLD tag", "gain_db": -4 },
+  { "t": 68.8, "sfx": "paper_slide", "note": "empty loop placed on navy", "gain_db": -8 },
+  { "t": 71.8, "sfx": "glass_clink", "note": "AMMONIA bottle lands", "gain_db": -6 },
+  { "t": 72.3, "sfx": "glass_clink", "note": "SULFUR DIOXIDE bottle lands", "gain_db": -6 },
+  { "t": 74.0, "sfx": "glass_clink", "note": "METHYL CHLORIDE bottle lands", "gain_db": -6 },
+  { "t": 75.1, "sfx": "stamp", "note": "skull labels land left to right", "gain_db": -8 }
+]

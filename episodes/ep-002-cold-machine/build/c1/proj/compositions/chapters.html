@@ -1,0 +1,94 @@
+<template>
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="chapters" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-110m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script src="assets/c1/c1.js"></script>
+  <script>
+    (function () {
+      // Section 1b, paragraphs 3-4. Host starts at chapter 34.15 s and runs to the chapter end (55.0833).
+      const T0 = 34.15, LEN = 55.0833 - T0, T = (t) => t - T0;
+      const root = document.querySelector('[data-composition-id="chapters"]');
+      const tl = gsap.timeline({ paused: true });
+      const st = Kit.stage(root, { theme: "cream", date: "Today", reasons: C1.REASONS, active: -1, channel: "STORY OF EVERYTHING" });
+      const { S, rr, draw, obj, tw, place, lift } = C1;
+      st.fadeIn(tl, 0, 0.3);
+
+      // headline card, one italic red word
+      const card = Kit.card(st, { x: 330, y: 236, w: 1260, big: "How do you *make* cold?", bigSize: 112, bigColor: "ink", seed: 5 });
+      card.parts.big.style.textAlign = "center";
+      card.el.querySelectorAll(".kit-accent").forEach((a) => { a.style.color = Kit.C.red; });
+      card.in(tl, T(34.5), "place");                                       // "how"
+      // "make": a hand-drawn red underline under the accent word
+      const acc = card.el.querySelector(".kit-accent");
+      acc.style.position = "relative";
+      const ul = S("svg", { width: "100%", height: 18, viewBox: "0 0 200 18", preserveAspectRatio: "none" }, acc);
+      Object.assign(ul.style, { position: "absolute", left: "2%", bottom: "-6px", width: "96%", overflow: "visible" });
+      const ulp = S("path", { d: "M2,10 C50,4 110,14 198,6", fill: "none", stroke: Kit.C.red, "stroke-width": 5, "stroke-linecap": "round", "vector-effect": "non-scaling-stroke", pathLength: 100, "stroke-dasharray": "100 100", "stroke-dashoffset": 100 }, ul);
+      tl.fromTo(ulp, { attr: { "stroke-dashoffset": 100 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.4, ease: "power2.out", immediateRender: false, lazy: false }, T(35.75));
+
+      // "a hole in the sky": a small paper Earth with a thin dark gap cut in the paper sky above it
+      const earth = obj(st.svg, { x: 960, y: 760, hidden: true });
+      const R1 = 150, R2 = 178;
+      const band = (a0, a1) => {
+        const p = (r, a) => [(r * Math.cos(a * Math.PI / 180)).toFixed(2), (r * Math.sin(a * Math.PI / 180)).toFixed(2)];
+        const [x0, y0] = p(R2, a0), [x1, y1] = p(R2, a1), [x2, y2] = p(R1, a1), [x3, y3] = p(R1, a0);
+        return `M${x0},${y0} A${R2},${R2} 0 0 1 ${x1},${y1} L${x2},${y2} A${R1},${R1} 0 0 0 ${x3},${y3}Z`;
+      };
+      draw(st, earth.g, [
+        { d: band(-172, -8), fill: "#BBD5E3" },
+        { group: C1.ICONS.sky(), transform: "scale(3.6)" }
+      ]);
+      const gap = S("g", { opacity: 0 }, earth.g);
+      const gapPath = S("path", { d: "M-9,-184 L3,-172 L-6,-163 L4,-154 L-4,-146 L4,-146 L13,-154 L4,-163 L12,-172 L1,-184Z", fill: Kit.C.navy }, gap);
+      place(tl, earth, T(39.45), { from: "bottom", dist: 40, rot: 2.5 });  // "a hole"
+      tl.fromTo(gap, { opacity: 0, scaleX: 0.1, transformOrigin: "50% 50%" }, { opacity: 1, scaleX: 1, duration: 0.35, ease: "power2.out", immediateRender: false, lazy: false }, T(39.95));  // "the sky"
+
+      // 41.90: the headline lifts off; five chapters land on a dotted line
+      Kit.exit(tl, T(41.9), card.el, { style: "lift" });
+      lift(tl, earth, T(41.95), { rot: -3 });
+
+      const LINE_Y = 650, X0 = 250, X1 = 1670;
+      const lineClip = S("clipPath", { id: "c1-dots-clip" }, S("defs", null, st.svg));
+      const lcr = S("rect", { x: X0 - 10, y: LINE_Y - 12, width: 0, height: 24 }, lineClip);
+      const dots = S("path", { d: `M${X0},${LINE_Y} H${X1}`, stroke: Kit.C.ink2, "stroke-width": 5, "stroke-linecap": "round", "stroke-dasharray": "0.1 18", fill: "none", "clip-path": "url(#c1-dots-clip)" }, st.svg);
+      tl.fromTo(lcr, { attr: { width: 0 } }, { attr: { width: X1 - X0 + 20 }, duration: 0.9, ease: "power2.inOut", immediateRender: false, lazy: false }, T(42.3));   // "five chapters"
+
+      const xs = [400, 680, 960, 1240, 1520], SC = 2.1;
+      const keys = ["ice", "flask", "loop", "poison", "sky"], names = ["The ice", "The trick", "The loop", "The poison", "The sky"];
+      const at = [43.95, 45.45, 46.95, 48.35, 50.55];                         // ice, trick, loop, poison, sky
+      const big = [], labs = [];
+      keys.forEach((k, i) => {
+        const o = obj(st.svg, { x: xs[i], y: 548, s: SC, hidden: true });
+        draw(st, o.g, [{ group: C1.ICONS[k](), transform: "scale(1)" }]);
+        place(tl, o, T(at[i]), { from: "bottom", dist: 36, rot: i % 2 ? -3 : 3 });
+        Kit.setReason(tl, T(at[i]), i, st);
+        const lb = Kit.label(st.svg, [xs[i], 722], names[i], { size: 26, anchor: "middle", haloColor: "bg", weight: 600, tracking: "0.16em" });
+        lb.in(tl, T(at[i]) + 0.15, "fadeUp");
+        big.push(o); labs.push(lb);
+      });
+
+      // then the big icons shrink up into the bar; REASON returns to -1
+      labs.forEach((lb, i) => tl.fromTo(lb.el, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.inOut", immediateRender: false, lazy: false }, T(51.35) + i * 0.03));
+      tl.fromTo(dots, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.inOut", immediateRender: false, lazy: false }, T(51.4));
+      big.forEach((o, i) => {
+        const tx = 1491 + 82 * i, ty = 69, t = T(51.55) + i * 0.07;
+        tw(tl, o, t, { dx: 0, dy: 0, ds: 1 }, { dx: tx - o.x, dy: ty - o.y, ds: 0.625 / SC }, 0.75, "power3.inOut");
+        tw(tl, o, t + 0.5, { o: 1 }, { o: 0 }, 0.25, "power1.in");
+      });
+      Kit.setReason(tl, T(52.45), -1, st);
+
+      tl.to({}, { duration: 0.01 }, LEN - 0.01);
+      window.__timelines["chapters"] = tl;
+    })();
+  </script>
+</template>

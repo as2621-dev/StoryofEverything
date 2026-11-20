@@ -1,0 +1,165 @@
+<template>
+  <!-- c2 scene B (chapter 61.2–91.0833 s, local 0 = 61.2): section 2b "Downhill". Cream: the small dome, the paper
+       hill (HOT top, COLD bottom), the HEAT ball rolling down, the tea in a cold room, the hand pushing heat uphill. -->
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="c2-hill" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-50m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script src="assets/c2/c2.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-composition-id="c2-hill"]');
+      const tl = gsap.timeline({ paused: true });
+      const OFF = 61.2, LEN = 91.0833 - OFF;
+      const T = (t) => t - OFF; // chapter time → scene time
+      const { el, obj, txt, wavy, heatArrow, hand, thermo, domeOuter } = C2;
+      const st = Kit.stage(root, { theme: "cream", channel: "STORY OF EVERYTHING", date: "SUMMER", reasons: C2.REASONS, active: 0 });
+      const P = (hex) => Kit.paperFill(st.svg, hex);
+      const CUT = Kit.filter(st.svg, "cut"), PIECE = Kit.filter(st.svg, "piece"), GLOW = Kit.filter(st.svg, "glow");
+      const INK = "#242018", RED = "#C03F27", BLUE = "#24506C";
+      st.fadeIn(tl, 0, 0.3);
+      Kit.setDate(tl, T(61.5), "ANY TIME");
+
+      // the dome from 2a, small, at left
+      const GB = 905;
+      const domeG = obj(st.top, 0, 0, CUT);
+      const dm = domeOuter(250, GB, 230, 120, 16, 8);
+      el("path", { d: dm.d, fill: P("#B08A5A") }, domeG.art);
+      const dc = el("clipPath", { id: "c2-hill-domeclip" }, el("defs", null, st.top));
+      el("path", { d: dm.d }, dc);
+      const dbr = el("g", { "clip-path": "url(#c2-hill-domeclip)" }, domeG.art);
+      for (let y = GB - 12; y > GB - 250; y -= 12) el("line", { x1: 120, y1: y, x2: 380, y2: y, stroke: "#8E6C44", "stroke-width": 1.2 }, dbr);
+      el("rect", { x: 236, y: GB - 34, width: 28, height: 34, rx: 12, fill: "#3A3026" }, domeG.art);
+      el("rect", { x: 90, y: GB, width: 320, height: 10, rx: 3, fill: P("#C9B48E") }, domeG.art);
+      const lbDome = txt(st.top, 250, 960, "Yakhchāl", { size: 20, anchor: "middle", color: INK });
+      // a summer sun over it: no ice can be made now
+      const sun = obj(st.top, 360, 600, PIECE);
+      el("circle", { cx: 0, cy: 0, r: 30, fill: P("#E2AF51") }, sun.art);
+      for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; el("path", { d: `M${(Math.cos(a) * 40).toFixed(1)},${(Math.sin(a) * 40).toFixed(1)}L${(Math.cos(a) * 52).toFixed(1)},${(Math.sin(a) * 52).toFixed(1)}`, stroke: "#E2AF51", "stroke-width": 4, "stroke-linecap": "round" }, sun.art); }
+      Kit.place(tl, sun, T(67.85), { from: "top", dist: 34, dur: 0.45 });
+      Kit.dim(tl, [domeG.el, lbDome, sun.el], T(69.2), 0.28);
+
+      // the paper hill: HOT at the top, COLD at the bottom
+      const SURF = "M470,345 L640,345 C820,345 900,600 1060,760 C1130,830 1200,850 1380,850";
+      const hill = obj(st.top, 0, 0, CUT);
+      el("path", { d: SURF + " L1380,905 L470,905 Z", fill: P("#D9C29A") }, hill.art);
+      el("path", { d: "M1060,760 C1130,830 1200,850 1380,850 L1380,905 L980,905 C1010,860 1040,800 1060,760Z", fill: P("#CDB488"), opacity: 0.8 }, hill.art);
+      el("path", { d: "M474,345 L640,345 C700,345 742,372 776,408", stroke: P(RED), "stroke-width": 16, fill: "none", "stroke-linecap": "round" }, hill.art);
+      el("path", { d: "M1150,843 C1210,852 1270,852 1376,852", stroke: P("#7FA9C4"), "stroke-width": 16, fill: "none", "stroke-linecap": "round" }, hill.art);
+      Kit.place(tl, hill, T(62.15), { from: "bottom", dist: 50, rot: 1.2, dur: 0.6 });
+      const lbHot = txt(st.top, 560, 440, "Hot", { size: 40, anchor: "middle", color: RED, tracking: "0.3em" });
+      const lbCold = txt(st.top, 1265, 962, "Cold", { size: 40, anchor: "middle", color: BLUE, tracking: "0.3em" });
+      Kit.enter(tl, lbHot, T(62.6), "fadeUp");
+      Kit.enter(tl, lbCold, T(62.8), "fadeUp");
+
+      // the surface as a lookup: point, tangent, ball centre (offset along the up-normal)
+      const surf = el("path", { d: SURF, fill: "none", stroke: "none" }, st.top);
+      const SL = surf.getTotalLength(), R = 34;
+      function at(p) {
+        const L = p * SL, a = surf.getPointAtLength(Math.max(0, L - 1)), b = surf.getPointAtLength(Math.min(SL, L + 1));
+        let tx = b.x - a.x, ty = b.y - a.y; const n = Math.hypot(tx, ty) || 1; tx /= n; ty /= n;
+        const q = surf.getPointAtLength(L);
+        return { x: q.x + ty * (R + 1), y: q.y - tx * (R + 1), tx, ty, L };
+      }
+      const P_TOP = 70 / SL, P_BOT = 0.955;
+
+      // water on a hill: a few drops trickle down
+      for (let i = 0; i < 4; i++) {
+        const dr = el("circle", { r: 9, fill: "#7FA9C4", opacity: 0 }, st.top);
+        const pr = { p: 0.2 };
+        const upd = () => { const L = pr.p * SL, q = surf.getPointAtLength(L), a = at(pr.p); dr.setAttribute("cx", (q.x + a.ty * 10).toFixed(1)); dr.setAttribute("cy", (q.y - a.tx * 10).toFixed(1)); };
+        upd();
+        const t0 = T(70.65) + i * 0.16;
+        tl.fromTo(pr, { p: 0.2 }, { p: 0.94, duration: 1.15, ease: "power2.in", onUpdate: upd, immediateRender: false }, t0);
+        tl.fromTo(dr, { opacity: 0 }, { opacity: 1, duration: 0.15 }, t0);
+        tl.to(dr, { opacity: 0, duration: 0.25 }, t0 + 1.0);
+      }
+
+      // the HEAT ball
+      const ball = el("g", null, st.top);
+      const ballIn = el("g", null, ball);
+      const ballSpin = el("g", { filter: PIECE }, ballIn);
+      el("circle", { cx: 0, cy: 0, r: R, fill: P(RED) }, ballSpin);
+      el("circle", { cx: -11, cy: -12, r: 9, fill: "#E0745E", opacity: 0.9 }, ballSpin);
+      el("path", { d: "M-20,10 Q0,22 20,10", stroke: "#8E2A18", "stroke-width": 3, fill: "none", "stroke-linecap": "round" }, ballSpin);
+      const lbHeat = txt(ballIn, 0, -R - 16, "Heat", { size: 26, anchor: "middle", color: RED });
+      const bp = { p: P_TOP };
+      const updBall = () => { const a = at(bp.p); ball.setAttribute("transform", `translate(${a.x.toFixed(1)},${a.y.toFixed(1)})`); ballSpin.setAttribute("transform", `rotate(${(a.L / R * 57.3).toFixed(1)})`); };
+      updBall();
+      tl.fromTo(ballIn, { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.4)" }, T(69.25));
+      [[lbHot, 75.5], [lbCold, 76.1]].forEach(([e, t]) => {
+        tl.fromTo(e, { scale: 1, transformOrigin: "50% 50%" }, { scale: 1.18, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1, immediateRender: false }, T(t));
+      });
+
+      // a cup of tea in a cold room
+      const room = obj(st.top, 1640, 590, CUT);
+      el("rect", { x: -200, y: -230, width: 400, height: 460, rx: 8, fill: P("#C9DCE6") }, room.art);
+      el("rect", { x: -200, y: 200, width: 400, height: 30, rx: 4, fill: P("#A9C3D1") }, room.art);
+      txt(room.body, -176, -192, "Cold room", { size: 22, color: BLUE });
+      const rTh = thermo(room.body, 150, { top: -170, bottom: -20, min: -10, max: 30, value: 2, color: "#7FA9C4", bulbR: 16, tw: 22, bore: 8,
+        ticks: [{ v: 0, label: "0", size: 16 }] }, P, PIECE);
+      Kit.place(tl, room, T(77.2), { from: "right", dist: 50, dur: 0.5 });
+      const mug = obj(st.top, 1560, 750, PIECE);
+      el("path", { d: "M34,-36 C62,-36 62,6 30,4", stroke: P("#B5553A"), "stroke-width": 9, fill: "none" }, mug.art);
+      el("path", { d: "M-40,-50 H40 V10 Q40,40 10,40 H-10 Q-40,40 -40,10Z", fill: P("#B5553A") }, mug.art);
+      el("ellipse", { cx: 0, cy: -50, rx: 40, ry: 8, fill: "#5A3A22" }, mug.art);
+      Kit.place(tl, mug, T(77.75), { from: "top", dist: 36, dur: 0.45 });
+      // steam: three rounds of puffs, each thinner than the last
+      const steam = el("g", null, st.top);
+      [[78.0, 0.9, 4], [78.7, 0.55, 3], [79.4, 0.25, 2]].forEach(([t, op, n], r) => {
+        for (let i = 0; i < n; i++) {
+          const x = 1560 + (i - (n - 1) / 2) * 24 + (r % 2 ? 8 : -6);
+          const pf = el("circle", { cx: x, cy: 0, r: 13 - r * 2, fill: "#F4EFE4", opacity: 0 }, steam);
+          tl.fromTo(pf, { attr: { cy: 690 }, opacity: 0 }, { attr: { cy: 590 }, opacity: op, duration: 0.5, ease: "power1.out", immediateRender: false }, T(t) + i * 0.08);
+          tl.to(pf, { attr: { cy: 540 }, opacity: 0, duration: 0.5, ease: "power1.in" }, T(t) + 0.5 + i * 0.08);
+        }
+      });
+      // heat leaves the mug into the room (downhill)
+      const out1 = heatArrow(st.top, wavy(1608, 700, 1730, 532, 7, 70, 0.4), { color: RED, glow: "#E2AF51", width: 5, glowFilter: GLOW });
+      out1.draw(tl, T(78.2), 0.8);
+      // the reverse never happens: room → mug, crossed out
+      const back = heatArrow(st.top, wavy(1468, 470, 1530, 676, 6, 70, 1.1), { color: RED, glow: "#E2AF51", width: 5, glowFilter: GLOW, opacity: 0.75 });
+      back.draw(tl, T(80.5), 0.6);
+      const X = el("g", null, st.top);
+      const x1 = el("path", { d: "M1462,535 L1546,619", stroke: INK, "stroke-width": 9, "stroke-linecap": "round" }, X);
+      const x2 = el("path", { d: "M1546,535 L1462,619", stroke: INK, "stroke-width": 9, "stroke-linecap": "round" }, X);
+      [x1, x2].forEach((p, i) => { p.setAttribute("stroke-dasharray", "120 140"); tl.fromTo(p, { attr: { "stroke-dashoffset": 120 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.16, ease: "power2.out" }, T(81.2) + i * 0.17); });
+      Kit.exit(tl, T(82.95), [mug, steam, out1.g, back.g, X, room], { style: "lift", stagger: 0.04 });
+
+      // to make cold you must push heat uphill: the hand, WORK
+      const hd = obj(st.top, 0, 0, null);
+      const hPose = el("g", null, hd.art);
+      const hArt = el("g", { filter: PIECE, transform: "scale(0.9)" }, hPose);
+      hand(hArt, P, true);
+      const work = el("g", null, st.top);
+      const workIn = el("g", { opacity: 0 }, work);
+      el("rect", { x: -62, y: -22, width: 124, height: 40, rx: 6, fill: P("#EFE9D9"), filter: PIECE }, workIn);
+      txt(workIn, 0, 9, "Work", { size: 26, anchor: "middle", color: INK, tracking: "0.25em" });
+      const updHand = () => {
+        const a = at(bp.p), d = R + 44;               // palm just downhill of the ball, fingers over its back
+        const hx = a.x + a.tx * d, hy = a.y + a.ty * d, ang = Math.atan2(a.ty, a.tx) * 57.3;
+        hPose.setAttribute("transform", `translate(${hx.toFixed(1)},${hy.toFixed(1)}) rotate(${ang.toFixed(1)})`);
+        work.setAttribute("transform", `translate(${(hx + 70).toFixed(1)},${(hy - 70).toFixed(1)})`);
+      };
+      const bp2 = bp; // the push reuses the ball's progress
+      bp.p = P_BOT; updHand(); bp.p = P_TOP; updBall();
+      Kit.place(tl, hd, T(83.3), { from: "right", dist: 60, rot: -3, dur: 0.55 });
+      tl.fromTo(workIn, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, T(85.75));
+      // the ball rolls down on its own (73.8–75.95), then the hand pushes it back up (85.8–87.5)
+      const ballP = C2.track([[T(73.8), P_TOP], [T(75.95), P_BOT, "power2.inOut"], [T(85.8), P_BOT], [T(87.5), P_TOP, "power1.inOut"]]);
+      C2.clock(tl, LEN, (t) => { bp2.p = ballP(t); updBall(); updHand(); });
+
+      tl.to({}, { duration: 0.01 }, LEN - 0.01);
+      window.__timelines["c2-hill"] = tl;
+    })();
+  </script>
+</template>

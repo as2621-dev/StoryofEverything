@@ -1,0 +1,20 @@
+[
+  { "t": 0.7, "sfx": "paper_slide", "note": "map of Iran slides in", "gain_db": -6 },
+  { "t": 4.5, "sfx": "paper_slide", "note": "thermometer card placed", "gain_db": -8 },
+  { "t": 11.2, "sfx": "ui_pop", "note": "Yazd pin", "gain_db": -6 },
+  { "t": 15.3, "sfx": "paper_rustle", "note": "map lifts, ground and pool placed", "gain_db": -7 },
+  { "t": 19.7, "sfx": "splash", "note": "qanat water trickles into the pool", "gain_db": -14 },
+  { "t": 22.3, "sfx": "paper_slide", "note": "paper hand measures the water", "gain_db": -8 },
+  { "t": 24.8, "sfx": "thud", "note": "tall wall placed", "gain_db": -10 },
+  { "t": 36.8, "sfx": "ice_crack", "note": "the pool freezes", "gain_db": -5 },
+  { "t": 41.0, "sfx": "ice_crack", "note": "another layer freezes", "gain_db": -10 },
+  { "t": 45.6, "sfx": "ice_crack", "note": "ice cut into blocks", "gain_db": -6 },
+  { "t": 46.75, "sfx": "paper_slide", "note": "yakhchal cross-section placed", "gain_db": -7 },
+  { "t": 47.6, "sfx": "thud", "note": "blocks drop into the pit", "gain_db": -9 },
+  { "t": 59.8, "sfx": "paper_slide", "note": "cart rolls away with a block", "gain_db": -8 },
+  { "t": 62.15, "sfx": "paper_slide", "note": "paper hill placed", "gain_db": -6 },
+  { "t": 73.8, "sfx": "ui_whoosh_short", "note": "HEAT ball rolls downhill", "gain_db": -8 },
+  { "t": 77.75, "sfx": "mug", "note": "cup of tea set down", "gain_db": -7 },
+  { "t": 81.2, "sfx": "ui_click_soft", "note": "reverse arrow crossed out", "gain_db": -6 },
+  { "t": 85.8, "sfx": "paper_rustle", "note": "hand pushes heat uphill", "gain_db": -8 }
+]

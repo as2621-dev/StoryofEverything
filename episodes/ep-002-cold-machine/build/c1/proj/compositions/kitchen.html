@@ -1,0 +1,143 @@
+<template>
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="kitchen" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-110m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script src="assets/c1/c1.js"></script>
+  <script>
+    (function () {
+      // Section 1a, paragraphs 0-1 (chapter-local 0.00-21.10 s; this scene starts at 0, so times are chapter times)
+      const LEN = 21.1;
+      const root = document.querySelector('[data-composition-id="kitchen"]');
+      const tl = gsap.timeline({ paused: true });
+      const st = Kit.stage(root, { theme: "cream", date: "Today", reasons: C1.REASONS, active: -1, channel: "STORY OF EVERYTHING" });
+      const { S, rr, draw, obj, tw, place, lift } = C1;
+
+      // kitchen-table theme: a warm cream wash over the desk, a floor band
+      const warm = document.createElement("div");
+      Object.assign(warm.style, { position: "absolute", inset: "0", backgroundColor: "#EBD3A8", backgroundImage: "url(" + Kit.texture("desk") + ")", opacity: "0.5" });
+      st.el.insertBefore(warm, st.svg);
+      draw(st, st.svg, [
+        { d: "M0,884 H1920 V1080 H0Z", fill: "#D2B88E" },
+        { d: "M0,872 H1920 V890 H0Z", fill: "#B89C72", flat: true },
+        { d: "M240,930 L180,1080 M700,930 L680,1080 M1180,930 L1200,1080 M1660,930 L1730,1080", stroke: "#C2A67C", sw: 2, flat: true }
+      ]);
+
+      // everything on the floor lifts off together at 20.54
+      const all = obj(st.svg, { pivot: [960, 560] });
+
+      // ---- fridge (side view: door on the left, coils on the back, right)
+      // interior first, so the side panel covers it until the cutaway
+      draw(st, all.g, [
+        { ellipse: [900, 884, 250, 13], fill: "#14120E", solid: true, flat: true, opacity: 0.16 },
+        { d: rr(722, 862, 34, 20, 4), fill: "#625949" }, { d: rr(1028, 862, 34, 20, 4), fill: "#625949" },
+        { d: rr(704, 204, 372, 668, 22), fill: "#E3D3AE" },                       // foam walls
+        { d: rr(730, 230, 320, 150, 10), fill: "#B2CEDF", flat: true },            // freezer
+        { d: rr(730, 424, 320, 422, 10), fill: "#CFE2EB", flat: true },            // fridge
+        { d: "M736,236 Q760,252 784,238 Q810,256 836,238 Q862,254 890,238 Q916,256 944,238 Q970,252 996,238 Q1020,254 1044,238 L1044,232 L736,232Z", fill: "#F4F8FA", flat: true },
+        { d: "M740,436 Q770,446 800,438 Q840,450 880,438 Q920,448 960,438 Q1000,450 1040,438 L1040,430 L740,430Z", fill: "#EEF5F8", flat: true },
+        { d: rr(760, 336, 46, 40, 8), fill: "#DCEAF1" }, { d: rr(814, 340, 40, 36, 8), fill: "#DCEAF1" }, { d: rr(862, 334, 46, 42, 8), fill: "#DCEAF1" },
+        { d: "M734,580 H1046 M734,720 H1046", stroke: "#93B4C6", sw: 6, flat: true },
+        { d: "M734,576 H1046 M734,716 H1046", stroke: "#F4F8FA", sw: 2, flat: true },
+        { circle: [960, 300, 3], fill: "#F4F8FA", solid: true, flat: true }, { circle: [1010, 270, 2.5], fill: "#F4F8FA", solid: true, flat: true },
+        { circle: [790, 500, 2.5], fill: "#F4F8FA", solid: true, flat: true }, { circle: [1000, 650, 2.5], fill: "#F4F8FA", solid: true, flat: true },
+        { circle: [780, 800, 3], fill: "#F4F8FA", solid: true, flat: true }
+      ]);
+      // milk bottle on the top shelf, thermometer on the lower shelf (placed on their words)
+      const milk = obj(all.g, { x: 850, y: 576, hidden: true });
+      draw(st, milk.g, [
+        { d: "M-28,0 V-86 Q-28,-108 -13,-118 V-136 H13 V-118 Q28,-108 28,-86 V0Z", fill: "#F7F4EC" },
+        { d: rr(-15, -148, 30, 14, 4), fill: "#3F7398" },
+        { d: "M-28,-64 H28 V-38 H-28Z", fill: "#7FA9C4", flat: true },
+        { d: "M-18,-96 V-14", stroke: "#FFFFFF", sw: 4, flat: true }
+      ]);
+      const thObj = obj(all.g, { x: 985, y: 630, hidden: true });
+      const th = C1.thermo(st, thObj.g, { h: 110, v: 0.62, c: 1 });
+
+      // side panel (the fridge as you see it), coils and compressor on the back
+      const panel = obj(all.g, { pivot: [890, 540] });
+      draw(st, panel.g, [
+        { d: rr(700, 200, 380, 675, 22), fill: "#F1ECDF" },
+        { d: rr(728, 232, 16, 616, 8), fill: "#FAF7EF", flat: true },
+        { d: "M712,398 H1068", stroke: "#D8D0BE", sw: 2.5, flat: true },
+        { d: "M960,830 H1050 M960,844 H1050 M960,858 H1050", stroke: "#BFB6A2", sw: 3, flat: true }
+      ]);
+      draw(st, all.g, [
+        { d: rr(682, 206, 28, 188, 8), fill: "#E2DBC8" }, { d: rr(682, 402, 28, 468, 8), fill: "#E2DBC8" },
+        { d: rr(656, 252, 12, 112, 6), fill: "#97948B" }, { d: rr(656, 438, 12, 170, 6), fill: "#97948B" },
+        { d: "M668,262 H684 M668,354 H684 M668,448 H684 M668,598 H684", stroke: "#97948B", sw: 5, flat: true }
+      ]);
+      let coil = "M1088,272";
+      for (let y = 272, k = 0; y < 790; y += 26, k++) coil += (k % 2 ? " H1088 A13,13 0 0 0 1088," : " H1116 A13,13 0 0 1 1116,") + (y + 26);
+      draw(st, all.g, [
+        { d: "M1082,262 L1102,262 M1082,808 L1102,808", stroke: "#3D3B37", sw: 5 },
+        { d: coil, stroke: "#3D3B37", sw: 5 },
+        { d: "M1100,262 V808", stroke: "#57544D", sw: 3, flat: true },
+        { d: "M1084,874 V840 Q1084,812 1116,812 Q1150,812 1150,840 V874Z", fill: "#3D3B37" },
+        { d: "M1098,830 Q1112,822 1128,826", stroke: "#6B675E", sw: 3, flat: true }
+      ]);
+
+      // ---- the paper hand reaching round the back, low down
+      const hand = obj(all.g, { x: 1132, y: 846, hidden: true });
+      draw(st, hand.g, [
+        { d: rr(150, -38, 920, 76, 34), fill: "#376B67" },
+        { d: rr(132, -42, 42, 84, 12), fill: "#2C5753" },
+        { d: rr(60, -32, 104, 64, 28), fill: "#E6C39A" },
+        { d: rr(72, -56, 56, 18, 9), fill: "#E6C39A", transform: "rotate(-24 100 -47)" },
+        { d: rr(4, -30, 82, 15, 7.5), fill: "#E6C39A" },
+        { d: rr(-2, -14, 90, 15, 7.5), fill: "#E6C39A" },
+        { d: rr(2, 2, 86, 15, 7.5), fill: "#E6C39A" },
+        { d: rr(14, 18, 74, 13, 6.5), fill: "#E6C39A" }
+      ]);
+      tw(tl, hand, 0.35, { dx: 760, r: 5 }, { dx: 0, r: 0 }, 2.3, "power3.out");
+      tw(tl, hand, 0.35, { o: 0 }, { o: 1 }, 0.15, "none");
+      tw(tl, hand, 4.1, { dx: 0 }, { dx: -12 }, 0.3, "power2.out");        // "feel"
+      tw(tl, hand, 4.4, { dx: -12 }, { dx: 0 }, 0.4, "power2.inOut");
+      tw(tl, hand, 7.75, { dx: 0, dy: 0, o: 1 }, { dx: 520, dy: 10, o: 0 }, 0.6, "power2.in");
+
+      // ---- "It's warm.": heat lines rise off the coils
+      const rising = [
+        C1.heatArrow(st, all.g, [[1136, 760], [1220, 660], [1290, 580]], { sw: 6, amp: 8, wl: 60 }),
+        C1.heatArrow(st, all.g, [[1136, 590], [1230, 480], [1290, 390]], { sw: 6, amp: 8, wl: 60 }),
+        C1.heatArrow(st, all.g, [[1136, 420], [1220, 320], [1262, 240]], { sw: 6, amp: 8, wl: 60 })
+      ];
+      rising.forEach((h, i) => h.draw(tl, 7.05 + i * 0.12, 0.85));
+      rising.forEach((h, i) => tl.fromTo(h.g, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.inOut", immediateRender: false, lazy: false }, 8.35 + i * 0.04));
+
+      // ---- 8.46 the fridge becomes a cutaway: the side panel lifts off
+      lift(tl, panel, 8.46, { rot: -2.5 });
+      place(tl, milk, 9.75, { from: "top", dist: 34, rot: -3 });          // "milk"
+      place(tl, thObj, 10.05, { from: "top", dist: 30, rot: 3 });          // "cold"
+      th.to(tl, 10.3, 0.16, 0, 0.9);                                       // reads cold (blue)
+
+      // heat arrows: milk -> cabinet -> back coils -> kitchen
+      const hIn = C1.heatArrow(st, all.g, [[880, 470], [960, 452], [1040, 448], [1098, 436]], { sw: 7, amp: 8, wl: 70 });
+      const hOut1 = C1.heatArrow(st, all.g, [[1134, 420], [1260, 372], [1400, 336], [1530, 318]], { sw: 8, amp: 10, wl: 80 });
+      const hOut2 = C1.heatArrow(st, all.g, [[1136, 640], [1280, 626], [1420, 600], [1540, 590]], { sw: 8, amp: 10, wl: 80 });
+      hIn.draw(tl, 11.55, 1.0);       // "heat"
+      hOut1.draw(tl, 12.75, 1.0);     // "kitchen"
+      hOut2.draw(tl, 13.3, 1.0);      // "day"
+      hIn.flow(tl, 12.6, 7.9); hOut1.flow(tl, 13.8, 6.7); hOut2.flow(tl, 14.35, 6.15);   // day and night
+
+      // "It moves heat.": the label HEAT lands on the arrow
+      const lab = Kit.label(all.g, [1350, 300], "HEAT", { size: 40, color: "red", anchor: "middle", haloColor: "bg", weight: 600, tracking: "0.22em" });
+      lab.in(tl, 18.75, "pop");
+
+      // ---- 20.54 the fridge lifts off; the date moves to the past
+      lift(tl, all, 20.45, { rot: 2.5, dur: 0.5 });
+      Kit.setDate(tl, 20.45, "Before 1755");
+
+      tl.to({}, { duration: 0.01 }, LEN - 0.01);
+      window.__timelines["kitchen"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,117 @@
+[
+ {
+  "t": 0.8,
+  "sfx": "paper_slide",
+  "note": "Cullen portrait placed",
+  "gain_db": -6
+ },
+ {
+  "t": 4.55,
+  "sfx": "paper_rustle",
+  "note": "pupil silhouette placed",
+  "gain_db": -8
+ },
+ {
+  "t": 9.45,
+  "sfx": "glass_clink",
+  "note": "thermometer dips into the spirit",
+  "gain_db": -8
+ },
+ {
+  "t": 14.6,
+  "sfx": "splash",
+  "note": "swimmer climbs out of the pool",
+  "gain_db": -8
+ },
+ {
+  "t": 16.25,
+  "sfx": "ui_whoosh_short",
+  "note": "wind lines",
+  "gain_db": -8
+ },
+ {
+  "t": 26.7,
+  "sfx": "ui_pop",
+  "note": "five kettles line up",
+  "gain_db": -8
+ },
+ {
+  "t": 31.82,
+  "sfx": "paper_slide",
+  "note": "air pump and plate placed",
+  "gain_db": -6
+ },
+ {
+  "t": 37.2,
+  "sfx": "glass_clink",
+  "note": "bell jar set down",
+  "gain_db": -6
+ },
+ {
+  "t": 38.55,
+  "sfx": "pump",
+  "note": "pump strokes, air leaves the jar",
+  "gain_db": -5
+ },
+ {
+  "t": 40.44,
+  "sfx": "paper_slide",
+  "note": "Everest panel slides in",
+  "gain_db": -6
+ },
+ {
+  "t": 51.15,
+  "sfx": "boil",
+  "note": "ether boils in the jar",
+  "gain_db": -10,
+  "dur": 4.5
+ },
+ {
+  "t": 56.25,
+  "sfx": "ice_crack",
+  "note": "ice crystals spread through the dish",
+  "gain_db": -5
+ },
+ {
+  "t": 61.2,
+  "sfx": "ice_crack",
+  "note": "crust of ice grows round the vessel",
+  "gain_db": -7
+ },
+ {
+  "t": 67.5,
+  "sfx": "pump",
+  "note": "pump strokes, ether vapour sucked out",
+  "gain_db": -6
+ },
+ {
+  "t": 69.65,
+  "sfx": "stamp",
+  "note": "LOST stamp",
+  "gain_db": -6
+ },
+ {
+  "t": 72.55,
+  "sfx": "glass_clink",
+  "note": "bottle tips more ether in",
+  "gain_db": -7
+ },
+ {
+  "t": 74.5,
+  "sfx": "paper_slide",
+  "note": "jar slides onto the shelf",
+  "gain_db": -6
+ },
+ {
+  "t": 77.65,
+  "sfx": "quill",
+  "note": "pencil sketch of the 1805 machine",
+  "gain_db": -8
+ },
+ {
+  "t": 80.45,
+  "sfx": "paper_slide",
+  "note": "ruler extends to 1834",
+  "gain_db": -8
+ }
+]

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" data-composition-variables='[{"id":"channel","type":"string","label":"Channel wordmark","default":"STORY OF EVERYTHING"}]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #E7DEC8; }
+      #root { position: absolute; inset: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- ep-002 chapter c3 (3a The trick, 3b Gone into the air): 2492 frames at 30 fps -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="83.0500" data-width="1920" data-height="1080">
+      <div id="c3" data-composition-id="c3" data-composition-src="compositions/c3.html"
+        data-start="0" data-duration="83.0500" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 1"></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<template>
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="night" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-110m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script src="assets/c1/c1.js"></script>
+  <script>
+    (function () {
+      // Section 1a, paragraph 2 + pause. Host starts at chapter 20.75 s; T() converts chapter time to local.
+      const T0 = 20.8, LEN = 13.85, T = (t) => t - T0;
+      const root = document.querySelector('[data-composition-id="night"]');
+      const tl = gsap.timeline({ paused: true });
+      const st = Kit.stage(root, { theme: "navy", date: "Before 1755", reasons: C1.REASONS, active: -1, channel: "STORY OF EVERYTHING" });
+      const { S, rr, draw, obj, tw, place, lift } = C1;
+      st.fadeIn(tl, 0, 0.3);
+
+      // stars
+      const r = Kit.rng("c1-night-stars"), stars = [];
+      const sg = S("g", null, st.svg);
+      for (let i = 0; i < 56; i++) {
+        const x = 90 + r() * 1740, y = 160 + r() * 540;
+        if (x > 1380 && y < 210) continue;
+        const big = r() < 0.18, rad = big ? 3.2 : 1.4 + r() * 1.3;
+        const c = S("circle", { cx: x.toFixed(1), cy: y.toFixed(1), r: rad.toFixed(2), fill: big ? "#FCE59E" : "#EFE9D9", opacity: 0 }, sg);
+        stars.push({ el: c, o: 0.45 + r() * 0.5 });
+      }
+      stars.forEach((s, i) => tl.fromTo(s.el, { opacity: 0 }, { opacity: s.o, duration: 0.5, ease: "power1.out", immediateRender: false, lazy: false }, 0.3 + (i % 14) * 0.05));
+
+      // the workbench (stays to the end: "leaving an empty workbench")
+      const bench = obj(st.svg, { pivot: [960, 900], hidden: true });
+      draw(st, bench.g, [
+        { d: rr(300, 870, 46, 240, 4), fill: "#6A4528" }, { d: rr(1574, 870, 46, 240, 4), fill: "#6A4528" },
+        { d: rr(262, 832, 1396, 42, 4), fill: "#7A4E2D" },
+        { d: rr(240, 792, 1440, 44, 6), fill: "#9A6B3F" },
+        { d: "M270,806 Q520,800 760,808 T1240,804 T1650,810 M300,822 Q620,816 980,822 T1630,820", stroke: "#7E5532", sw: 2, flat: true }
+      ]);
+      place(tl, bench, T(22.4), { from: "bottom", dist: 44, rot: 1.2 });   // "impossible"
+
+      // "carried down from a mountain": a snowy peak, a basket of snow sliding down its side
+      const mtn = obj(st.svg, { pivot: [660, 600], hidden: true });
+      draw(st, mtn.g, [
+        { d: "M330,794 L520,470 L582,502 L655,330 L1020,794Z", fill: "#8C836F" },
+        { d: "M655,330 L1020,794 L800,794 L700,520Z", fill: "#766E5C", flat: true },
+        { d: "M655,330 L703,391 L690,404 L672,392 L656,416 L637,398 L619,416Z", fill: "#F4F0E6" },
+        { d: "M520,470 L582,502 L566,508 L546,496 L527,510 L505,496Z", fill: "#F4F0E6" }
+      ]);
+      place(tl, mtn, T(25.75), { from: "bottom", dist: 50, rot: -2.5 });
+      const basket = obj(st.svg, { x: 722, y: 392, hidden: true });
+      const bRot = S("g", null, basket.g);
+      draw(st, bRot, [
+        { d: "M-22,-34 Q0,-62 22,-34", stroke: "#7A4E2D", sw: 4 },
+        { d: "M-36,-28 Q-30,-54 -8,-50 Q8,-64 24,-48 Q38,-46 36,-28Z", fill: "#F4F0E6" },
+        { d: "M-34,-28 L34,-28 L26,10 L-26,10Z", fill: "#C9A877" },
+        { d: "M-32,-16 L32,-16 M-30,-3 L29,-3 M-14,-28 L-10,10 M8,-28 L6,10", stroke: "#A9885A", sw: 2.5, flat: true }
+      ]);
+      // slide along the right flank (655,330)->(1020,794), outward normal (0.786,-0.618)
+      const B = { u: 0 };
+      function basketAt() {
+        const u = B.u, x = 655 + 365 * u, y = 330 + 464 * u;
+        basket.x = x + 0.786 * 34; basket.y = y - 0.618 * 34 + 8;
+        bRot.setAttribute("transform", "rotate(" + (22 + Math.sin(u * 9) * 3).toFixed(2) + ")"); basket.set();
+      }
+      B.u = 0.12; basketAt();
+      place(tl, basket, T(26.25), { from: "top", dist: 30, rot: 4, dur: 0.4 });
+      tl.fromTo(B, { u: 0.12 }, { u: 0.86, duration: 1.6, ease: "power2.in", onUpdate: basketAt, immediateRender: false, lazy: false }, T(26.75));  // "down from a mountain"
+      tl.fromTo(B, { u: 0.86 }, { u: 0.88, duration: 0.25, ease: "power2.out", onUpdate: basketAt, immediateRender: false, lazy: false }, T(28.35));
+
+      // "caught on a winter night": a thin sheet of ice forms on a shallow dish under stars
+      const dish = obj(st.svg, { x: 1360, y: 794, hidden: true });
+      draw(st, dish.g, [
+        { d: "M-170,-30 Q-158,4 -110,6 H110 Q158,4 170,-30Z", fill: "#B7AD97" },
+        { ellipse: [0, -30, 170, 15], fill: "#D8CFB8" },
+        { ellipse: [0, -30, 154, 10], fill: "#24394A", flat: true }
+      ]);
+      const cid = "c1-ice-clip";
+      const defs = S("defs", null, dish.g), cp = S("clipPath", { id: cid }, defs);
+      const clipR = S("rect", { x: -156, y: -44, width: 0, height: 30 }, cp);
+      const ice = S("g", { "clip-path": "url(#" + cid + ")" }, dish.g);
+      draw(st, ice, [
+        { ellipse: [0, -30, 154, 10], fill: "#CFE2EB", flat: true },
+        { d: "M-120,-31 L-92,-26 L-70,-33 M-40,-28 L-12,-34 L14,-27 M40,-32 L70,-27 L98,-33 M-96,-34 L-80,-30 M110,-29 L128,-31", stroke: "#F6F9FB", sw: 2.2, flat: true }
+      ]);
+      place(tl, dish, T(28.65), { from: "right", dist: 44, rot: 2.5 });   // "caught"
+      tl.fromTo(clipR, { attr: { width: 0 } }, { attr: { width: 312 }, duration: 1.2, ease: "power1.inOut", immediateRender: false, lazy: false }, T(29.35));  // "winter night"
+      // a few stars above the dish brighten as it freezes
+      stars.filter((s) => +s.el.getAttribute("cx") > 1150 && +s.el.getAttribute("cx") < 1600).slice(0, 5).forEach((s, i) => {
+        tl.fromTo(s.el, { opacity: s.o }, { opacity: 1, duration: 0.3, ease: "power1.inOut", yoyo: true, repeat: 1, immediateRender: false, lazy: false }, T(29.4) + i * 0.12);
+      });
+
+      // "from nothing": both lift off, leaving an empty workbench
+      lift(tl, basket, T(31.7), { rot: 3.5 });
+      lift(tl, mtn, T(31.76), { rot: -3 });
+      lift(tl, dish, T(31.86), { rot: 3 });
+
+
+      tl.to({}, { duration: 0.01 }, LEN - 0.01);
+      window.__timelines["night"] = tl;
+    })();
+  </script>
+</template>

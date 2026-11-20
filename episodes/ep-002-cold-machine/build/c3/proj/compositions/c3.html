@@ -1,0 +1,494 @@
+<template>
+  <!-- ep-002 chapter c3 (sections 3a "The trick" + 3b "Gone into the air"), 83.05 s, local times from build/c3/packet.md. -->
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+    #root .q-card .kit-big { font-weight: 500; font-style: italic; line-height: 1.18; letter-spacing: 0; }
+  </style>
+  <div id="root" data-composition-id="c3" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-110m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-composition-id="c3"]');
+      const tl = gsap.timeline({ paused: true });
+      const LEN = 83.05;
+      const NS = "http://www.w3.org/2000/svg";
+
+      // ---- reason icons (shapes as the builder brief describes; c1 owns the designs)
+      const ICE = () => [
+        { d: "M-30,-34 H30 Q38,-34 38,-26 V26 Q38,34 30,34 H-30 Q-38,34 -38,26 V-26 Q-38,-34 -30,-34Z", fill: "#BFDCE8", stroke: "#5D8FA8", sw: 2.5 },
+        { d: "M-26,-24 Q-26,-28 -20,-28 H6 Q-14,-22 -20,2 Q-26,4 -26,-2Z", fill: "#FFFFFF", solid: true, flat: true }];
+      const FLASK = () => [
+        { d: "M-9,-40 H9 V-16 A30,30 0 1 1 -9,-16Z", fill: "#F2EEE4", stroke: "#242018", sw: 3 },
+        { d: "M-28,8 A30,30 0 0 0 28,8 Q14,2 0,8 Q-14,14 -28,8Z", fill: "#7FA9C4", flat: true },
+        { d: "M-9,-40 H9 V-16 A30,30 0 1 1 -9,-16Z", stroke: "#242018", sw: 3, flat: true },
+        { d: "M-13,-42 H13", stroke: "#242018", sw: 4, flat: true }];
+      const LOOP = () => [
+        { d: "M-30,8 A31,31 0 0 1 22,-22", stroke: "#24506C", sw: 7, flat: true },
+        { d: "M30,-8 A31,31 0 0 1 -22,22", stroke: "#24506C", sw: 7, flat: true },
+        { d: "M12,-34 L32,-26 L18,-8Z", fill: "#24506C", solid: true, flat: true },
+        { d: "M-12,34 L-32,26 L-18,8Z", fill: "#24506C", solid: true, flat: true }];
+      const POISON = () => [
+        { d: "M-8,-42 H8 V-30 Q22,-24 22,-8 V34 Q22,40 16,40 H-16 Q-22,40 -22,34 V-8 Q-22,-24 -8,-30Z", fill: "#7A4E2A", stroke: "#3E2A18", sw: 2 },
+        { d: "M-16,-6 H16 V26 H-16Z", fill: "#F4EEDF", flat: true },
+        { circle: [0, 6, 7], fill: "#242018", solid: true, flat: true },
+        { d: "M-4,12 H4 V17 H-4Z", fill: "#242018", solid: true, flat: true },
+        { circle: [-2.6, 5, 1.8], fill: "#F4EEDF", solid: true, flat: true }, { circle: [2.6, 5, 1.8], fill: "#F4EEDF", solid: true, flat: true },
+        { d: "M-10,-46 H10 V-40 H-10Z", fill: "#3E2A18", solid: true, flat: true }];
+      const SKY = () => [
+        { circle: [0, 0, 36], fill: "#7FA9C4", stroke: "#24506C", sw: 2.5 },
+        { d: "M-24,-14 Q-12,-28 4,-22 Q14,-14 6,-4 Q-2,4 6,14 Q2,26 -12,22 Q-22,12 -20,0 Q-30,-4 -24,-14Z", fill: "#EADFC2", flat: true }];
+      const REASONS = [{ icon: ICE, label: "The ice" }, { icon: FLASK, label: "The trick" }, { icon: LOOP, label: "The loop" },
+        { icon: POISON, label: "The poison" }, { icon: SKY, label: "The sky" }];
+
+      // c2 ends on DATE "ANY TIME", REASON 0: change both in the opening 0.8 s of silence
+      const st = Kit.stage(root, { theme: "cream", channel: "STORY OF EVERYTHING", reasons: REASONS, active: 0, date: "Any time" });
+      Kit.setDate(tl, 0.08, "Glasgow, 1755");
+      Kit.setReason(tl, 0.08, 1);
+
+      const top = st.top;
+      const P = (hex) => Kit.paperFill(top, hex);
+      const FP = Kit.filter(top, "piece"), FC = Kit.filter(top, "cut"), FL = Kit.filter(top, "lift");
+      const INK = "#242018", INK2 = "#5C5546", RED = "#C03F27", GOLD = "#E2AF51", BLUE = "#24506C", DROP = "#7FA9C4";
+      function S(tag, a, p) { const e = document.createElementNS(NS, tag); for (const k in a) if (a[k] != null) e.setAttribute(k, a[k]); (p || top).appendChild(e); return e; }
+      function obj(x, y, parent, scale) { // outer holds the position, body takes the tweens (place / exit)
+        const outer = S("g", { transform: `translate(${x},${y})` + (scale ? ` scale(${scale})` : "") }, parent);
+        const body = S("g", {}, outer);
+        return { el: outer, body, x, y, scale: scale || 1 };
+      }
+      const lab = (xy, text, o) => Kit.label(top, xy, text, Object.assign({ size: 22, halo: true, haloColor: "bg", haloWidth: 5 }, o || {}));
+      function labIn(l, t) { tl.fromTo(l.el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, t); return l; }
+      function popIn(el, t, dur) { tl.fromTo(el, { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: dur || 0.3, ease: "back.out(1.6)" }, t); }
+      const lift = (t, targets, o) => Kit.exit(tl, t, targets, Object.assign({ style: "lift" }, o || {}));
+
+      // a point travelling a polyline, written per frame from one tween (position, scale, opacity)
+      function along(el, pts, t, dur, o) {
+        o = o || {};
+        const seg = [], tot = [0];
+        for (let i = 1; i < pts.length; i++) { const L = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(L); tot.push(tot[i - 1] + L); }
+        const T = tot[tot.length - 1], pr = { p: 0 }, s0 = o.s0 == null ? 1 : o.s0, s1 = o.s1 == null ? 1 : o.s1;
+        const fi = o.fadeIn == null ? 0.12 : o.fadeIn, fo = o.fadeOut == null ? 0.25 : o.fadeOut;
+        function upd() {
+          const d = pr.p * T; let i = 0; while (i < seg.length - 1 && d > tot[i + 1]) i++;
+          const k = seg[i] ? (d - tot[i]) / seg[i] : 0, x = pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, y = pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k;
+          const s = s0 + (s1 - s0) * pr.p;
+          let op = 1; if (fi > 0 && pr.p < fi) op = pr.p / fi; if (fo > 0 && pr.p > 1 - fo) op = Math.min(op, (1 - pr.p) / fo);
+          if (o.hideBefore && pr.p <= 0) op = 0;
+          el.setAttribute("transform", `translate(${x.toFixed(2)},${y.toFixed(2)}) scale(${s.toFixed(3)})`);
+          el.setAttribute("opacity", op.toFixed(3));
+        }
+        tl.fromTo(pr, { p: 0 }, { p: 1, duration: dur, ease: o.ease || "sine.inOut", onUpdate: upd, immediateRender: false }, t);
+        pr.p = 0; upd();
+        return el;
+      }
+      function puffShape(parent, r, tint) { // pale cream vapour puff (outline drawn under the fills)
+        const g = S("g", { filter: FP }, parent), c = [[-r * 0.55, r * 0.15, r * 0.62], [r * 0.5, r * 0.2, r * 0.58], [0, -r * 0.3, r * 0.75]];
+        c.forEach(([x, y, rr]) => S("circle", { cx: x, cy: y, r: rr, fill: "none", stroke: "#AFA48A", "stroke-width": 3 }, g));
+        c.forEach(([x, y, rr]) => S("circle", { cx: x, cy: y, r: rr, fill: P(tint || "#F5EFE0") }, g));
+        return g;
+      }
+      function puff(pts, t, dur, r, o) { const w = S("g", {}, (o && o.parent) || top); puffShape(w, r || 18); return along(w, pts, t, dur, Object.assign({ s0: 0.35, s1: 1.1, hideBefore: true }, o || {})); }
+      function dropShape(parent, r) {
+        const g = S("g", {}, parent);
+        S("path", { d: `M0,${-r * 1.7} C${r * 0.5},${-r * 0.8} ${r},${-r * 0.2} ${r},${r * 0.25} A${r},${r} 0 1 1 ${-r},${r * 0.25} C${-r},${-r * 0.2} ${-r * 0.5},${-r * 0.8} 0,${-r * 1.7}Z`,
+          fill: P(DROP), stroke: BLUE, "stroke-width": Math.max(1.2, r * 0.12), filter: FP }, g);
+        S("path", { d: `M${-r * 0.45},${r * 0.05} Q${-r * 0.5},${-r * 0.45} ${-r * 0.15},${-r * 0.8}`, stroke: "#FFFFFF", "stroke-width": Math.max(1.5, r * 0.18), fill: "none", "stroke-linecap": "round", opacity: 0.85 }, g);
+        return g;
+      }
+      function wavy(x0, y0, x1, y1, amp, waves) {
+        const n = 48, dx = x1 - x0, dy = y1 - y0, L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L, pts = [];
+        for (let i = 0; i <= n; i++) { const k = i / n, w = Math.sin(k * Math.PI * 2 * (waves || 2)) * amp * Math.min(1, k * 4, (1 - k) * 4 + 0.25); pts.push([x0 + dx * k + nx * w, y0 + dy * k + ny * w]); }
+        return "M" + pts.map((p) => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" L");
+      }
+      // heat: a soft red-gold wavy arrow drawn on along its path; returns the group (lift or fade it later)
+      function heat(parent, d, t, dur, o) {
+        o = o || {};
+        const g = S("g", { filter: FP }, parent), w = o.w || 1;
+        const under = S("path", { d, fill: "none", stroke: GOLD, "stroke-width": 11 * w, "stroke-linecap": "round", opacity: 0.6 }, g);
+        const line = S("path", { d, fill: "none", stroke: RED, "stroke-width": 4.5 * w, "stroke-linecap": "round" }, g);
+        const L = line.getTotalLength(), e = line.getPointAtLength(L), b = line.getPointAtLength(Math.max(0, L - 6));
+        const a = Math.atan2(e.y - b.y, e.x - b.x) * 180 / Math.PI, hs = 13 * w;
+        const head = S("path", { d: `M${hs},0 L${-hs * 0.7},${-hs * 0.85} L${-hs * 0.35},0 L${-hs * 0.7},${hs * 0.85}Z`, fill: RED, transform: `translate(${e.x.toFixed(1)},${e.y.toFixed(1)}) rotate(${a.toFixed(1)})` }, g);
+        [under, line].forEach((p) => p.setAttribute("stroke-dasharray", `${L.toFixed(1)} ${(L + 20).toFixed(1)}`));
+        tl.fromTo([under, line], { attr: { "stroke-dashoffset": L } }, { attr: { "stroke-dashoffset": 0 }, duration: dur, ease: o.ease || "power1.inOut" }, t);
+        tl.fromTo(head, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, t + dur * 0.88);
+        tl.fromTo(g, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, t); // hides the round caps before the draw
+        if (o.fadeAt != null) tl.fromTo(g, { opacity: 1 }, { opacity: 0, duration: o.fadeDur || 0.4, ease: "power1.in", immediateRender: false }, o.fadeAt);
+        return g;
+      }
+      // paper thermometer: tube, bulb, moving column (red warm / blue cold)
+      function thermo(parent, x, y, h, lvl, o) {
+        o = o || {};
+        const g = S("g", {}, parent), sh = S("g", { filter: FP }, g);
+        S("rect", { x: x - 12, y: y - h, width: 24, height: h + 4, rx: 12, fill: P("#F4EEDF"), stroke: INK, "stroke-width": 2 }, sh);
+        S("circle", { cx: x, cy: y + 10, r: 19, fill: P("#F4EEDF"), stroke: INK, "stroke-width": 2 }, sh);
+        for (let i = 1; i < 6; i++) S("path", { d: `M${x + 12},${y - h * i / 6} h8`, stroke: INK2, "stroke-width": 2 }, g);
+        const col0 = o.color || RED;
+        const bulb = S("circle", { cx: x, cy: y + 10, r: 13, fill: col0 }, g);
+        const col = S("rect", { x: x - 5.5, y: y - h + 10, width: 11, height: h - 4, rx: 5, fill: col0 }, g);
+        gsap.set(col, { scaleY: lvl, svgOrigin: `${x} ${y + 6}` });
+        return { g, col, bulb, x, y,
+          to(t, l, dur, color, from) {
+            tl.fromTo(col, { scaleY: from, svgOrigin: `${x} ${y + 6}` }, { scaleY: l, duration: dur, ease: "sine.inOut", immediateRender: false, svgOrigin: `${x} ${y + 6}` }, t);
+            if (color) tl.fromTo([col, bulb], { attr: { fill: o.color || RED } }, { attr: { fill: color }, duration: dur, ease: "sine.inOut", immediateRender: false }, t);
+          } };
+      }
+      function kettle(parent, x, y, s) { // side view, base at y
+        const o = obj(x, y, parent, s), g = S("g", { filter: FP }, o.body);
+        S("path", { d: "M-46,0 Q-52,-58 -30,-70 H30 Q52,-58 46,0Z", fill: P("#6F7E86"), stroke: "#2F3A40", "stroke-width": 2.5 }, g);
+        S("path", { d: "M42,-38 Q66,-44 76,-74 L84,-70 Q76,-34 46,-18Z", fill: P("#6F7E86"), stroke: "#2F3A40", "stroke-width": 2.5 }, g);
+        S("path", { d: "M-30,-70 Q0,-112 30,-70", fill: "none", stroke: "#2F3A40", "stroke-width": 7, "stroke-linecap": "round" }, g);
+        S("path", { d: "M-22,-70 Q0,-84 22,-70Z", fill: P("#8E9CA3") }, g);
+        S("circle", { cx: 0, cy: -80, r: 6, fill: P("#2F3A40") }, g);
+        S("path", { d: "M-30,-48 Q-36,-24 -30,-8", fill: "none", stroke: "#FFFFFF", "stroke-width": 4, opacity: 0.5, "stroke-linecap": "round" }, g);
+        return o;
+      }
+
+      // =====================================================================================================
+      // 3a / P12 (0.80–12.82): Glasgow 1755, Cullen; the thermometer dipped in spirit gets colder as it dries
+      const port = Kit.portrait(st, { src: "assets/portraits/cullen_wellcome_M0002757.jpg", fit: "xMidYMin slice", name: "William Cullen",
+        role: "Professor of Medicine", x: 560, y: 500, w: 300 });
+      port.in(tl, 0.8);
+      const credit = lab([560, 846], "Wellcome Collection · CC BY 4.0", { size: 14, anchor: "middle", color: "ink2", haloWidth: 3 });
+      tl.fromTo(credit.el, { opacity: 0 }, { opacity: 0.85, duration: 0.4 }, 1.3);
+
+      const pupil = Kit.cutout(st, "silhouettePerson", { x: 1640, y: 650, size: 300 });
+      pupil.place(tl, 4.55, { from: "right", dist: 44, rot: 3 });
+      const dish = obj(1290, 800);
+      { const g = S("g", { filter: FC }, dish.body);
+        S("path", { d: "M-170,-34 H170 Q160,10 120,14 H-120 Q-160,10 -170,-34Z", fill: P("#D9CDB2"), stroke: "#7C6E52", "stroke-width": 2 }, g);
+        S("path", { d: "M-158,-26 H158 Q150,0 118,4 H-118 Q-150,0 -158,-26Z", fill: P("#B9D3DC") }, g);
+        S("path", { d: "M-150,-24 H150", stroke: "#FFFFFF", "stroke-width": 3, opacity: 0.6 }, g); }
+      const spiritLab = lab([1480, 812], "Spirit", { anchor: "start" });
+      Kit.place(tl, dish, 8.25, { from: "bottom", dist: 40, rot: -2 });
+      labIn(spiritLab, 8.6);
+      const th1o = obj(0, 0), th1 = thermo(th1o.body, 1290, 650, 300, 0.62);
+      const th1dip = th1o.body; // place, dip and lift all move the body (one tween at a time)
+      tl.fromTo(th1dip, { y: -60, rotation: 4, opacity: 0, svgOrigin: "1290 650" }, { y: 0, rotation: 0, opacity: 1, duration: 0.5, ease: "back.out(1.2)", svgOrigin: "1290 650" }, 8.75);
+      tl.fromTo(th1dip, { y: 0 }, { y: 118, duration: 0.42, ease: "power2.inOut", immediateRender: false }, 9.45);
+      tl.fromTo(th1dip, { y: 118 }, { y: 0, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 10.25);
+      // wet bulb: two drops cling, then dry off as vapour puffs; the column falls on "colder"
+      const wet = [];
+      [[-10, 668], [11, 676]].forEach(([dx, y], i) => {
+        const w = S("g", { transform: `translate(${1290 + dx},${y})` }); dropShape(w, 6); wet.push(w);
+        tl.fromTo(w, { opacity: 0 }, { opacity: 1, duration: 0.15 }, 10.6);
+        tl.fromTo(w, { opacity: 1 }, { opacity: 0, duration: 0.5, immediateRender: false }, 11.4 + i * 0.35);
+        puff([[1290 + dx, y - 4], [1290 + dx + 30, y - 70], [1290 + dx + 70, y - 150]], 11.35 + i * 0.35, 1.6, 15);
+      });
+      th1.to(11.3, 0.36, 1.2, null, 0.62);
+      const colderLab = lab([1340, 470], "Colder", { anchor: "start", color: "blue" });
+      labIn(colderLab, 11.6);
+
+      // =====================================================================================================
+      // 3a / P13 (13.57–30.82): the swimmer in the wind; evaporation carries heat off; one gram vs five kettles
+      lift(13.95, [port, credit, pupil, dish, spiritLab, th1dip, colderLab], { stagger: 0.04 });
+
+      const pool = obj(0, 0);
+      { const g = S("g", { filter: FC }, pool.body);
+        S("path", { d: "M180,780 H860 V900 H180Z", fill: P("#8FB8CB") }, g);
+        S("path", { d: "M860,780 H1720 V812 H860Z", fill: P("#D9CDB2"), stroke: "#7C6E52", "stroke-width": 2 }, g);
+        S("path", { d: "M180,780 H860", stroke: "#FFFFFF", "stroke-width": 3, opacity: 0.7 }, g);
+        for (let i = 0; i < 5; i++) S("path", { d: wavy(220 + i * 120, 820 + (i % 2) * 30, 300 + i * 120, 820 + (i % 2) * 30, 4, 1.5), stroke: "#FFFFFF", "stroke-width": 2.5, fill: "none", opacity: 0.55 }, g);
+        S("path", { d: "M842,780 V700 M872,780 V700 M842,724 H872 M842,752 H872", stroke: "#8C8C84", "stroke-width": 5, "stroke-linecap": "round", fill: "none" }, g); }
+      Kit.place(tl, pool, 14.15, { from: "bottom", dist: 36, rot: 0 });
+
+      // swimmer (faceless paper puppet), clipped at the waterline while still in the pool
+      const clip = S("clipPath", { id: "c3-waterline" }, S("defs", {})); S("rect", { x: 0, y: 0, width: 1920, height: 781 }, clip);
+      const swC = S("g", { "clip-path": "url(#c3-waterline)" }), swO = obj(1000, 780, swC), sw = swO.body;
+      { const g = S("g", { filter: FC }, sw), SK = P("#C98E66"), SU = P("#3D5A6B");
+        S("path", { d: "M-20,-112 L-24,0 H-6 L-2,-104 L2,-104 L6,0 H24 L20,-112Z", fill: SK }, g);
+        S("path", { d: "M-40,-196 Q-44,-150 -40,-104 L-46,-98 L-56,-104 Q-58,-150 -50,-192Z", fill: SK }, g);
+        S("path", { d: "M40,-196 Q44,-150 40,-104 L46,-98 L56,-104 Q58,-150 50,-192Z", fill: SK }, g);
+        S("path", { d: "M-40,-200 Q0,-210 40,-200 L34,-150 L26,-110 Q0,-100 -26,-110 L-34,-150Z", fill: SU }, g);
+        S("path", { d: "M-9,-214 H9 V-200 H-9Z", fill: SK }, g);
+        S("circle", { cx: 0, cy: -234, r: 22, fill: SK }, g);
+        S("path", { d: "M-22,-236 Q-22,-260 0,-260 Q22,-260 22,-236 Q0,-246 -22,-236Z", fill: P(INK) }, g); }
+      const skin = [[-46, -170], [46, -160], [-20, -136], [18, -186], [-14, -60], [16, -40], [0, -240]];
+      const skinDrops = skin.map(([x, y]) => { const w = S("g", { transform: `translate(${x},${y})` }, sw); dropShape(w, 6.5); return w; });
+      tl.fromTo(sw, { x: -150, y: 150, opacity: 1 }, { x: -150, y: 150, duration: 0.01 }, 0);
+      tl.fromTo(swC, { opacity: 0 }, { opacity: 1, duration: 0.25 }, 14.25);
+      tl.fromTo(sw, { x: -150, y: 150 }, { x: -150, y: 0, duration: 0.8, ease: "power2.out", immediateRender: false }, 14.6);
+      tl.fromTo(sw, { x: -150, y: 0 }, { x: 0, y: 0, duration: 0.7, ease: "power2.inOut", immediateRender: false }, 15.4);
+      // wind from the left on "windy"
+      const wind = [];
+      [[300, 360, 0], [250, 450, 0.12], [330, 540, 0.24]].forEach(([x, y, dt], i) => {
+        const p = S("path", { d: wavy(x, y, x + 420, y - 20, 9, 1.5), fill: "none", stroke: "#9C9583", "stroke-width": 4, "stroke-linecap": "round" });
+        const L = p.getTotalLength(); p.setAttribute("stroke-dasharray", `${L} ${L + 10}`); wind.push(p);
+        tl.fromTo(p, { attr: { "stroke-dashoffset": L } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.8, ease: "power1.out" }, 16.25 + dt);
+        tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: 0.05 }, 16.25 + dt);
+        tl.fromTo(p, { attr: { "stroke-dashoffset": 0 } }, { attr: { "stroke-dashoffset": -L }, duration: 0.8, ease: "power1.in", immediateRender: false }, 17.4 + dt);
+        tl.fromTo(p, { opacity: 1 }, { opacity: 0, duration: 0.15, immediateRender: false }, 18.05 + dt);
+      });
+      // "turn into vapour": each drop on the skin becomes a puff that drifts off with the wind
+      const puffPaths = [];
+      skin.forEach(([x, y], i) => {
+        const t = 17.75 + i * 0.12;
+        tl.fromTo(skinDrops[i], { scale: 1, opacity: 1, svgOrigin: `${x} ${y}` }, { scale: 0.2, opacity: 0, duration: 0.45, ease: "power2.in", svgOrigin: `${x} ${y}`, immediateRender: false }, t);
+        const X = 1000 + x, Y = 780 + y, pts = [[X, Y], [X + 60, Y - 50 - i * 6], [X + 150, Y - 110 - i * 10], [X + 260, Y - 150 - i * 12]];
+        puffPaths.push(pts); puff(pts, t + 0.1, 5.4, 19, { fadeIn: 0.06, fadeOut: 0.2 });
+      });
+      const vapLab = lab([1300, 520], "Vapour", { anchor: "start" }); labIn(vapLab, 18.3);
+      // "as heat": red heat arrows ride away from the skin with the vapour
+      const heatOff = [];
+      [[-30, -170, 1200, 500], [30, -150, 1290, 560], [10, -60, 1270, 680], [-10, -230, 1180, 420]].forEach(([x, y, ex, ey], i) => {
+        heatOff.push(heat(top, wavy(1000 + x, 780 + y, ex, ey, 7, 1.5), 21.45 + i * 0.1, 0.75, { w: 0.8 }));
+      });
+      const heatLab = lab([1200, 400], "Heat", { anchor: "start", color: "red" }); labIn(heatLab, 21.75);
+      const skinTh = thermo(top, 1560, 720, 220, 0.66); const skinThO = { body: skinTh.g, x: 1560, y: 600, scale: 1 };
+      Kit.place(tl, skinThO, 19.35, { from: "right", dist: 40, rot: 3 });
+      const skinLab = lab([1560, 790], "Skin", { anchor: "middle", size: 20 }); labIn(skinLab, 19.6);
+      skinTh.to(22.7, 0.3, 1.3, "#24506C", 0.66);
+      lift(23.9, [swO, pool, skinThO, skinLab, vapLab, heatLab], { stagger: 0.03 });
+      tl.fromTo(heatOff, { opacity: 1 }, { opacity: 0, duration: 0.4, immediateRender: false }, 23.9);
+
+      // one gram of water vs five kettles (freezing to boiling)
+      const gram = obj(420, 430); { const w = S("g", {}, gram.body); dropShape(w, 46); }
+      Kit.place(tl, gram, 25.05, { from: "top", dist: 40, rot: 3 });
+      const gramLab = lab([500, 445], "1 g of water", { anchor: "start", size: 24 }); labIn(gramLab, 25.3);
+      const evapLab = lab([300, 572], "To evaporate it", { anchor: "start", size: 20, color: "ink2" }); labIn(evapLab, 25.9);
+      const bigHeat = heat(top, wavy(300, 610, 1500, 610, 6, 7), 25.9, 0.9, { w: 1.15, ease: "power2.out" });
+      const kets = [], ketHeat = [];
+      for (let i = 0; i < 5; i++) {
+        const k = kettle(top, 420 + i * 240, 820, 0.95); kets.push(k);
+        const t = 26.7 + i * 0.16;
+        Kit.place(tl, k, t, { from: "bottom", dist: 34, rot: i % 2 ? 3 : -3, dur: 0.45 });
+        ketHeat.push(heat(top, wavy(306 + i * 240, 870, 532 + i * 240, 870, 4, 1.5), t + 0.15, 0.45, { w: 0.9 }));
+      }
+      const ketLab = lab([900, 945], "Each: 0 °C → 100 °C", { anchor: "middle", size: 22 }); labIn(ketLab, 29.35);
+      lift(31.15, [gram, gramLab, evapLab, bigHeat, ...kets, ...ketHeat, ketLab], { stagger: 0.025 });
+
+      // =====================================================================================================
+      // 3a / P14–P16: the air pump, the jar, ether boiling at room temperature, the crust of ice
+      const app = S("g", {});          // whole jar rig (moves to the shelf in P18)
+      // pump (left of the jar)
+      const pump = obj(0, 0, app);
+      const handle = S("g", {}, pump.body);
+      { const g = S("g", { filter: FC }, pump.body);
+        S("path", { d: "M820,820 H990 V852 H820Z", fill: P("#7A5A3A"), stroke: "#3E2A18", "stroke-width": 2 }, g);
+        S("path", { d: "M940,800 H1080 V818 H940Z", fill: P("#6E6A60") }, g);
+        S("path", { d: "M862,560 H938 V820 H862Z", fill: P("#B59A63"), stroke: "#5A4626", "stroke-width": 2 }, g);
+        S("path", { d: "M856,552 H944 V566 H856Z M856,700 H944 V712 H856Z", fill: P("#8C7445") }, g);
+        S("path", { d: "M836,582 H862 V600 H836Z", fill: P("#8C7445") }, g);
+        S("path", { d: "M870,575 V800", stroke: "#FFFFFF", "stroke-width": 4, opacity: 0.35 }, g); }
+      { const g = S("g", { filter: FP }, handle);
+        S("path", { d: "M896,470 H904 V556 H896Z", fill: P("#3E3A33") }, g);
+        S("path", { d: "M830,458 H970 V474 H830Z", fill: P("#7A5A3A"), stroke: "#3E2A18", "stroke-width": 2 }, g); }
+      // jar rig: table, plate, dish of water, ether vessel, thermometer, bell jar
+      const rig = obj(0, 0, app);
+      { const g = S("g", { filter: FC }, rig.body);
+        S("path", { d: "M1070,835 H1530 V872 H1070Z", fill: P("#7A5A3A"), stroke: "#3E2A18", "stroke-width": 2 }, g);
+        S("path", { d: "M1050,815 H1550 V836 H1050Z", fill: P("#B59A63"), stroke: "#5A4626", "stroke-width": 2 }, g); }
+      const jarIn = S("g", {}, rig.body);       // contents
+      const dishW = obj(0, 0, jarIn);
+      const dishG = S("g", { filter: FP }, dishW.body);
+      S("path", { d: "M1160,740 H1440 L1428,812 H1172Z", fill: P("#D9CDB2"), stroke: "#7C6E52", "stroke-width": 2 }, dishG);
+      const vessel = obj(0, 0, jarIn);
+      const vG = S("g", {}, vessel.body);
+      S("path", { d: "M1250,666 H1350 L1346,802 Q1346,808 1340,808 H1260 Q1254,808 1254,802Z", fill: "#EEF4F5", stroke: "#6F8F9C", "stroke-width": 3, filter: FP }, vG);
+      const ether = S("rect", { x: 1257, y: 712, width: 86, height: 92, fill: P("#5E8FB0") }, vG);
+      const etherTop = 712;
+      const bubbleG = S("g", {}, vG);
+      S("path", { d: "M1246,664 H1354", stroke: "#6F8F9C", "stroke-width": 5, "stroke-linecap": "round" }, vG);
+      S("path", { d: "M1262,676 V796", stroke: "#FFFFFF", "stroke-width": 4, opacity: 0.6 }, vG);
+      const tag = S("g", { filter: FP }, vG);
+      S("rect", { x: 1262, y: 686, width: 76, height: 26, fill: P("#F4EEDF"), stroke: INK2, "stroke-width": 1.2 }, tag);
+      const tagT = S("text", { x: 1300, y: 705, "text-anchor": "middle", "font-family": "IBM Plex Mono", "font-size": 16, "font-weight": 700, "letter-spacing": "0.12em", fill: INK }, tag);
+      tagT.textContent = "ETHER";
+      const water = S("path", { d: "M1166,758 H1434 L1428,806 H1172Z", fill: "#9EC2D3", opacity: 0.88 }, dishW.body);
+      const waterLine = S("path", { d: "M1168,758 H1432", stroke: "#FFFFFF", "stroke-width": 3, opacity: 0.7 }, dishW.body);
+      const iceG = S("g", {}, dishW.body);
+      const crust = S("path", { d: "M1236,806 L1234,768 Q1244,754 1256,764 Q1268,750 1282,762 Q1296,748 1310,760 Q1326,750 1338,762 Q1352,752 1366,770 L1364,806Z",
+        fill: P("#F3F7F8"), stroke: "#8FB0BF", "stroke-width": 2.5, filter: FP }, jarIn);
+      const jth = thermo(jarIn, 1405, 790, 250, 0.55);
+      // the bell jar (glass)
+      const jar = S("g", {}, rig.body);
+      S("path", { d: "M1120,815 L1120,600 C1120,470 1220,442 1285,438 L1285,412 L1315,412 L1315,438 C1380,442 1480,470 1480,600 L1480,815",
+        fill: "#E3EEF1", "fill-opacity": 0.28, stroke: "#5F8392", "stroke-width": 3.5, "stroke-linejoin": "round" }, jar);
+      S("path", { d: "M1140,790 L1140,610 C1140,520 1190,478 1250,466", fill: "none", stroke: "#FFFFFF", "stroke-width": 6, opacity: 0.55, "stroke-linecap": "round" }, jar);
+      S("path", { d: "M1278,398 H1322 V414 H1278Z M1294,384 H1306 V400 H1294Z", fill: P("#B59A63"), stroke: "#5A4626", "stroke-width": 1.5, filter: FP }, jar);
+      const jarLab = lab([1500, 470], "Glass jar", { anchor: "start", size: 20, color: "ink2" });
+      const waterLab = lab([1500, 790], "Water", { anchor: "start", size: 20, color: "ink2" });
+      const pumpLab = lab([900, 900], "Air pump", { anchor: "middle", size: 20, color: "ink2" });
+
+      // P14 entrances: rig + pump on "Cullen" (31.82), vessel on "vessel", tag on "ether", water on "water", jar on "glass jar"
+      Kit.place(tl, rig, 31.82, { from: "bottom", dist: 40, rot: 0 });
+      Kit.place(tl, pump, 31.95, { from: "left", dist: 46, rot: -3 });
+      labIn(pumpLab, 32.3);
+      Kit.place(tl, vessel, 32.45, { from: "top", dist: 50, rot: 3 });
+      tl.fromTo(tag, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.3 }, 32.95);
+      tl.fromTo(dishW.body, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 34.0);       // empty dish under the vessel
+      tl.fromTo([water, waterLine], { scaleY: 0, svgOrigin: "1300 806" }, { scaleY: 1, duration: 0.6, ease: "power2.out", svgOrigin: "1300 806" }, 35.95);
+      labIn(waterLab, 36.1);
+      tl.fromTo(jar, { y: -90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power2.out" }, 37.2);
+      labIn(jarLab, 37.5);
+      gsap.set(crust, { scaleY: 0, svgOrigin: "1300 806" });
+      // the jar's air: dots that the pump draws out through the plate, up the barrel and out of the valve
+      const airPts = [[1170, 480], [1230, 500], [1360, 486], [1420, 520], [1190, 560], [1450, 600], [1160, 640], [1390, 580], [1225, 610], [1440, 680], [1180, 700], [1350, 620]];
+      airPts.forEach(([x, y], i) => {
+        const wrap = S("g", {}, app), dot = S("circle", { cx: 0, cy: 0, r: 6, fill: INK2 }, wrap);
+        tl.fromTo(dot, { opacity: 0 }, { opacity: 0.8, duration: 0.3 }, 37.6 + i * 0.02);
+        const pts = [[x, y], [1146, 806], [940, 810], [900, 800], [900, 600], [846, 590], [760, 560 - i * 8], [620, 520 - i * 14]];
+        along(wrap, pts, 38.6 + i * 0.13, 2.0, { fadeIn: 0, fadeOut: 0.22, ease: "power1.in" });
+      });
+      const strokes = (t0, n, per) => { for (let k = 0; k < n; k++) { const t = t0 + k * per;
+        tl.fromTo(handle, { y: 0 }, { y: 72, duration: per * 0.5, ease: "power1.inOut", immediateRender: false }, t);
+        tl.fromTo(handle, { y: 72 }, { y: 0, duration: per * 0.5, ease: "power1.inOut", immediateRender: false }, t + per * 0.5); } };
+      strokes(38.55, 3, 0.8);
+
+      // P15 (40.33–55.16): side panel, Everest; then the ether boils and pulls heat out of the water
+      Kit.dim(tl, [app, jarLab, waterLab, pumpLab], 40.4, 0.28, 0.4);
+      const pan = obj(0, 0);
+      { const g = S("g", { filter: FC }, pan.body);
+        S("rect", { x: 100, y: 190, width: 580, height: 740, fill: P("#F1EADA") }, g); }
+      const panLab = Kit.label(pan.body, [390, 240], "Less air · lower boiling point", { size: 18, anchor: "middle", halo: false, color: "ink2", weight: 600 });
+      const mtn = S("g", { filter: FP }, pan.body);
+      S("path", { d: "M130,880 L300,560 L350,610 L390,446 L490,446 L540,640 L590,600 L650,880Z", fill: P("#857E70"), stroke: "#4A453B", "stroke-width": 2 }, mtn);
+      S("path", { d: "M390,446 L490,446 L509,520 L490,508 L470,528 L450,506 L430,524 L372,512Z", fill: P("#F6F3EA") }, mtn);
+      S("path", { d: "M130,880 H650", stroke: "#4A453B", "stroke-width": 3 }, mtn);
+      const evLab = Kit.label(pan.body, [300, 900], "Everest", { size: 18, anchor: "middle", halo: false, color: "ink2" });
+      const k2 = kettle(pan.body, 410, 446, 0.5);
+      const panTh = thermo(pan.body, 610, 520, 230, 0.15);
+      const t100 = Kit.label(pan.body, [586, 304], "100 °C", { size: 15, anchor: "end", halo: false, color: "ink2" });
+      const t70 = Kit.label(pan.body, [586, 372], "About 70 °C", { size: 18, anchor: "end", halo: false, color: "red", weight: 700 });
+      const tick100 = S("path", { d: "M594,298 H632", stroke: INK2, "stroke-width": 2, "stroke-dasharray": "4 3" }, pan.body);
+      const cup = obj(470, 433, pan.body, 0.55);
+      { const g = S("g", { filter: FP }, cup.body);
+        S("path", { d: "M-34,-30 H34 L28,10 Q26,20 14,20 H-14 Q-26,20 -28,10Z", fill: P("#F4EEDF"), stroke: INK2, "stroke-width": 2 }, g);
+        S("path", { d: "M34,-20 Q52,-18 48,-2 Q44,8 30,4", fill: "none", stroke: INK2, "stroke-width": 4 }, g);
+        S("path", { d: "M-30,-26 H30", stroke: "#C9A46A", "stroke-width": 6 }, g);
+        S("path", { d: "M-46,24 H46", stroke: INK2, "stroke-width": 3, "stroke-linecap": "round" }, g);
+        S("path", { d: "M10,-28 Q22,-10 18,8 L14,12 L24,18 L22,8", fill: "none", stroke: INK2, "stroke-width": 1.5 }, g); }
+      const steam = S("path", { d: "M-4,-40 Q-12,-56 -2,-70 Q6,-82 -2,-96", fill: "none", stroke: "#AFA48A", "stroke-width": 3, "stroke-linecap": "round", opacity: 0.5 }, cup.body);
+      Kit.place(tl, pan, 40.44, { from: "left", dist: 50, rot: -2.5 });
+      Kit.place(tl, k2, 44.35, { from: "top", dist: 34, rot: 3 });
+      tl.fromTo(evLab.el, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 44.4);
+      for (let i = 0; i < 4; i++) puff([[448, 408], [400, 380], [350, 336]], 45.25 + i * 0.4, 1.5, 11, { parent: pan.body });
+      Kit.place(tl, { body: panTh.g, x: 610, y: 400, scale: 1 }, 45.0, { from: "right", dist: 30, rot: 2 });
+      tl.fromTo([t100.el, tick100], { opacity: 0 }, { opacity: 1, duration: 0.3 }, 45.3);
+      panTh.to(45.95, 0.66, 0.7, null, 0.15);
+      tl.fromTo(t70.el, { opacity: 0, x: 8 }, { opacity: 1, x: 0, duration: 0.3 }, 46.05);
+      Kit.place(tl, cup, 48.35, { from: "bottom", dist: 30, rot: -3 });
+      tl.fromTo(steam, { opacity: 0 }, { opacity: 0.45, duration: 0.5 }, 48.8);
+      lift(49.75, pan);
+      Kit.dim(tl, [app, jarLab, waterLab, pumpLab], 49.85, 1, 0.4);
+      // the ether boils hard: bubbles in the vessel, puffs fill the jar, heat runs from the water into the ether
+      const bclip = S("clipPath", { id: "c3-ether" }, S("defs", {})); S("rect", { x: 1257, y: 712, width: 86, height: 92 }, bclip);
+      bubbleG.setAttribute("clip-path", "url(#c3-ether)");
+      function bubbles(t0, n, gap) { for (let i = 0; i < n; i++) { const w = S("g", {}, bubbleG); S("circle", { cx: 0, cy: 0, r: 4 + (i % 3), fill: "none", stroke: "#E8F1F4", "stroke-width": 2 }, w);
+        const x = 1268 + ((i * 37) % 64); along(w, [[x, 800], [x + ((i % 2) ? 4 : -4), 715]], t0 + i * gap, 0.7, { fadeIn: 0.1, fadeOut: 0.1, hideBefore: true, ease: "power1.in" }); } }
+      bubbles(51.15, 22, 0.17);
+      for (let i = 0; i < 15; i++) {
+        const x = 1300 + ((i % 3) - 1) * 18, sd = (i % 2) ? 1 : -1, pts = [[x, 700], [x + sd * (30 + (i % 4) * 12), 610], [x + sd * (70 + (i % 5) * 18), 500 - (i % 3) * 18]];
+        puff(pts, 51.15 + i * 0.3, 2.2, 22, { parent: app, fadeOut: 0.3 });
+      }
+      [[1180, 770, 1258, 760], [1420, 772, 1342, 762], [1190, 796, 1258, 790], [1418, 798, 1342, 790]].forEach(([x0, y0, x1, y1], i) => {
+        heat(app, wavy(x0, y0, x1, y1, 4, 1.5), 53.15 + (i % 2) * 0.12 + Math.floor(i / 2) * 0.9, 0.55, { w: 0.75, fadeAt: 55.7 + i * 0.05 });
+      });
+      jth.to(54.2, 0.2, 1.6, "#24506C", 0.55);
+      strokes(51.2, 5, 0.9);
+      tl.fromTo(ether, { scaleY: 1, svgOrigin: "1300 804" }, { scaleY: 0.86, duration: 3.5, ease: "none", svgOrigin: "1300 804" }, 51.3);
+
+      // P16 (56.09–64.23): ice crystals spread through the dish, a firm crust grows round the vessel; the quote
+      tl.fromTo(water, { attr: { fill: "#9EC2D3" } }, { attr: { fill: "#DCEAF0" }, duration: 2.4, ease: "sine.inOut", immediateRender: false }, 56.2);
+      const xtal = [[1185, 780], [1215, 795], [1200, 765], [1235, 785], [1380, 782], [1365, 768], [1420, 790], [1390, 798], [1245, 770], [1355, 795], [1176, 796], [1425, 770]];
+      xtal.sort((a, b) => Math.abs(a[0] - 1300) - Math.abs(b[0] - 1300));
+      xtal.forEach(([x, y], i) => {
+        const g = S("g", { transform: `translate(${x},${y})` }, iceG), r = 9 + (i % 3) * 2;
+        for (let a = 0; a < 3; a++) { const an = a * Math.PI / 3; S("path", { d: `M${(-Math.cos(an) * r).toFixed(1)},${(-Math.sin(an) * r).toFixed(1)} L${(Math.cos(an) * r).toFixed(1)},${(Math.sin(an) * r).toFixed(1)}`, stroke: "#FFFFFF", "stroke-width": 2.5, "stroke-linecap": "round" }, g); }
+        popIn(g, 56.25 + i * 0.2, 0.3);
+      });
+      tl.fromTo(crust, { scaleY: 0, svgOrigin: "1300 806" }, { scaleY: 0.35, duration: 1.4, ease: "power1.out", svgOrigin: "1300 806", immediateRender: false }, 59.9);
+      tl.fromTo(crust, { scaleY: 0.35, svgOrigin: "1300 806" }, { scaleY: 1, duration: 2.0, ease: "power2.out", svgOrigin: "1300 806", immediateRender: false }, 61.2);
+      const iceLab = lab([1300, 896], "Ice", { anchor: "middle", size: 24, color: "blue", weight: 700 }); labIn(iceLab, 63.2);
+      const q = Kit.card(st, { x: 110, y: 250, w: 640, eyebrow: "Cullen's own words",
+        big: "“we found the most part of the water frozen, and the vessel containing the aether surrounded with a thick and firm *crust of ice*.”",
+        bigSize: 38, bigColor: "ink", small: "W. Cullen, Essays and Observations, 1756" });
+      q.el.classList.add("q-card");
+      q.in(tl, 56.3, "place");
+
+      // =====================================================================================================
+      // 3b / P17 (66.23–73.54): every drop that boiled was pumped out and lost; pour in more
+      lift(66.2, q.el);
+      tl.fromTo(iceLab.el, { opacity: 1 }, { opacity: 0, duration: 0.3, immediateRender: false }, 66.2);
+      tl.fromTo(ether, { scaleY: 0.86, svgOrigin: "1300 804" }, { scaleY: 0.52, duration: 3.0, ease: "power1.inOut", svgOrigin: "1300 804", immediateRender: false }, 66.6);
+      bubbles(66.6, 14, 0.2);
+      for (let i = 0; i < 9; i++) {
+        const ex = -80, ey = 380 - (i % 4) * 40;
+        const pts = [[1300 + ((i % 3) - 1) * 14, 700], [1250 - (i % 2) * 40, 620], [1150, 700], [1146, 806], [940, 810], [900, 800], [900, 600], [846, 590], [640, 520 - (i % 3) * 30], [ex, ey]];
+        puff(pts, 67.45 + i * 0.3, 3.4, 16, { parent: app, s0: 0.5, s1: 0.9, fadeIn: 0.04, fadeOut: 0.04, ease: "none" });
+      }
+      strokes(67.5, 4, 0.85);
+      const lost = Kit.stamp(st, "Lost", { x: 360, y: 470, rotate: -5, size: 34 });
+      lost.in(tl, 69.65);
+      // more ether poured in through the tap on the jar
+      const bottle = obj(1342, 340);
+      { const g = S("g", { filter: FC }, bottle.body);
+        S("path", { d: "M-12,-74 H12 V-52 Q34,-44 34,-20 V44 Q34,52 26,52 H-26 Q-34,52 -34,44 V-20 Q-34,-44 -12,-52Z", fill: P("#CFE0E6"), stroke: "#4E7484", "stroke-width": 2.5 }, g);
+        S("path", { d: "M-30,4 H30 V44 Q30,48 26,48 H-26 Q-30,48 -30,44Z", fill: P("#5E8FB0") }, g);
+        S("path", { d: "M-24,-14 H24 V8 H-24Z", fill: P("#F4EEDF"), stroke: INK2, "stroke-width": 1 }, g);
+        const tt = S("text", { x: 0, y: 2, "text-anchor": "middle", "font-family": "IBM Plex Mono", "font-size": 12, "font-weight": 700, "letter-spacing": "0.08em", fill: INK }, g); tt.textContent = "ETHER";
+        S("path", { d: "M-14,-82 H14 V-72 H-14Z", fill: P("#7A5A3A") }, g); }
+      Kit.place(tl, bottle, 72.05, { from: "right", dist: 50, rot: 4, dur: 0.4 });
+      tl.fromTo(bottle.body, { rotation: 0, svgOrigin: "0 0" }, { rotation: -105, duration: 0.4, ease: "power2.inOut", svgOrigin: "0 0", immediateRender: false }, 72.55);
+      for (let i = 0; i < 7; i++) { const w = S("g", {}, app); dropShape(w, 5);
+        along(w, [[1272, 368], [1298, 392], [1300, 470], [1300, 720]], 72.9 + i * 0.08, 0.5, { fadeIn: 0.05, fadeOut: 0.1, hideBefore: true, ease: "power2.in" }); }
+      tl.fromTo(ether, { scaleY: 0.52, svgOrigin: "1300 804" }, { scaleY: 0.95, duration: 0.6, ease: "power1.out", svgOrigin: "1300 804", immediateRender: false }, 73.0);
+      tl.fromTo(bottle.body, { rotation: -105, svgOrigin: "0 0" }, { rotation: 0, duration: 0.3, ease: "power2.inOut", svgOrigin: "0 0", immediateRender: false }, 73.55);
+      lift(73.85, bottle);
+      tl.fromTo(ether, { scaleY: 0.95, svgOrigin: "1300 804" }, { scaleY: 0.7, duration: 0.9, ease: "power1.in", svgOrigin: "1300 804", immediateRender: false }, 73.6);
+      bubbles(73.6, 5, 0.15);
+
+      // =====================================================================================================
+      // 3b / P18 (74.32–80.66): the jar goes onto a shelf; a ruler 1755 → 1805 (described, never built) → 1834
+      lift(74.3, [pump, pumpLab, lost, jarLab, waterLab], { stagger: 0.03 });
+      const shelf = obj(0, 0);
+      { const g = S("g", { filter: FC }, shelf.body);
+        S("path", { d: "M170,470 H630 V494 H170Z", fill: P("#9A7650"), stroke: "#4E3824", "stroke-width": 2 }, g);
+        S("path", { d: "M220,494 L250,494 L236,540Z M550,494 L580,494 L566,540Z", fill: P("#7A5A3A") }, g); }
+      Kit.place(tl, shelf, 74.3, { from: "left", dist: 40, rot: 0, dur: 0.45 });
+      tl.fromTo(app, { x: 0, y: 0, scale: 1, svgOrigin: "1300 872" }, { x: -900, y: -402, scale: 0.42, duration: 1.0, ease: "power3.inOut", svgOrigin: "1300 872" }, 74.5);
+
+      const RX = (yr) => 400 + (yr - 1755) * 16, RY = 770;
+      const ruler = S("g", {});
+      const rclip = S("clipPath", { id: "c3-ruler" }, S("defs", {})); const rcr = S("rect", { x: 360, y: RY - 60, width: 0, height: 140 }, rclip);
+      ruler.setAttribute("clip-path", "url(#c3-ruler)");
+      { const g = S("g", { filter: FC }, ruler);
+        S("rect", { x: 370, y: RY, width: RX(1834) - 370 + 40, height: 46, fill: P("#E6D6A8"), stroke: "#8C7445", "stroke-width": 2 }, g);
+        for (let yr = 1755; yr <= 1834; yr += 5) S("path", { d: `M${RX(yr)},${RY} v${yr % 10 === 5 && (yr - 1755) % 10 === 0 ? 22 : 12}`, stroke: "#5A4626", "stroke-width": 2 }, g); }
+      tl.fromTo(rcr, { attr: { width: 0 } }, { attr: { width: RX(1805) - 360 + 6 }, duration: 0.6, ease: "power2.out" }, 75.85);
+      const y1755 = lab([RX(1755), RY + 82], "1755", { anchor: "middle", size: 24, weight: 700 }); labIn(y1755, 75.85);
+      const m1805 = S("path", { d: `M${RX(1805)},${RY - 16} V${RY + 46}`, stroke: RED, "stroke-width": 4 });
+      tl.fromTo(m1805, { opacity: 0 }, { opacity: 1, duration: 0.2 }, 76.4);
+      const y1805 = lab([RX(1805), RY + 82], "1805", { anchor: "middle", size: 24, weight: 700, color: "red" }); labIn(y1805, 76.4);
+      const lnk = S("path", { d: `M${RX(1755)},${RY - 8} V${RY - 200}`, stroke: "#9C9583", "stroke-width": 2, "stroke-dasharray": "5 6" });
+      tl.fromTo(lnk, { opacity: 0 }, { opacity: 0.7, duration: 0.4 }, 75.9);
+      // faint pencil sketch of a machine at 1805
+      const sk = S("g", { fill: "none", stroke: "#7D776A", "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0.75 });
+      const SX = RX(1805), SY = 600;
+      const skPaths = [`M${SX - 110},${SY + 110} H${SX + 110}`, `M${SX - 90},${SY + 110} V${SY - 30} H${SX - 10} V${SY + 110}`,
+        `M${SX - 80},${SY - 10} q10,10 0,20 q-10,10 0,20 q10,10 0,20 q-10,10 0,20`, `M${SX - 10},${SY + 20} H${SX + 40} V${SY - 60} H${SX + 80} V${SY + 110}`,
+        `M${SX + 40},${SY - 60} V${SY - 80} M${SX + 30},${SY - 80} H${SX + 50}`, `M${SX + 60},${SY - 20} m-18,0 a18,18 0 1,0 36,0 a18,18 0 1,0 -36,0`,
+        `M${SX + 78},${SY - 20} l26,-30`, `M${SX - 50},${SY - 30} Q${SX - 50},${SY - 100} ${SX + 40},${SY - 80}`];
+      skPaths.forEach((d, i) => { const p = S("path", { d }, sk), L = p.getTotalLength(); p.setAttribute("stroke-dasharray", `${L.toFixed(1)} ${(L + 10).toFixed(1)}`);
+        tl.fromTo(p, { attr: { "stroke-dashoffset": L } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.35, ease: "power1.inOut" }, 77.65 + i * 0.13);
+        tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: 0.05 }, 77.65 + i * 0.13); });
+      const desc = lab([SX, RY + 124], "Described,", { anchor: "end", size: 20, color: "ink2", dx: 0 });
+      desc.el.setAttribute("x", SX - 4);
+      const nb = lab([SX + 4, RY + 124], "never built", { anchor: "start", size: 20, color: "red", weight: 700 });
+      labIn(desc, 78.0); labIn(nb, 80.0);
+      // the ruler runs on to 1834
+      tl.fromTo(rcr, { attr: { width: RX(1805) - 360 + 6 } }, { attr: { width: RX(1834) - 360 + 50 }, duration: 0.7, ease: "power2.inOut", immediateRender: false }, 80.45);
+      const y1834 = lab([RX(1834), RY + 82], "1834", { anchor: "middle", size: 24, weight: 700 }); labIn(y1834, 80.9);
+
+      tl.to({}, { duration: 0.01 }, LEN - 0.01);
+      window.__timelines["c3"] = tl;
+    })();
+  </script>
+</template>

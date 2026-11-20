@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-composition-variables='[{"id":"channel","type":"string","label":"Channel wordmark","default":"STORY OF EVERYTHING"}]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #E7DEC8; }
+      #root { position: absolute; inset: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- ep-002 chapter c1 (sections 1a, 1b): 1653 frames at 30 fps, data-duration = (1653 - 0.5) / 30 -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="55.0833" data-width="1920" data-height="1080">
+      <div id="kitchen" data-composition-id="kitchen" data-composition-src="compositions/kitchen.html"
+        data-start="0" data-duration="21.1" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 1"></div>
+      <div id="night" data-composition-id="night" data-composition-src="compositions/night.html"
+        data-start="20.8" data-duration="13.85" data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="chapters" data-composition-id="chapters" data-composition-src="compositions/chapters.html"
+        data-start="34.15" data-duration="20.9333" data-track-index="3" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 3"></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+<template>
+  <!-- c2 scene A (chapter 0–61.6 s): section 2a "The ice". Navy night: Iran map + thermometer, the ice pool under
+       the stars (qanat, hand, wall, low sun, radiative cooling, freezing, layers), the yakhchāl cross-section. -->
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="c2-ice" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-50m.js"></script>
+  <script src="assets/vendor/world-50m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script src="assets/c2/c2.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-composition-id="c2-ice"]');
+      const tl = gsap.timeline({ paused: true });
+      const LEN = 61.6;
+      const { el, obj, txt, wavy, heatArrow, hand, thermo, domeOuter } = C2;
+      // c1 ends on cream, TODAY, no icon raised: flip to the desert night in the opening silence
+      const st = Kit.stage(root, { theme: "cream", channel: "STORY OF EVERYTHING", date: "TODAY", reasons: C2.REASONS, active: -1 });
+      const P = (hex) => Kit.paperFill(st.svg, hex);
+      const CUT = Kit.filter(st.svg, "cut"), PIECE = Kit.filter(st.svg, "piece"), GLOW = Kit.filter(st.svg, "glow");
+      const CREAM = "#EFE9D9";
+      Kit.setDate(tl, 0.12, "IRAN, 1600s");
+      Kit.setReason(tl, 0.2, 0);
+
+      // ================================================================ beat 1 (0–15.3): map of Iran
+      const map = Kit.flatMap(st.svg, { projection: "equirect", center: [53.5, 32.5], scale: 2968, translate: [720, 560],
+        land: "50m", graticuleStep: 5 });
+      const W50 = window.WORLD_50m, countries = topojson.feature(W50, W50.objects.countries);
+      const iran = countries.features.find((f) => f.properties && f.properties.name === "Iran");
+      const gIran = el("g", { filter: PIECE }, map.gRoutes);
+      el("path", { d: map.path(iran), fill: P("#7F97A6") }, gIran);
+      // the central desert (Dasht-e Kavir and Dasht-e Lut, with the Yazd basin): schematic outline, smoothed
+      const desertLL = [[51.0, 35.0], [53.0, 35.6], [55.5, 35.4], [57.5, 34.6], [59.0, 33.2], [59.6, 31.0], [59.2, 29.0], [58.2, 28.3],
+        [57.2, 29.5], [56.6, 31.0], [55.4, 30.9], [54.4, 31.2], [53.4, 32.3], [52.3, 33.4], [51.3, 34.1]];
+      const dp = desertLL.map((ll) => map.project(ll));
+      let dd = "";
+      for (let i = 0; i < dp.length; i++) { // closed Catmull-Rom as cubic Béziers
+        const p0 = dp[(i - 1 + dp.length) % dp.length], p1 = dp[i], p2 = dp[(i + 1) % dp.length], p3 = dp[(i + 2) % dp.length];
+        if (!i) dd += "M" + p1[0].toFixed(1) + "," + p1[1].toFixed(1);
+        dd += "C" + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + "," + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) + " " +
+          (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + "," + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) + " " + p2[0].toFixed(1) + "," + p2[1].toFixed(1);
+      }
+      const desert = el("path", { d: dd + "Z", fill: P("#CDB27E"), filter: PIECE, opacity: 0 }, map.gRoutes);
+      const borders = topojson.mesh(W50, W50.objects.countries, (a, b) => a !== b);
+      el("path", { d: map.path(borders), fill: "none", stroke: "#EFE9D9", "stroke-width": 1.2, opacity: 0.35, "stroke-dasharray": "5 4" }, map.gRoutes);
+      const lbIran = Kit.label(map, map.project([47.6, 34.6]), "Iran", { size: 30, tracking: "0.3em", anchor: "middle" });
+      const lbDesert = txt(map.gLabels, map.project([56.7, 33.6])[0], map.project([56.7, 33.6])[1], "Central desert",
+        { size: 21, color: "#3A2E1E", anchor: "middle", opacity: 0 });
+      const pinYazd = Kit.pin(map, [54.37, 31.9], "Yazd", { pos: "l", size: 26 });
+      const yz = map.project([54.37, 31.9]);
+      const cube = obj(st.top, yz[0] + 44, yz[1] - 6, PIECE);
+      el("rect", { x: -17, y: -17, width: 34, height: 34, rx: 6, fill: P("#BCD8E6") }, cube.art);
+      el("path", { d: "M-12,-11 h12 v4 h-8 v9 h-4Z", fill: "#FFFFFF" }, cube.art);
+      // entrance: the paper map slides in
+      tl.fromTo(map.g, { x: -46, y: 6, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.18);
+      Kit.enter(tl, lbIran.el, 1.0, "fadeUp");
+      tl.fromTo(desert, { opacity: 0 }, { opacity: 0.92, duration: 0.5, ease: "power2.out" }, 1.45);
+      tl.fromTo(lbDesert, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.out" }, 1.7);
+      pinYazd.in(tl, 11.2);
+      Kit.place(tl, cube, 12.6, { from: "top", dist: 30, dur: 0.45 });
+
+      // thermometer card beside the map
+      const card = obj(st.top, 1590, 560, null);
+      el("rect", { x: -205, y: -340, width: 410, height: 690, rx: 10, fill: P("#EFE9D9"), filter: CUT }, card.art);
+      const readout = txt(card.body, 0, -270, "≈ 40 °C", { font: "serif", size: 56, color: "#C03F27", anchor: "middle", weight: 700, opacity: 0 });
+      const th = thermo(card.body, 50, { top: -220, bottom: 270, min: 0, max: 45, value: 22, color: "#C03F27",
+        ticks: [{ v: 0, label: "0 °C" }, { v: 10, label: "10" }, { v: 20, label: "20" }, { v: 30, label: "30" }, { v: 40, label: "40 °C" },
+          { v: 39, label: "High fever 39 °C", side: "l", key: "fever", size: 18, long: 22, w: 3 }] }, P, PIECE);
+      th.ticks.fever.line.setAttribute("opacity", 0.0); th.ticks.fever.text.setAttribute("opacity", 0.0);
+      Kit.place(tl, card, 4.5, { from: "right", dist: 50 });
+      th.set(tl, 6.2, 1.2, 40, null, "power2.inOut");
+      tl.fromTo(readout, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 7.1);
+      tl.fromTo([th.ticks.fever.line, th.ticks.fever.text], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 8.2);
+      Kit.exit(tl, 15.0, [card, cube, pinYazd.g, pinYazd.label.el], { style: "lift", stagger: 0.03 });
+      tl.to(map.g, { opacity: 0, y: -24, duration: 0.5, ease: "power2.in" }, 15.0);
+
+      // ================================================================ beat 2 (15.3–45): the ice pool under the stars
+      const stars = el("g", null, st.svg);
+      const rs = Kit.rng("c2-stars"), PIV = [960, 430], starEls = [];
+      for (let i = 0; i < 300; i++) {
+        const a = rs() * Math.PI * 2, rr = Math.sqrt(rs()) * 1350, x = PIV[0] + Math.cos(a) * rr, y = PIV[1] + Math.sin(a) * rr;
+        const big = rs() < 0.12;
+        const s = el("circle", { cx: x.toFixed(1), cy: y.toFixed(1), r: (big ? 2.8 : 1.1 + rs() * 1.3).toFixed(2), fill: rs() < 0.15 ? "#E2AF51" : "#EFE9D9" }, stars);
+        if (y > 100 && y < 780 && x > -20 && x < 1940) starEls.push(s);
+      }
+      tl.fromTo(stars, { opacity: 0 }, { opacity: 1, duration: 0.01 }, 15.3);
+      starEls.forEach((s, i) => tl.fromTo(s, { opacity: 0 }, { opacity: 0.9, duration: 0.25, ease: "power2.out" }, 15.4 + Kit.hash2(7, i) * 1.4));
+
+      const GY = 760, PX0 = 520, PX1 = 1400, FLOOR = 910;
+      // ground
+      const ground = obj(st.top, 0, 0, CUT);
+      el("rect", { x: -40, y: GY, width: 2000, height: 360, fill: P("#5E4E3C") }, ground.art);
+      el("rect", { x: -40, y: GY, width: 2000, height: 10, fill: P("#7A6650") }, ground.art);
+      Kit.place(tl, ground, 15.3, { from: "bottom", dist: 40, rot: 0.6 });
+      // the pool, cut into the ground (cross-section)
+      const trough = obj(st.top, 0, 0, PIECE);
+      el("rect", { x: PX0, y: GY, width: PX1 - PX0, height: FLOOR - GY, fill: P("#22303B") }, trough.art);
+      el("rect", { x: PX0 - 8, y: GY, width: 8, height: FLOOR - GY + 8, fill: P("#4A3D2F") }, trough.art);
+      el("rect", { x: PX1, y: GY, width: 8, height: FLOOR - GY + 8, fill: P("#4A3D2F") }, trough.art);
+      el("rect", { x: PX0 - 8, y: FLOOR, width: PX1 - PX0 + 16, height: 8, fill: P("#4A3D2F") }, trough.art);
+      Kit.place(tl, trough, 15.45, { from: "bottom", dist: 30, rot: 0.5 });
+
+      // water + ice (one group, hidden when the slab is cut into blocks)
+      const poolIce = el("g", null, st.top);
+      const water = el("rect", { x: PX1, y: 850, width: 0, height: FLOOR - 850, fill: "#7FA9C4" }, poolIce);
+      tl.fromTo(water, { attr: { x: PX1, width: 0 } }, { attr: { x: PX0, width: PX1 - PX0 }, duration: 1.3, ease: "power1.out" }, 19.75);
+
+      // heat arrows rising from the water (drawn later)
+      const gHeat = el("g", null, st.top);
+      st.top.insertBefore(gHeat, poolIce); // ice layers grow over the arrows' feet
+      const heat = [620, 800, 980, 1160, 1320].map((x, i) => heatArrow(gHeat, wavy(x, 846, x + (i - 2) * 6, 262, 9, 130, i * 1.3),
+        { color: "#DF716B", glow: "#E2AF51", width: 5, glowFilter: GLOW }));
+
+      // freezing: ice sweep + crystals on the first layer
+      const clipId = "c2-ice-sweep";
+      const cp = el("clipPath", { id: clipId }, el("defs", null, st.top));
+      const sweep = el("rect", { x: PX0, y: 700, width: 0, height: 260 }, cp);
+      const ice0 = el("rect", { x: PX0, y: 850, width: PX1 - PX0, height: FLOOR - 850, fill: "#DCEAF0", "clip-path": "url(#" + clipId + ")" }, poolIce);
+      tl.fromTo(sweep, { attr: { width: 0 } }, { attr: { width: PX1 - PX0 }, duration: 1.0, ease: "power1.inOut" }, 36.8);
+      const crystals = el("g", null, poolIce);
+      for (let i = 0; i < 12; i++) {
+        const cx = PX0 + 40 + i * 72 + Kit.hash2(3, i) * 20, cy = 862 + Kit.hash2(4, i) * 34, s = 7 + Kit.hash2(5, i) * 5;
+        const c = el("g", { transform: `translate(${cx.toFixed(1)},${cy.toFixed(1)})` }, crystals);
+        const ci = el("path", { d: [0, 60, 120].map((a) => { const r = a * Math.PI / 180; return `M${(-Math.cos(r) * s).toFixed(1)},${(-Math.sin(r) * s).toFixed(1)}L${(Math.cos(r) * s).toFixed(1)},${(Math.sin(r) * s).toFixed(1)}`; }).join(""),
+          stroke: "#FFFFFF", "stroke-width": 2.2, "stroke-linecap": "round", fill: "none" }, c);
+        tl.fromTo(ci, { scale: 0, opacity: 0, svgOrigin: "0 0" }, { scale: 1, opacity: 0.95, duration: 0.25, ease: "back.out(1.6)", svgOrigin: "0 0" }, 36.85 + (cx - PX0) / (PX1 - PX0) * 0.95);
+      }
+      // layer on layer: three more nights, three more layers
+      const layers = [[820, 40.0], [790, 41.0], [760, 42.0]].map(([y, t], i) => {
+        const w = el("rect", { x: PX0, y: y, width: PX1 - PX0, height: 30, fill: "#7FA9C4", opacity: 0 }, poolIce);
+        const ic = el("rect", { x: PX0, y: y, width: PX1 - PX0, height: 30, fill: "#DCEAF0", opacity: 0 }, poolIce);
+        el("line", { x1: PX0, y1: y + 30, x2: PX1, y2: y + 30, stroke: "#B7CDD8", "stroke-width": 2, opacity: 0.0 }, poolIce);
+        tl.fromTo(w, { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, t);
+        tl.fromTo(ic, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.inOut" }, t + 0.42);
+        tl.fromTo(stars, { rotation: i * 18, svgOrigin: PIV.join(" ") }, { rotation: (i + 1) * 18, svgOrigin: PIV.join(" "), duration: 0.9, ease: "power2.inOut", immediateRender: i === 0 }, t - 0.12);
+        return ic;
+      });
+      const seams = el("g", null, poolIce);
+      [850, 820, 790].forEach((y) => el("line", { x1: PX0, y1: y, x2: PX1, y2: y, stroke: "#A9C3D1", "stroke-width": 2 }, seams));
+      tl.fromTo(seams, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 40.4);
+
+      // qanat: dashed tunnel + well shafts (right)
+      const qanat = obj(st.top, 0, 0, null);
+      const qClip = el("clipPath", { id: "c2-qanat-clip" }, el("defs", null, st.top));
+      const qRect = el("rect", { x: 1930, y: 700, width: 0, height: 260 }, qClip);
+      const tun = el("g", { "clip-path": "url(#c2-qanat-clip)" }, qanat.art);
+      el("path", { d: `M${PX1 + 8},856 L1960,878 L1960,900 L${PX1 + 8},878Z`, fill: "#2E261E" }, tun);
+      el("path", { d: `M${PX1 + 8},856 L1960,878`, stroke: "#EFE9D9", "stroke-width": 2.5, "stroke-dasharray": "14 10", opacity: 0.8 }, tun);
+      el("path", { d: `M${PX1 + 8},878 L1960,900`, stroke: "#EFE9D9", "stroke-width": 2.5, "stroke-dasharray": "14 10", opacity: 0.8 }, tun);
+      tl.fromTo(qRect, { attr: { x: 1930, width: 0 } }, { attr: { x: PX1, width: 1930 - PX1 }, duration: 0.8, ease: "power2.inOut" }, 18.8);
+      const shaftX = [1500, 1620, 1740, 1860];
+      shaftX.forEach((x, i) => {
+        const yT = 856 + (x - PX1) / (1960 - PX1) * 22;
+        const sh = el("rect", { x: x - 7, y: GY, width: 14, height: yT - GY, fill: "#2E261E" }, qanat.art);
+        const mound = el("ellipse", { cx: x, cy: GY - 1, rx: 26, ry: 9, fill: P("#8A7458"), filter: PIECE }, qanat.art);
+        tl.fromTo(sh, { attr: { height: 0 } }, { attr: { height: yT - GY }, duration: 0.35, ease: "power2.out" }, 19.0 + i * 0.12);
+        tl.fromTo(mound, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 18.95 + i * 0.12);
+      });
+      const lbQanat = txt(qanat.art, 1640, 960, "Qanat", { size: 22, anchor: "middle", opacity: 0 });
+      tl.fromTo(lbQanat, { opacity: 0, y: 8 }, { opacity: 0.9, y: 0, duration: 0.35, ease: "power2.out" }, 19.3);
+      // drops running down the tunnel into the pool
+      for (let i = 0; i < 5; i++) {
+        const dr = el("circle", { cx: 0, cy: 0, r: 6, fill: "#7FA9C4", opacity: 0 }, qanat.art);
+        const t0 = 19.35 + i * 0.22;
+        tl.fromTo(dr, { attr: { cx: 1925, cy: 888 }, opacity: 1 }, { attr: { cx: PX1 + 10, cy: 868 }, duration: 0.75, ease: "none", immediateRender: false }, t0);
+        tl.set(dr, { opacity: 0 }, t0 + 0.75);
+      }
+
+      // a paper hand measures the water: about as deep as your hand is wide
+      const hd = obj(st.top, 1336, 880, PIECE);
+      const hg = el("g", { transform: "scale(0.84)" }, hd.art);
+      hand(hg, P, true);
+      const brk = el("g", { opacity: 0 }, st.top);
+      el("path", { d: "M1238,850 h-12 v60 h12", stroke: CREAM, "stroke-width": 3, fill: "none", "stroke-linecap": "round" }, brk);
+      txt(brk, 1180, 815, "≈ a hand's width", { size: 22, anchor: "middle" });
+      Kit.place(tl, hd, 22.3, { from: "right", dist: 50, rot: -3 });
+      tl.fromTo(brk, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 22.9);
+      Kit.exit(tl, 24.2, [hd, brk], { style: "lift", stagger: 0.04 });
+
+      // the tall wall on the south side, the low winter sun and its shade
+      const sunG = obj(st.top, 250, 330, CUT);
+      el("circle", { cx: 0, cy: 0, r: 46, fill: P("#E2AF51") }, sunG.art);
+      el("circle", { cx: -10, cy: -12, r: 16, fill: P("#EDC77A") }, sunG.art);
+      const rays = el("g", { opacity: 0 }, st.top);
+      [470, 520, 570, 620].forEach((y) => el("path", { d: `M310,${330 + (y - 470) * 0.3} L426,${y - 50}`, stroke: "#E2AF51", "stroke-width": 3, "stroke-dasharray": "10 8", "stroke-linecap": "round" }, rays));
+      const shade = el("path", { d: "M505,395 L1440,633 L1440,912 L505,912Z", fill: "#0B141B", opacity: 0 }, st.top);
+      const lbShade = txt(st.top, 960, 812, "In shade", { size: 22, anchor: "middle", opacity: 0 });
+      const wall = obj(st.top, 467, GY, CUT);
+      el("rect", { x: -37, y: -365, width: 74, height: 368, fill: P("#A8845C") }, wall.art);
+      for (let y = -335, k = 0; y < 0; y += 30, k++) {
+        el("line", { x1: -37, y1: y, x2: 37, y2: y, stroke: "#8A6A44", "stroke-width": 2 }, wall.art);
+        const bx = k % 2 ? -6 : 12;
+        el("line", { x1: bx, y1: y, x2: bx, y2: y + 30, stroke: "#8A6A44", "stroke-width": 2 }, wall.art);
+      }
+      Kit.place(tl, wall, 24.8, { from: "bottom", dist: 50, rot: 1.5 });
+      tl.fromTo(sunG.body, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, 25.95);
+      tl.fromTo(rays, { opacity: 0 }, { opacity: 0.9, duration: 0.35, ease: "power2.out" }, 26.45);
+      tl.fromTo(shade, { opacity: 0 }, { opacity: 0.42, duration: 0.45, ease: "power1.inOut" }, 26.75);
+      tl.fromTo(lbShade, { opacity: 0 }, { opacity: 0.85, duration: 0.35, ease: "power2.out" }, 26.9);
+      // the sun goes down: night again
+      tl.to(sunG.body, { y: 90, opacity: 0, duration: 0.6, ease: "power2.in" }, 27.9);
+      tl.to([rays, lbShade], { opacity: 0, duration: 0.35, ease: "power1.inOut" }, 27.9);
+      tl.to(shade, { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 28.0);
+
+      // heat goes straight up to space
+      heat.forEach((h, i) => h.draw(tl, 28.7 + i * 0.1, 1.4));
+      const lbSpace = txt(st.top, 970, 222, "Space", { size: 34, anchor: "middle", tracking: "0.5em", opacity: 0 });
+      tl.fromTo(lbSpace, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 35.0);
+      // a pulse of heat rides each arrow on "sends its heat straight up"
+      heat.forEach((h, i) => {
+        const dot = el("circle", { cx: 0, cy: 0, r: 8, fill: "#F3D08A", opacity: 0 }, gHeat);
+        const pr = { p: 0 };
+        const upd = () => { const q = h.line.getPointAtLength(pr.p * h.len); dot.setAttribute("cx", q.x.toFixed(1)); dot.setAttribute("cy", q.y.toFixed(1)); };
+        upd();
+        tl.fromTo(pr, { p: 0 }, { p: 1, duration: 1.2, ease: "power1.in", onUpdate: upd, immediateRender: false }, 33.9 + i * 0.07);
+        tl.fromTo(dot, { opacity: 0 }, { opacity: 1, duration: 0.15 }, 33.9 + i * 0.07);
+        tl.to(dot, { opacity: 0, duration: 0.2 }, 34.95 + i * 0.07);
+      });
+      // the air stays above zero
+      const airTh = thermo(st.top, 1560, { top: 520, bottom: 715, min: -10, max: 20, value: 3, color: "#7FA9C4", bulbR: 18, tw: 26, bore: 10,
+        textColor: CREAM, ticks: [{ v: 0, label: "0 °C", size: 18 }] }, P, PIECE);
+      const lbAir = txt(st.top, 1560, 490, "Air: above 0 °C", { size: 22, anchor: "middle", opacity: 0 });
+      Kit.place(tl, airTh, 37.55, { from: "top", dist: 34, dur: 0.45 });
+      tl.fromTo(lbAir, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 37.85);
+      Kit.exit(tl, 39.6, [airTh, lbAir], { style: "lift", stagger: 0.04 });
+      Kit.dim(tl, [gHeat, lbSpace], 39.7, 0.3);
+      // ≈ 50 cm
+      const b50 = el("g", { opacity: 0 }, st.top);
+      el("path", { d: "M548,762 h-12 v146 h12", stroke: "#242018", "stroke-width": 3, fill: "none", "stroke-linecap": "round" }, b50);
+      txt(b50, 562, 845, "≈ 50 cm", { size: 30, color: "#242018", tracking: "0.1em" });
+      tl.fromTo(b50, { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 43.2);
+
+      // ================================================================ beat 3 (45–61): blocks into the yakhchāl
+      Kit.exit(tl, 45.0, [wall, qanat, gHeat, lbSpace, b50], { style: "lift", stagger: 0.04 });
+      const cuts = el("g", null, st.top);
+      [740, 960, 1180].forEach((x, i) => {
+        const c = el("line", { x1: x, y1: GY, x2: x, y2: GY, stroke: "#3E5566", "stroke-width": 4, "stroke-dasharray": "10 6", "stroke-linecap": "round" }, cuts);
+        tl.fromTo(c, { attr: { y2: GY }, opacity: 0 }, { attr: { y2: FLOOR }, opacity: 1, duration: 0.3, ease: "power2.out" }, 45.6 + i * 0.12);
+      });
+      tl.set([poolIce, cuts], { opacity: 0 }, 46.2);
+
+      // the yakhchāl cross-section (drawn under the blocks)
+      const YCX = 1250, DH = 480, DB = 290, DT = 36;
+      const yak = obj(st.top, 0, 0, null);
+      const dome = domeOuter(YCX, GY, DH, DB, DT, 8);
+      const inner = [];
+      for (let k = 0; k <= 24; k++) {
+        const u = k / 24 * 0.9, y = GY - u * DH, th2 = 60 * (1 - u) + 20 * u, w = Math.max(6, dome.hw(u) - th2);
+        inner.push([w, y]);
+      }
+      const innerD = "M" + inner.map(([w, y]) => `${(YCX - w).toFixed(1)},${y.toFixed(1)}`).join("L") + "L" +
+        inner.slice().reverse().map(([w, y]) => `${(YCX + w).toFixed(1)},${y.toFixed(1)}`).join("L") + "Z";
+      const yakArt = el("g", { filter: CUT }, yak.art);
+      el("path", { d: dome.d, fill: P("#B08A5A") }, yakArt);
+      const bClip = el("clipPath", { id: "c2-dome-clip" }, el("defs", null, st.top));
+      el("path", { d: dome.d }, bClip);
+      const bricks = el("g", { "clip-path": "url(#c2-dome-clip)" }, yakArt);
+      for (let y = GY - 20, k = 0; y > GY - DH - 20; y -= 20, k++) el("line", { x1: YCX - DB - 10, y1: y, x2: YCX + DB + 10, y2: y, stroke: "#8E6C44", "stroke-width": 1.6 }, bricks);
+      el("path", { d: innerD, fill: "#1E2A33" }, yakArt);
+      el("rect", { x: YCX + DB - 62, y: GY - 58, width: 66, height: 60, fill: "#1E2A33" }, yakArt); // door on the right
+      el("rect", { x: YCX - 140, y: GY - 2, width: 280, height: 214, fill: "#1E2A33" }, yakArt);       // the pit
+      el("path", { d: `M${YCX - 146},${GY} v218 h292 v-218`, stroke: "#8E6C44", "stroke-width": 6, fill: "none" }, yakArt);
+      Kit.place(tl, yak, 46.75, { from: "bottom", dist: 50, rot: 1.2, dur: 0.6 });
+      const chip = Kit.chip(st, "Schematic · not to scale");
+      chip.in(tl, 46.9);
+      tl.to(chip.el, { opacity: 0, duration: 0.4, ease: "power1.inOut" }, 60.5);
+
+      // blocks: cut slab → stack beside the pit → into the pit
+      const blocks = [];
+      const BW = 210, BH = 150;
+      const start = [630, 850, 1070, 1290], stack = [[300, 722], [410, 722], [300, 646], [410, 646]], pit = [[1192, 932], [1302, 932], [1192, 856], [1302, 856]];
+      const tracks = start.map((x0, i) => {
+        const b = el("g", { opacity: 0 }, st.top);
+        const bi = el("g", { filter: PIECE }, b);
+        el("rect", { x: -BW / 2, y: -BH / 2, width: BW, height: BH, rx: 6, fill: P("#DCEAF0") }, bi);
+        el("path", { d: `M${-BW / 2 + 14},${-BH / 2 + 12} h40 v8 h-32 v26 h-8Z`, fill: "#FFFFFF", opacity: 0.9 }, bi);
+        [-45, -15, 15].forEach((dy) => el("line", { x1: -BW / 2 + 4, y1: dy + 30, x2: BW / 2 - 4, y2: dy + 30, stroke: "#B7CDD8", "stroke-width": 3 }, bi));
+        const ts = 46.45 + i * 0.05, tp = 47.1 + i * 0.25;
+        const X = [[ts, x0], [ts + 0.45, stack[i][0], "power2.inOut"], [tp, stack[i][0]], [tp + 0.5, pit[i][0], "power1.inOut"]];
+        const Yk = [[46.2, 835], [46.45, 805, "power2.out"], [ts, 805], [ts + 0.45, stack[i][1], "power2.inOut"], [tp, stack[i][1]],
+          [tp + 0.22, 600, "power2.out"], [tp + 0.5, pit[i][1], "power2.in"]];
+        const Sk = [[ts, 1], [ts + 0.45, 0.5, "power2.inOut"]];
+        const Ok = [[46.199, 0], [46.2, 1]];
+        if (i === 3) { // the block that leaves on the cart in summer
+          X.push([59.35, pit[i][0]], [59.75, 1720, "power2.inOut"]);
+          Yk.push([59.0, pit[i][1]], [59.35, 722, "power2.inOut"], [59.75, GY - 64 - 37.5, "power2.inOut"]);
+          Ok.push([59.75, 1], [59.76, 0]);
+        }
+        return { b, x: C2.track(X), y: C2.track(Yk), s: C2.track(Sk), o: C2.track(Ok) };
+      });
+      C2.clock(tl, LEN, (t) => tracks.forEach((k) => {
+        k.b.setAttribute("transform", `translate(${k.x(t).toFixed(1)},${k.y(t).toFixed(1)}) scale(${k.s(t).toFixed(3)})`);
+        k.b.setAttribute("opacity", k.o(t));
+      }));
+      Kit.exit(tl, 46.4, [trough], { style: "lift" });
+
+      // labels: YAKHCHĀL · "ICE PIT", deep pit, mud brick
+      const lbY1 = txt(st.top, 1000, 1032, "Yakhchāl", { size: 32, anchor: "end", opacity: 0 });
+      const lbY2 = txt(st.top, 1014, 1032, "· “ice pit”", { size: 32, anchor: "start", opacity: 0, color: "#BCD8E6" });
+      tl.fromTo(lbY1, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 47.9);
+      tl.fromTo(lbY2, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 49.3);
+      const lbPit = el("g", { opacity: 0 }, st.top);
+      el("path", { d: `M${YCX - 150},900 H990`, stroke: CREAM, "stroke-width": 2, "stroke-dasharray": "5 5" }, lbPit);
+      txt(lbPit, 978, 908, "Deep pit", { size: 22, anchor: "end" });
+      const lbBrick = el("g", { opacity: 0 }, st.top);
+      const hw470 = dome.hw((GY - 470) / DH);
+      el("path", { d: `M${(YCX - hw470 - 6).toFixed(1)},470 H960`, stroke: CREAM, "stroke-width": 2, "stroke-dasharray": "5 5" }, lbBrick);
+      txt(lbBrick, 948, 478, "Mud brick", { size: 22, anchor: "end" });
+      tl.fromTo(lbPit, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 50.8);
+      tl.fromTo(lbBrick, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 52.0);
+      // scale: a small figure, the height bracket, six storeys
+      const fig = obj(st.top, 905, GY, PIECE);
+      el("circle", { cx: 0, cy: -41, r: 5.5, fill: P("#EFE9D9") }, fig.art);
+      el("path", { d: "M-6,-34 h12 l3,18 h-3 l-1,16 h-4 l-1,-12 l-1,12 h-4 l-1,-16 h-3Z", fill: P("#EFE9D9") }, fig.art);
+      Kit.place(tl, fig, 53.9, { from: "left", dist: 30, dur: 0.45 });
+      const bH = el("g", null, st.top);
+      const bLine = el("path", { d: `M1585,${GY} V${GY - DH - 18}`, stroke: CREAM, "stroke-width": 3, fill: "none" }, bH);
+      const bl = bLine.getTotalLength(); bLine.setAttribute("stroke-dasharray", bl + " " + bl);
+      el("path", { d: `M1573,${GY} h24 M1573,${GY - DH - 18} h24`, stroke: CREAM, "stroke-width": 3 }, bH);
+      tl.fromTo(bLine, { attr: { "stroke-dashoffset": bl } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.7, ease: "power2.inOut" }, 54.7);
+      tl.fromTo(bH, { opacity: 0 }, { opacity: 1, duration: 0.15 }, 54.7);
+      const lbH = txt(st.top, 1585, 236, "Up to ≈ 18 m", { size: 28, anchor: "middle", opacity: 0 });
+      tl.fromTo(lbH, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 55.1);
+      const storeys = el("g", null, st.top), SH = (DH + 18) / 6;
+      for (let k = 0; k < 6; k++) {
+        const r = el("rect", { x: 1606, y: GY - SH * (k + 1) + 3, width: 58, height: SH - 6, fill: "none", stroke: CREAM, "stroke-width": 2, "stroke-dasharray": "6 4", opacity: 0 }, storeys);
+        tl.fromTo(r, { opacity: 0 }, { opacity: 0.75, duration: 0.12, ease: "none" }, 55.4 + k * 0.07);
+      }
+      Kit.exit(tl, 57.0, [bH, storeys, lbH, lbPit, lbBrick, fig], { style: "lift", stagger: 0.03 });
+      // into summer: one block leaves on a paper cart
+      Kit.setDate(tl, 58.6, "SUMMER");
+      const cart = obj(st.top, 1720, GY, null);
+      const cartArt = el("g", { filter: PIECE }, cart.art);
+      el("rect", { x: -78, y: -64, width: 156, height: 28, rx: 4, fill: P("#8C6A45") }, cartArt);
+      el("path", { d: "M-78,-50 L-126,-30", stroke: "#8C6A45", "stroke-width": 7, "stroke-linecap": "round" }, cartArt);
+      const wheels = [-44, 44].map((x) => {
+        const w = el("g", { transform: `translate(${x},-23)` }, cartArt);
+        const wi = el("g", null, w);
+        el("circle", { cx: 0, cy: 0, r: 22, fill: P("#5A4430") }, wi);
+        el("path", { d: "M-18,0 H18 M0,-18 V18", stroke: "#C9A27A", "stroke-width": 3 }, wi);
+        return wi;
+      });
+      const cartBlock = el("g", { opacity: 0 }, cart.body);
+      el("rect", { x: -52, y: -64 - 75, width: 104, height: 75, rx: 4, fill: P("#DCEAF0"), filter: PIECE }, cartBlock);
+      Kit.place(tl, cart, 58.55, { from: "right", dist: 50, dur: 0.5 });
+      tl.fromTo(cartBlock, { opacity: 0 }, { opacity: 1, duration: 0.01 }, 59.75);
+      tl.fromTo(cart.body, { x: 0 }, { x: 340, duration: 0.65, ease: "power1.in", immediateRender: false }, 59.8);
+      wheels.forEach((w) => tl.fromTo(w, { rotation: 0, svgOrigin: "0 0" }, { rotation: 300, svgOrigin: "0 0", duration: 0.65, ease: "power1.in" }, 59.8));
+
+      Kit.themeFlip(tl, 0.1, { to: "navy" });
+      tl.to({}, { duration: 0.01 }, LEN - 0.01);
+      window.__timelines["c2-ice"] = tl;
+    })();
+  </script>
+</template>
