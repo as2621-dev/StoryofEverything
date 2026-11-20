@@ -371,5 +371,110 @@
    "title": "typewriter typing",
    "credit": "Pixabay Content License"
   }
+ ],
+ "fridge_hum": [
+  {
+   "file": "fridge_hum_1.mp3",
+   "duration": 15.918,
+   "license": "cc0",
+   "credit": "\"Refrigerator Hum\" by p0lter, CC0, https://freesound.org/people/p0lter/sounds/413566",
+   "title": "Refrigerator Hum"
+  },
+  {
+   "file": "fridge_hum_2.mp3",
+   "duration": 31.184,
+   "license": "cc0",
+   "credit": "\"Refrigerator humming\" by RCSound99, CC0, https://freesound.org/people/RCSound99/sounds/651210",
+   "title": "Refrigerator humming"
+  }
+ ],
+ "fridge_door": [
+  {
+   "file": "fridge_door_1.mp3",
+   "duration": 1.429,
+   "license": "cc0",
+   "credit": "\"refrigerator door open\" by Yoyodaman234, CC0, https://freesound.org/people/Yoyodaman234/sounds/183531",
+   "title": "refrigerator door open"
+  },
+  {
+   "file": "fridge_door_2.mp3",
+   "duration": 2.453,
+   "license": "cc0",
+   "credit": "\"refrigerator door close interior\" by Yoyodaman234, CC0, https://freesound.org/people/Yoyodaman234/sounds/183538",
+   "title": "refrigerator door close interior"
+  }
+ ],
+ "ice_crack": [
+  {
+   "file": "ice_crack_1.mp3",
+   "duration": 3.505,
+   "license": "cc0",
+   "credit": "\"Ice Crack 5.wav\" by ecfike, CC0, https://freesound.org/people/ecfike/sounds/177217",
+   "title": "Ice Crack 5.wav"
+  },
+  {
+   "file": "ice_crack_2.mp3",
+   "duration": 3.666,
+   "license": "cc0",
+   "credit": "\"Ice Crack 3.wav\" by ecfike, CC0, https://freesound.org/people/ecfike/sounds/177211",
+   "title": "Ice Crack 3.wav"
+  }
+ ],
+ "boil": [
+  {
+   "file": "boil_1.mp3",
+   "duration": 7.679,
+   "license": "cc0",
+   "credit": "\"Bubbles 003.wav\" by ristooooo1, CC0, https://freesound.org/people/ristooooo1/sounds/539820",
+   "title": "Bubbles 003.wav"
+  },
+  {
+   "file": "boil_2.mp3",
+   "duration": 4.237,
+   "license": "cc0",
+   "credit": "\"chemistry.wav\" by 211redman112, CC0, https://freesound.org/people/211redman112/sounds/145797",
+   "title": "chemistry.wav"
+  }
+ ],
+ "hiss": [
+  {
+   "file": "hiss_1.mp3",
+   "duration": 1.955,
+   "license": "cc0",
+   "credit": "\"Carbonation Release and Fizz.wav\" by baidonovan, CC0, https://freesound.org/people/baidonovan/sounds/187332",
+   "title": "Carbonation Release and Fizz.wav"
+  },
+  {
+   "file": "hiss_2.mp3",
+   "duration": 1.261,
+   "license": "by",
+   "credit": "\"gas.whooosh.wav\" by junggle, CC BY 4.0, https://freesound.org/people/junggle/sounds/73259",
+   "title": "gas.whooosh.wav"
+  }
+ ],
+ "pump": [
+  {
+   "file": "pump_1.mp3",
+   "duration": 4.0,
+   "license": "by",
+   "credit": "\"Bicycle Pump - Plastic - Medium Release 02.wav\" by Phi_Sound, CC BY 4.0, https://freesound.org/people/Phi_Sound/sounds/236890",
+   "title": "Bicycle Pump - Plastic - Medium Release 02.wav"
+  }
+ ],
+ "glass_clink": [
+  {
+   "file": "glass_clink_1.mp3",
+   "duration": 1.428,
+   "license": "cc0",
+   "credit": "\"ice sounds5.wav\" by creeeeak, CC0, https://freesound.org/people/creeeeak/sounds/436972",
+   "title": "ice sounds5.wav"
+  },
+  {
+   "file": "glass_clink_2.mp3",
+   "duration": 0.598,
+   "license": "cc0",
+   "credit": "\"Glassy bits 04\" by cabled_mess, CC0, https://freesound.org/people/cabled_mess/sounds/352071",
+   "title": "Glassy bits 04"
+  }
  ]
 }

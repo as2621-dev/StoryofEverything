@@ -6,3 +6,5 @@
 - gulls_1.mp3: "Gull at the coast 824AM 210303_0264.wav" by klankbeeld, CC BY 4.0, https://freesound.org/people/klankbeeld/sounds/623933
 - mug_1.mp3: "Ceramic Set Down" by f4ngy, CC BY 4.0, https://freesound.org/people/f4ngy/sounds/240782
 - mug_2.mp3: "Ceramic Set Down 2" by f4ngy, CC BY 4.0, https://freesound.org/people/f4ngy/sounds/240783
+- hiss_2.mp3: "gas.whooosh.wav" by junggle, CC BY 4.0, https://freesound.org/people/junggle/sounds/73259
+- pump_1.mp3: "Bicycle Pump - Plastic - Medium Release 02.wav" by Phi_Sound, CC BY 4.0, https://freesound.org/people/Phi_Sound/sounds/236890

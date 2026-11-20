@@ -1,0 +1,52 @@
+{
+ "chapters": [
+  {
+   "id": "c1",
+   "sections": [
+    "1a",
+    "1b"
+   ]
+  },
+  {
+   "id": "c2",
+   "sections": [
+    "2a",
+    "2b"
+   ]
+  },
+  {
+   "id": "c3",
+   "sections": [
+    "3a",
+    "3b"
+   ]
+  },
+  {
+   "id": "c4",
+   "sections": [
+    "4a",
+    "4b"
+   ]
+  }
+ ],
+ "tabs": {
+  "1a": -1,
+  "1b": -1,
+  "2a": 0,
+  "2b": 0,
+  "3a": 1,
+  "3b": 1,
+  "4a": 2,
+  "4b": 2
+ },
+ "moods": {
+  "1a": "curious",
+  "1b": "curious",
+  "2a": "voyage",
+  "2b": "curious",
+  "3a": "curious",
+  "3b": "curious",
+  "4a": "curious",
+  "4b": "dark"
+ }
+}

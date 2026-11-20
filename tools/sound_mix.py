@@ -20,6 +20,9 @@ MOODS = {"1a": "dark", "1b": "curious", "2a": "curious", "2b": "curious", "3a": 
          "4a": "curious", "4b": "dark", "5a": "dark", "5b": "dark", "6a": "curious", "6b": "dark",
          "7a": "voyage", "7b": "ending"}
 BEDS = {"waves", "fire", "gulls", "ship_creak", "march", "clock_tick", "flag", "ui_typing", "quill"}
+_cfg = ep / "episode.json"  # per-episode moods (ep-002 on); without it, the ep-001 MOODS above apply
+if _cfg.exists():
+    MOODS = json.loads(_cfg.read_text(encoding="utf-8"))["moods"]
 meter = pyln.Meter(SR)
 
 
