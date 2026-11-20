@@ -1,0 +1,44 @@
+<template>
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="demo-parade" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-50m.js"></script>
+  <script src="assets/vendor/land-110m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-composition-id="demo-parade"]');
+      const tl = gsap.timeline({ paused: true });
+      const st = Kit.stage(root, { theme: "cream", active: 3 });
+      st.fadeIn(tl, 0, 0.5);
+      const title = Kit.title(st, "What *traded* hands", { align: "center", y: 150, size: 72, kicker: "BREDA · 31 JULY 1667" });
+      title.in(tl, 0.45);
+
+      const y = 640, cap = { size: 20, tracking: "0.16em" };
+      const items = [
+        Kit.cutout(st, "nutmegFruit", { x: 330, y, size: 250, label: "Nutmeg · Run", labelDy: 190, labelOpts: cap }),
+        Kit.cutout(st, "treatyScroll", { x: 750, y, size: 250, rotate: -3, label: "Treaty of Breda", labelDy: 190, labelOpts: cap }),
+        Kit.cutout(st, "manhattanIsland", { x: 1170, y, size: 270, label: "Manhattan", labelDy: 190, labelOpts: cap }),
+        Kit.vehicle(st.top, "eastIndiaman", { x: 1590, y: y + 70, scale: 1.25, label: "The VOC fleet", labelDy: 120, labelOpts: cap })
+      ];
+      const dirs = ["left", "bottom", "top", "right"];
+      items.forEach((o, i) => o.place(tl, 1.0 + i * 0.75, { from: dirs[i] }));
+      items[0].wobble(tl, 1.6, 6.3);
+      items[3].wobble(tl, 3.9, 4.0, { seed: 9 });
+
+      Kit.dim(tl, [items[1].el, items[1].label.el, items[3].el, items[3].label.el], 5.0, 0.28);
+      const swap = Kit.route(st.top, null, [[330, 470], [750, 350], [1150, 470]], { color: "red", width: 5, greatCircle: false, smooth: true, arrow: true });
+      swap.drawOn(tl, 5.3, 1.1, "power2.inOut");
+      tl.to({}, { duration: 0.01 }, 7.99);
+      window.__timelines["demo-parade"] = tl;
+    })();
+  </script>
+</template>

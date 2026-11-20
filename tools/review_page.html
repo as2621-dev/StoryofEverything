@@ -1,0 +1,298 @@
+<title>{{TITLE}} review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an editor's cutting list. Each shot is a row: clip on the left, a large note pad on the right. */
+:root {
+  --bg: #eceeed; --panel: #f8f9f8; --ink: #17191a; --muted: #5d6366; --line: #cfd4d3;
+  --red: #b3261e; --red-soft: #f6dcd9; --ok: #2f6b3f; --ok-soft: #dcebdf;
+  --f-head: "Archivo Narrow", "Arial Narrow", system-ui, sans-serif;
+  --f-text: "Source Serif 4", Georgia, serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121415; --panel: #1b1e1f; --ink: #e8eaea; --muted: #9aa1a3; --line: #2e3335;
+  --red: #ef6a5f; --red-soft: #3a1f1d; --ok: #7cc18e; --ok-soft: #1d2e22; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121415; --panel: #1b1e1f; --ink: #e8eaea; --muted: #9aa1a3; --line: #2e3335;
+  --red: #ef6a5f; --red-soft: #3a1f1d; --ok: #7cc18e; --ok-soft: #1d2e22; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-head); }
+.wrap { max-width: 1320px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 80px; }
+header.top { display: grid; gap: 10px; padding-bottom: 18px; border-bottom: 2px solid var(--ink); }
+h1 { font-size: clamp(26px, 4vw, 40px); margin: 0; letter-spacing: .01em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--red); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; color: var(--muted); font-size: 15px; }
+.meta a { color: var(--red); font-weight: 700; }
+.tools { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; padding-block: 12px; border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.count { font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.count b { color: var(--red); font-weight: 500; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { font: 600 14px var(--f-head); padding: 6px 12px; background: var(--panel); color: var(--ink); border: 0; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+label.chk { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; cursor: pointer; }
+.status { margin-left: auto; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.status.bad { color: var(--red); }
+h2.sec { font-size: 20px; margin: 34px 0 6px; display: flex; gap: 10px; align-items: baseline; }
+h2.sec span { font-family: var(--f-mono); font-size: 13px; color: var(--red); font-weight: 500; }
+.shot { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px; padding: 18px 0;
+  border-bottom: 1px solid var(--line); scroll-margin-top: 70px; }
+.shot.playing .clip video { outline: 3px solid var(--red); outline-offset: 2px; }
+.clip { display: grid; gap: 8px; min-width: 0; }
+.clip video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 4px; display: block; }
+.tag { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.tag .id { color: var(--ink); font-weight: 500; font-size: 15px; }
+.tag .tc { color: var(--red); }
+.line { font-family: var(--f-text); font-size: 16px; line-height: 1.5; margin: 0; max-width: 65ch; }
+.note { display: grid; gap: 8px; align-content: start; min-width: 0; }
+textarea { width: 100%; box-sizing: border-box; min-height: 190px; resize: vertical; padding: 12px 14px;
+  font: 16px/1.5 var(--f-text); color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+textarea:focus { outline: 2px solid var(--red); outline-offset: 1px; border-color: transparent; }
+textarea:disabled { opacity: .6; }
+.foot { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.pill { padding: 2px 8px; border-radius: 99px; font-weight: 500; }
+.pill.open { background: var(--red-soft); color: var(--red); }
+.pill.done { background: var(--ok-soft); color: var(--ok); }
+.reply { font-family: var(--f-text); font-size: 15px; line-height: 1.45; background: var(--ok-soft); color: var(--ink);
+  border-radius: 6px; padding: 8px 12px; margin: 0; }
+.reply b { font-family: var(--f-head); color: var(--ok); }
+.mic { font: 600 13px var(--f-head); padding: 5px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+.mic.rec { background: var(--red); color: #fff; border-color: var(--red); }
+.partial { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin: 0; }
+.hist { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.hist summary { cursor: pointer; padding: 4px 0; list-style: none; }
+.hist summary::-webkit-details-marker { display: none; }
+.hist summary::before { content: "▸ "; }
+.hist[open] summary::before { content: "▾ "; }
+.hist .h { display: grid; gap: 4px; padding: 8px 0 4px; border-top: 1px dashed var(--line); }
+.hist .q { font-family: var(--f-text); font-size: 15px; line-height: 1.45; margin: 0; color: var(--ink); }
+.hist .q b, .hist .reply b { font-family: var(--f-head); font-weight: 700; }
+.hist .reply { margin: 0; }
+button:focus-visible, a:focus-visible, video:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+@media (max-width: 760px) { .shot { grid-template-columns: minmax(0, 1fr); } textarea { min-height: 140px; } .status { margin-left: 0; width: 100%; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1 id="h1"></h1>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="tools">
+    <div class="seg" role="group" aria-label="Show">
+      <button id="f-all" aria-pressed="true">All shots</button>
+      <button id="f-noted" aria-pressed="false">With notes</button>
+      <button id="f-open" aria-pressed="false">Open notes</button>
+    </div>
+    <label class="chk"><input type="checkbox" id="auto" checked> Play next clip automatically</label>
+    <span class="count" id="count"></span>
+    <span class="status" id="status">Connecting to the notes store…</span>
+  </div>
+  <main id="list"></main>
+</div>
+
+<script>
+const DATA = /*DATA*/null;
+const prevBy = {};       // this version's shot id -> earlier notes that point at it
+const $ = (s, el = document) => el.querySelector(s);
+const tc = t => { const m = Math.floor(t / 60), s = t - m * 60; return m + ":" + s.toFixed(1).padStart(4, "0"); };
+const docs = {};          // shot id -> stored doc body
+const rowsById = {};
+let db = null, canWrite = true, filter = "all", dictating = false;
+function pauseAll() { document.querySelectorAll("video").forEach(v => v.pause()); }
+
+document.title = DATA.title + " review";
+$("#h1").innerHTML = "";
+$("#h1").append(DATA.title + " ", Object.assign(document.createElement("em"), { textContent: "clip review" }));
+const meta = $("#meta");
+meta.append(`${DATA.shots.length} shots · ${tc(DATA.total)} · type a note beside any clip; it saves by itself`);
+if (DATA.drive) { const a = document.createElement("a"); a.href = DATA.drive; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Full-quality cut on Google Drive"; meta.append(a); }
+
+function status(msg, bad) { const s = $("#status"); s.textContent = msg; s.classList.toggle("bad", !!bad); }
+
+let lastSec = null;
+const list = $("#list");
+DATA.shots.forEach((s, i) => {
+  if (s.sec !== lastSec) {
+    lastSec = s.sec;
+    const h = document.createElement("h2"); h.className = "sec";
+    h.append(Object.assign(document.createElement("span"), { textContent: "Section " + s.sec }), s.secTitle);
+    list.append(h);
+  }
+  const row = document.createElement("article"); row.className = "shot"; row.id = s.id;
+  row.innerHTML = `
+    <div class="clip">
+      <video controls preload="none" playsinline poster="${s.poster}" src="${s.clip}"></video>
+      <div class="tag"><span class="id"></span><span class="tc"></span><span class="kind"></span></div>
+      <p class="line"></p>
+    </div>
+    <div class="note">
+      <textarea id="note-${s.id}" placeholder="What should change in this shot? Script, image, marks, motion, sound, timing…"></textarea>
+      <div class="foot"><span class="saved"></span><span class="state"></span><button type="button" class="mic" hidden>Dictate</button></div>
+      <p class="partial" hidden></p>
+      <p class="reply" hidden></p>
+      <details class="hist" hidden><summary></summary><div class="hlist"></div></details>
+    </div>`;
+  $(".id", row).textContent = "Shot " + s.n + " · " + s.id;
+  $(".tc", row).textContent = tc(s.start) + " – " + tc(s.start + s.dur);
+  $(".kind", row).textContent = s.kind;
+  $(".line", row).textContent = s.line;
+  const ta = $("textarea", row);
+  let timer = null;
+  ta.addEventListener("focus", pauseAll);
+  ta.addEventListener("input", () => { $(".saved", row).textContent = "typing…"; clearTimeout(timer); timer = setTimeout(() => save(s, row), 1200); });
+  ta.addEventListener("blur", () => { if (timer) { clearTimeout(timer); timer = null; save(s, row); } });
+  const v = $("video", row);
+  v.addEventListener("play", () => { document.querySelectorAll("video").forEach(o => { if (o !== v) o.pause(); }); document.querySelectorAll(".shot.playing").forEach(r => r.classList.remove("playing")); row.classList.add("playing"); });
+  v.addEventListener("ended", () => {
+    row.classList.remove("playing");
+    // Reason: never move on while a note is being typed or dictated.
+    if (!$("#auto").checked || (document.activeElement && document.activeElement.tagName === "TEXTAREA") || dictating) return;
+    let j = i + 1; while (j < DATA.shots.length && rowsById[DATA.shots[j].id].hidden) j++;
+    if (j >= DATA.shots.length) return;
+    const next = rowsById[DATA.shots[j].id];
+    next.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+    $("video", next).play().catch(() => {});
+  });
+  rowsById[s.id] = row;
+  list.append(row);
+});
+
+
+const pending = {}, inflight = {};
+async function save(s, row) {
+  if (!db || !canWrite) { $(".saved", row).textContent = db ? "read-only" : "not saved: notes store unavailable"; return; }
+  const body = { shot: s.id, n: s.n, tc: tc(s.start), text: $("textarea", row).value };
+  const old = docs[s.id];
+  if (old && old.text === body.text) { $(".saved", row).textContent = old.updatedAt ? "saved" : ""; return; }
+  if (inflight[s.id]) { pending[s.id] = true; return; }
+  inflight[s.id] = true;
+  body.updatedAt = new Date().toISOString();
+  body.status = body.text.trim() ? (old && old.status === "done" && old.text === body.text ? "done" : "open") : "empty";
+  $(".saved", row).textContent = "saving…";
+  try {
+    const ref = db.collection(DATA.collection || "notes").doc(s.id);
+    if (old) await ref.update(body); else await ref.set(body);
+    docs[s.id] = { ...(old || {}), ...body };
+    $(".saved", row).textContent = "saved " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    paint(s.id);
+  } catch (e) {
+    if (e && e.code === "invalid_argument" && !old) { canWrite = false; status("You can read these notes but not write them.", true); }
+    $(".saved", row).textContent = "not saved (" + (e && e.code || "error") + ")";
+  } finally {
+    inflight[s.id] = false;
+    if (pending[s.id]) { pending[s.id] = false; save(s, row); }
+  }
+}
+
+function paint(id) {
+  const row = rowsById[id], d = docs[id];
+  if (!row) return;
+  const ta = $("textarea", row);
+  if (d && document.activeElement !== ta && !inflight[id]) {
+    ta.value = d.text || "";
+  }
+  const st = $(".state", row);
+  st.textContent = ""; st.className = "state";
+  if (d && (d.status === "open" || d.status === "done")) { st.textContent = d.status === "done" ? "done" : "open"; st.className = "state pill " + d.status; }
+  const rep = $(".reply", row);
+  if (d && d.reply) { rep.hidden = false; rep.innerHTML = ""; rep.append(Object.assign(document.createElement("b"), { textContent: "Claude: " }), d.reply); } else rep.hidden = true;
+  applyFilter();
+}
+
+function hasNote(id) { const d = docs[id]; return d && (d.text || "").trim(); }
+function applyFilter() {
+  let noted = 0, open = 0;
+  DATA.shots.forEach(s => {
+    const n = hasNote(s.id), o = n && docs[s.id].status !== "done";
+    if (n) noted++; if (o) open++;
+    rowsById[s.id].hidden = filter === "noted" ? !n : filter === "open" ? !o : false;
+  });
+  document.querySelectorAll("h2.sec").forEach(h => {
+    let el = h.nextElementSibling, any = false;
+    while (el && el.tagName !== "H2") { if (!el.hidden) any = true; el = el.nextElementSibling; }
+    h.hidden = !any;
+  });
+  $("#count").innerHTML = "";
+  $("#count").append("Notes: ", Object.assign(document.createElement("b"), { textContent: open + " open" }), " · " + (noted - open) + " done");
+}
+["all", "noted", "open"].forEach(f => $("#f-" + f).addEventListener("click", () => {
+  filter = f; ["all", "noted", "open"].forEach(g => $("#f-" + g).setAttribute("aria-pressed", g === f ? "true" : "false")); applyFilter();
+}));
+applyFilter();
+
+// ---- Dictate button on every box: Claude's own speech-to-text, a fallback for outside dictation tools ----
+(async () => {
+  let dict = null;
+  try { dict = window.claude ? await window.claude.use("dictation") : null; } catch { dict = null; }
+  if (!dict) return;
+  let target = null;   // the row being dictated into
+  document.querySelectorAll(".mic").forEach(b => b.hidden = false);
+  dict.onPartial(({ text }) => { if (!target) return; const p = $(".partial", target); p.hidden = !text; p.textContent = text; });
+  dict.onFinal(({ text }) => {
+    if (!text || !target) return;
+    const ta = $("textarea", target), sep = ta.value && !/\s$/.test(ta.value) ? " " : "";
+    ta.value = ta.value + sep + text.trim();
+    ta.dispatchEvent(new Event("input"));
+    $(".partial", target).hidden = true;
+  });
+  dict.onState(({ state, reason }) => {
+    dictating = state !== "idle";
+    document.querySelectorAll(".mic").forEach(b => { const on = dictating && target && b.closest(".shot") === target; b.textContent = on ? "Stop" : "Dictate"; b.classList.toggle("rec", on); });
+    if (state === "idle") {
+      if (target) { $(".partial", target).hidden = true; $("textarea", target).dispatchEvent(new Event("blur")); }
+      target = null;
+      if (reason === "not_granted" || reason === "unavailable") document.querySelectorAll(".mic").forEach(b => b.hidden = true);
+    }
+  });
+  document.querySelectorAll(".mic").forEach(b => b.addEventListener("click", () => {
+    if (dictating) { dict.stop().catch(() => {}); return; }
+    pauseAll(); target = b.closest(".shot");
+    dict.start().catch(() => {});
+  }));
+})();
+
+(async () => {
+  try { db = window.claude ? await window.claude.use("db") : null; } catch { db = null; }
+  if (!db) { status("Notes store unavailable here: open this page on claude.ai, signed in, to save notes.", true); return; }
+  const loading = setTimeout(() => status("Notes store not answering yet; notes typed now may not save.", true), 10000);
+  db.collection(DATA.collection || "notes").onSnapshot(snap => {
+    if (!snap.metadata.fromCache) { clearTimeout(loading); status("Notes save automatically"); }
+    snap.docChanges().forEach(ch => {
+      if (ch.type === "removed") delete docs[ch.doc.id]; else docs[ch.doc.id] = ch.doc.data();
+      paint(ch.doc.id);
+    });
+  }, e => { clearTimeout(loading); status("Notes store stopped (" + e.code + "). Reload the page.", true); });
+  // Earlier round's notes sit under the shot they now belong to, folded: a note's `next` lists this version's shot ids.
+  if (DATA.prev) db.collection(DATA.prev).onSnapshot(snap => {
+    Object.keys(prevBy).forEach(k => delete prevBy[k]);
+    snap.docs.map(d => d.data()).filter(d => (d.text || "").trim()).forEach(d => {
+      (Array.isArray(d.next) && d.next.length ? d.next : [d.shot]).forEach(id => { if (rowsById[id]) (prevBy[id] = prevBy[id] || []).push(d); });
+    });
+    DATA.shots.forEach(s => {
+      const box = $(".hist", rowsById[s.id]), ps = prevBy[s.id] || [];
+      box.hidden = ps.length === 0;
+      if (!ps.length) return;
+      const done = ps.filter(d => d.status === "done").length;
+      $("summary", box).textContent = "Last round: " + ps.length + (ps.length === 1 ? " note" : " notes") + " · " + (done === ps.length ? "all changed" : (ps.length - done) + " still open");
+      const hl = $(".hlist", box); hl.innerHTML = "";
+      ps.sort((x, y) => (x.n || 0) - (y.n || 0)).forEach(d => {
+        const w = document.createElement("div"); w.className = "h";
+        const q = document.createElement("p"); q.className = "q";
+        q.append(Object.assign(document.createElement("b"), { textContent: "You said (old shot " + d.n + "): " }), d.text);
+        const r = document.createElement("p"); r.className = "reply";
+        r.append(Object.assign(document.createElement("b"), { textContent: "What changed: " }), d.reply || "Not changed yet.");
+        w.append(q, r); hl.append(w);
+      });
+    });
+  }, () => {});
+  try {
+    const user = window.claude ? await window.claude.use("user") : null;
+    const w = user && user.can ? await user.can("data.write") : null;
+    if (w === false) { canWrite = false; document.querySelectorAll("textarea").forEach(t => t.disabled = true); status("You can read these notes but not write them."); }
+  } catch {}
+})();
+</script>

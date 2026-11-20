@@ -1,0 +1,62 @@
+<template>
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="demo-route" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-50m.js"></script>
+  <script src="assets/vendor/land-110m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-composition-id="demo-route"]');
+      const tl = gsap.timeline({ paused: true });
+      const st = Kit.stage(root, { theme: "navy", active: 0, disclaimer: "Tracks illustrative · mark-ups illustrative" });
+      const map = Kit.flatMap(st.svg, { projection: "equirect", fitBounds: [[4, -14], [140, 56]], land: "50m" });
+      const P = Kit.places;
+
+      const title = Kit.title(st, "The *nutmeg* road", { x: 690, y: 892, size: 64, kicker: "BANDA → VENICE · c. 1500" });
+      title.in(tl, 0.35);
+
+      const road = Kit.route(st.svg, map, Kit.routes.bandaVenice, { color: "red", width: 5, greatCircle: false, smooth: true });
+      const dhow = Kit.vehicle(map, "dhow", { scale: 0.42 });
+
+      const stops = [
+        { key: "banda", label: "Banda", pos: "r" },
+        { key: "malacca", label: "Malacca", pos: "ur" },
+        { key: "calicut", label: "Calicut", pos: "r" },
+        { key: "aden", label: "Aden", pos: "dr" },
+        { key: "alexandria", label: "Alexandria", pos: "ul" },
+        { key: "venice", label: "Venice", pos: "r", dx: 34 }
+      ];
+      const ladder = Kit.priceLadder(st, [
+        { label: "Banda", value: 1 }, { label: "Malacca", value: 5 }, { label: "Calicut", value: 20 },
+        { label: "Aden", value: 60 }, { label: "Alexandria", value: 150 }, { label: "Venice", value: 600 }
+      ], { x: 66, y: 610, w: 400, eyebrow: "Price of a pound of nutmeg", small: "Each hand takes its cut" });
+      ladder.in(tl, 0.9);
+      ladder.step(tl, 0, 1.0);
+
+      const T0 = 1.6, DUR = 6.2;
+      Kit.ride(dhow, road, tl, T0, DUR, "none");
+      const pins = stops.map((s, i) => {
+        const p = Kit.pin(map, P[s.key], s.label, { pos: s.pos, dx: s.dx || 0 });
+        const at = i === 0 ? 0.7 : T0 + DUR * Kit.routeT(road, P[s.key]);
+        p.in(tl, at);
+        if (i > 0) ladder.step(tl, i, at);
+        return p;
+      });
+
+      // dim the context, then flip to the cream "day" stock
+      Kit.dim(tl, [road.g].concat(...pins.slice(1, 5).map((p) => p.group)), 8.25, 0.35);
+      Kit.themeFlip(tl, 8.7);
+      tl.to({}, { duration: 0.01 }, 9.49);
+      window.__timelines["demo-route"] = tl;
+    })();
+  </script>
+</template>

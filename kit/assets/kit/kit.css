@@ -1,0 +1,90 @@
+/* OLD ROUTES motion kit — styles. Paths are relative to this file (assets/kit/). */
+@font-face { font-family: "Newsreader"; src: url("../fonts/Newsreader.woff2") format("woff2"); font-weight: 400 800; font-style: normal; }
+@font-face { font-family: "Newsreader"; src: url("../fonts/Newsreader-Italic.woff2") format("woff2"); font-weight: 400 800; font-style: italic; }
+
+.kit-stage { position: absolute; inset: 0; overflow: hidden; font-family: "Newsreader", serif; font-variant-numeric: lining-nums tabular-nums; }
+.kit-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.kit-bg { position: absolute; inset: 0; background-size: 512px 512px; }
+.kit-svg { position: absolute; left: 0; top: 0; overflow: visible; }
+.kit-layer { position: absolute; inset: 0; }
+.kit-vignette { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 72% 72% at 50% 50%, rgba(30, 22, 10, 0) 0%, rgba(30, 22, 10, 0) 46%, rgba(30, 22, 10, 0.07) 70%, rgba(30, 22, 10, 0.17) 100%); }
+.kit-chrome { position: absolute; inset: 0; pointer-events: none; }
+
+/* brand chrome */
+/* v2: the logo sits bottom-right; the date top-left; reason icons top-right */
+.kit-logo { position: absolute; right: 66px; bottom: 38px; display: flex; align-items: center; gap: 12px; }
+.kit-mark { display: block; overflow: visible; }
+.kit-wordstrip { position: relative; padding: 9px 10px 8px 16px; }
+.kit-wordmark { position: relative; font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 600; letter-spacing: 0.3em; line-height: 1; }
+.kit-tabs { position: absolute; right: 66px; top: 44px; display: flex; gap: 8px; }
+.kit-tab { position: relative; padding: 11px 16px 10px; }
+.kit-tab-sheet { position: absolute; inset: 0; border-radius: 3px 3px 2px 2px; background-size: 256px 256px; }
+.kit-tab-edge { position: absolute; left: 3px; right: 3px; top: 0; height: 4px; background: #C03F27; border-radius: 2px 2px 0 0; }
+.kit-tab-label { position: relative; font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; line-height: 1; }
+.kit-chip { position: absolute; left: 66px; bottom: 40px; padding: 8px 12px 7px; }
+.kit-chip-text { position: relative; font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 600; letter-spacing: 0.16em; color: #4A4234; }
+
+/* map text */
+.kit-label { paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
+.kit-label-mono { font-family: "IBM Plex Mono", monospace; font-weight: 600; letter-spacing: 0.14em; }
+.kit-label-serif { font-family: "Newsreader", serif; font-weight: 600; }
+.kit-label-ocean { font-family: "Newsreader", serif; font-style: italic; font-weight: 500; letter-spacing: 0.12em; }
+
+/* paper sheets (HTML) */
+.kit-sheet { position: absolute; inset: 0; border-radius: 3px; background-size: 256px 256px; }
+.kit-card { position: absolute; padding: 26px 32px 26px; }
+.kit-card-body { position: relative; }
+.kit-eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 600; letter-spacing: 0.18em; opacity: 0.72; text-transform: uppercase; }
+.kit-big { font-family: "Newsreader", serif; font-size: 84px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.02; margin-top: 8px; }
+.kit-small { font-family: "IBM Plex Mono", monospace; font-size: 16px; font-weight: 500; letter-spacing: 0.14em; margin-top: 12px; opacity: 0.7; text-transform: uppercase; }
+.kit-accent { font-style: italic; font-weight: 600; }
+
+.kit-title { position: absolute; font-family: "Newsreader", serif; font-weight: 700; letter-spacing: -0.015em; line-height: 1.04; }
+.kit-title-line { display: block; }
+.kit-word { display: inline-block; }
+.kit-kicker { font-family: "IBM Plex Mono", monospace; font-size: 22px; font-weight: 600; letter-spacing: 0.2em; margin-bottom: 12px; }
+.kit-title-sub { font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 500; letter-spacing: 0.16em; margin-top: 14px; text-transform: uppercase; }
+
+.kit-stamp { position: absolute; }
+.kit-stamp-ink { font-family: "IBM Plex Mono", monospace; font-weight: 700; letter-spacing: 0.12em; white-space: nowrap; line-height: 1;
+  padding: 10px 18px 9px; border: 4px solid; border-radius: 7px; -webkit-mask-size: 256px 256px; mask-size: 256px 256px; opacity: 0.92;
+  box-shadow: inset 0 0 0 2px transparent; }
+
+.kit-ladder { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.kit-ladder-row { display: flex; align-items: baseline; gap: 10px; font-family: "IBM Plex Mono", monospace; font-size: 17px; font-weight: 600; letter-spacing: 0.14em; }
+.kit-ladder-dots { flex: 1; border-bottom: 2px dotted currentColor; opacity: 0.35; transform: translateY(-4px); }
+.kit-ladder-val { font-family: "Newsreader", serif; font-size: 24px; font-weight: 700; letter-spacing: 0; }
+
+/* ---- v2 chrome */
+.kit-date { position: absolute; left: 66px; top: 42px; height: 44px; width: 520px; }
+.kit-date-text { position: absolute; left: 0; top: 0; white-space: nowrap; font-family: "Newsreader", serif; font-size: 34px; font-weight: 500;
+  font-variant-caps: small-caps; font-variant-numeric: oldstyle-nums proportional-nums; letter-spacing: 0.06em; line-height: 1; }
+.kit-reasons { position: absolute; right: 66px; top: 34px; }
+.kit-reason-row { display: flex; gap: 12px; }
+.kit-reason { position: relative; width: 70px; height: 70px; }
+.kit-reason-sheet { position: absolute; inset: 0; border-radius: 6px; background-size: 256px 256px; }
+.kit-reason-rim { position: absolute; inset: -1px; border: 3px solid #C03F27; border-radius: 7px; }
+.kit-reason-icon { position: absolute; left: 0; top: 0; overflow: visible; }
+.kit-reason-labels { position: relative; height: 22px; margin-top: 12px; }
+.kit-reason-label { position: absolute; top: 0; text-align: center; white-space: nowrap; font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 600; letter-spacing: 0.16em; line-height: 1; }
+
+/* ---- v2 portrait */
+.kit-portrait { position: absolute; display: flex; flex-direction: column; align-items: center; }
+.kit-portrait-svg { display: block; overflow: visible; }
+.kit-plate { position: relative; margin-top: -6px; padding: 12px 22px 11px; text-align: center; min-width: 200px; }
+.kit-plate-name { position: relative; font-family: "Newsreader", serif; font-size: 28px; font-weight: 700; letter-spacing: -0.01em; color: #242018; line-height: 1.05; }
+.kit-plate-role { position: relative; margin-top: 6px; font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #625949; }
+
+/* ---- v2 scroll */
+.kit-scroll { position: absolute; }
+.kit-scroll-view { position: absolute; left: 0; right: 0; overflow: hidden; }
+.kit-scroll-content { position: relative; padding: 34px 44px; color: #3A2A1A; }
+.kit-scroll-line { font-family: "Newsreader", serif; }
+.kit-scroll-head { font-size: 34px; font-weight: 700; font-style: italic; text-align: center; margin-bottom: 14px; }
+.kit-scroll-body { font-size: 24px; font-weight: 400; line-height: 1.45; }
+.kit-scroll-sign { font-size: 26px; font-style: italic; font-weight: 500; text-align: right; margin-top: 14px; }
+.kit-scroll-roll { position: absolute; left: -18px; right: -18px; height: 30px; border-radius: 15px;
+  background: linear-gradient(to bottom, #B79F72 0%, #EBDDBA 30%, #DCC9A0 58%, #A88E62 100%); box-shadow: 0 5px 7px rgba(20, 18, 14, 0.28); }
+.kit-scroll-cap { position: absolute; top: 0; width: 18px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #8C744C 0 20%, #D6C397 22% 46%, #A88E62 48% 100%); }
+.kit-scroll-cap-l { left: -4px; } .kit-scroll-cap-r { right: -4px; }

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "1a",
+    "title": "A pinch on the eggnog",
+    "wpm": 146,
+    "pause": 0.9,
+    "style": "",
+    "chapter": "intro"
+  },
+  {
+    "id": "1b",
+    "title": "The truth is stranger",
+    "wpm": 150,
+    "pause": 0.8,
+    "style": "",
+    "chapter": "intro"
+  },
+  {
+    "id": "2a",
+    "title": "The seed",
+    "wpm": 150,
+    "pause": 0.7,
+    "style": "",
+    "chapter": "ch1"
+  },
+  {
+    "id": "2b",
+    "title": "The route",
+    "wpm": 150,
+    "pause": 0.7,
+    "style": "",
+    "chapter": "ch2"
+  },
+  {
+    "id": "3a",
+    "title": "The company",
+    "wpm": 150,
+    "pause": 0.7,
+    "style": "",
+    "chapter": "ch3"
+  },
+  {
+    "id": "3b",
+    "title": "The next island",
+    "wpm": 148,
+    "pause": 0.8,
+    "style": "",
+    "chapter": "ch3"
+  },
+  {
+    "id": "4a",
+    "title": "Two ships",
+    "wpm": 148,
+    "pause": 0.8,
+    "style": "",
+    "chapter": "ch4"
+  },
+  {
+    "id": "4b",
+    "title": "The siege",
+    "wpm": 146,
+    "pause": 0.8,
+    "style": "",
+    "chapter": "ch4"
+  },
+  {
+    "id": "5a",
+    "title": "Sixteen twenty-one",
+    "wpm": 135,
+    "pause": 1.4,
+    "style": "",
+    "chapter": "ch4"
+  },
+  {
+    "id": "5b",
+    "title": "Every tree on Run",
+    "wpm": 135,
+    "pause": 1.5,
+    "style": "",
+    "chapter": "ch4"
+  },
+  {
+    "id": "6a",
+    "title": "The other island",
+    "wpm": 150,
+    "pause": 0.7,
+    "style": "",
+    "chapter": "ch5"
+  },
+  {
+    "id": "6b",
+    "title": "Breda",
+    "wpm": 148,
+    "pause": 0.9,
+    "style": "",
+    "chapter": "ch5"
+  },
+  {
+    "id": "7a",
+    "title": "The escape",
+    "wpm": 150,
+    "pause": 0.8,
+    "style": "",
+    "chapter": "escape"
+  },
+  {
+    "id": "7b",
+    "title": "Back to the kitchen",
+    "wpm": 144,
+    "pause": 1.1,
+    "style": "",
+    "chapter": "ending"
+  }
+]

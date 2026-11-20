@@ -1,0 +1,102 @@
+<template>
+  <!-- Kit v2 reference sheet (20 s): figures and poses, waving flags, the VOC logo reveal, portraits, price climb,
+       scroll, exits, plus the v2 chrome (date top-left, reason icons top-right, logo bottom-right).
+       Rendered to demo_v2.mp4. The v1 sheet of every cutout and vehicle is compositions/kit-sheet-v1.html. -->
+  <link rel="stylesheet" href="assets/kit/kit.css" />
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Newsreader", serif; }
+    #root .kit-mono { font-family: "IBM Plex Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="kit-sheet" data-width="1920" data-height="1080"></div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/d3-array.min.js"></script>
+  <script src="assets/vendor/d3-geo.min.js"></script>
+  <script src="assets/vendor/d3-geo-projection.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="assets/vendor/land-50m.js"></script>
+  <script src="assets/vendor/land-110m.js"></script>
+  <script src="assets/kit/kit.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-composition-id="kit-sheet"]');
+      const tl = gsap.timeline({ paused: true });
+      const LEN = 20;
+      const st = Kit.stage(root, { theme: "cream", active: -1, date: "Anno 1599", disclaimer: "Kit v2 · reference sheet" });
+      const small = { size: 15, upper: true, halo: false, color: "ink2" };
+
+      // ---- page A (0–4.9): every figure kind × every pose
+      const A = [];
+      const poses = ["stand", "walk", "swim", "sign", "kneel", "fall"];
+      const kinds = [["englishman"], ["dutchman"], ["bandanese", "male"], ["bandanese", "female"], ["orangKaya"], ["japaneseMercenary"], ["sailor"]];
+      const colX = (j) => 360 + j * 228, rowY = (i) => 246 + i * 113;
+      poses.forEach((p, j) => A.push(Kit.label(st.top, [colX(j), 166], p, Object.assign({ anchor: "middle" }, small))));
+      kinds.forEach(([k, variant], i) => {
+        A.push(Kit.label(st.top, [96, rowY(i) + 6], variant ? k + " · " + variant : k, Object.assign({}, small, { size: 14 })));
+        poses.forEach((p, j) => {
+          const f = Kit.figure(st, k, { variant, pose: p === "fall" ? "stand" : p, x: colX(j), y: rowY(i), scale: 0.43 });
+          f.place(tl, 0.15 + i * 0.05 + j * 0.02, { from: "bottom", dist: 24 });
+          if (p === "walk") f.walk(tl, 0.9, 3.6);
+          if (p === "swim") f.swim(tl, 0.9, 3.6);
+          if (p === "fall") f.fall(tl, 2.0 + i * 0.12);
+          A.push(f);
+        });
+      });
+      // detail column: larger figures with pennants (flagOnTop)
+      const d1 = Kit.figure(st, "englishman", { x: 1745, y: 330, scale: 0.68, flagOnTop: "england1616", label: "flagOnTop: england1616", labelDy: 92, labelOpts: Object.assign({}, small, { size: 13 }) });
+      const d2 = Kit.figure(st, "dutchman", { x: 1745, y: 620, scale: 0.68, flagOnTop: "voc", label: "flagOnTop: voc", labelDy: 92, labelOpts: Object.assign({}, small, { size: 13 }) });
+      const d3 = Kit.figure(st, "bandanese", { variant: "female", x: 1745, y: 862, scale: 0.6 });
+      [d1, d2, d3].forEach((f, i) => { f.place(tl, 0.5 + i * 0.12, { from: "right" }); A.push(f); });
+      Kit.waveFlags(tl, 0, 4.9); // the two pennants
+      Kit.exit(tl, 4.55, A, { style: "lift", stagger: 0.004 });
+
+      // ---- page B (4.9–10.4): every flag, waving (deterministic, timeline-driven)
+      const B = [];
+      const flags = [["england1616", {}], ["union1606", {}], ["britain1801", {}], ["voc", {}],
+        ["dutchRepublic", {}], ["franceRoyal", {}], ["franceRoyal", { lis: true }], ["grenada", {}]];
+      flags.forEach(([type, o], i) => {
+        const x = 200 + (i % 4) * 420, y = 245 + Math.floor(i / 4) * 390;
+        const f = Kit.flag(st, type, Object.assign({ x, y, w: 250, pole: 1.35, label: type + (o.lis ? " · lis" : ""), labelOpts: small }, o));
+        f.place(tl, 5.0 + i * 0.07, { from: "bottom", dist: 40 });
+        f.wave(tl, 4.9, 5.6);
+        B.push(f);
+      });
+      Kit.exit(tl, 10.05, B, { style: "lift", stagger: 0.03 });
+
+      // ---- page C (10.4–15.4): VOC logo reveal + portrait frames
+      const logo = Kit.vocLogo(st, { x: 560, y: 610, size: 400, chamber: "A" });
+      Kit.vocReveal(tl, 10.7, logo, { hold: 4.4 });
+      const lab = Kit.label(st.top, [560, 920], "Kit.vocLogo · chamber A (Amsterdam)", Object.assign({ anchor: "middle" }, small));
+      lab.in(tl, 12.4);
+      const p1 = Kit.portrait(st, { src: "assets/portraits/test-portrait.jpg", name: "Jan Pieterszoon Coen", role: "VOC Governor-General", x: 1150, y: 520, w: 270 });
+      const p2 = Kit.portrait(st, { name: "Nathaniel Courthope", role: "English agent on Run", x: 1560, y: 520, w: 270 });
+      p1.in(tl, 11.2); p2.in(tl, 11.45);
+      Kit.exit(tl, 15.0, [logo, lab, p1, p2], { style: "lift", stagger: 0.06 });
+
+      // ---- page D (15.4–20): price climb on a map, scroll, exit
+      const map = Kit.flatMap(st.svg, { projection: "equirect", fitBounds: [[-32, -14], [134, 58]], land: "110m" });
+      tl.fromTo(map.g, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, 15.25);
+      const climb = Kit.priceClimb(st, map, [
+        { at: "banda", label: "Banda", value: 1 }, { at: "malacca", label: "Malacca", value: 3 }, { at: "calicut", label: "Calicut", value: 8 },
+        { at: "aden", label: "Aden", value: 25 }, { at: "alexandria", label: "Alexandria", value: 60, pos: "dl" }, { at: "venice", label: "Venice", value: 120, pos: "ul" }
+      ], { format: "x", card: { x: 900, y: 800, eyebrow: "Demo values · not sourced", small: "Banda → Venice" } });
+      climb.run(tl, 15.7, 19.8);
+      const scroll = Kit.scrollPaper(st, { x: 96, y: 450, w: 400, h: 360, cps: 75, lines: [
+        { text: "Treaty of Breda", style: "head" },
+        "Each side keeps what it holds on the day of signing.",
+        "Run stays with the Dutch; New Netherland with the English.",
+        { text: "31 July 1667", style: "sign" }] });
+      scroll.in(tl, 15.7);
+      scroll.scroll(tl, 18.7, 0.7, 24);
+      Kit.exit(tl, 19.45, scroll, { style: "lift" });
+
+      // ---- chrome over the whole sheet: date crossfades, reason icons step through every state
+      Kit.setDate(tl, 4.9, "1616");
+      Kit.setDate(tl, 10.4, "1621");
+      Kit.setDate(tl, 15.4, "31 July 1667");
+      [[0.6, 0], [3.0, 1], [6.0, 2], [9.0, 3], [12.5, 4], [17.8, -1]].forEach(([t, i]) => Kit.setReason(tl, t, i));
+
+      tl.to({}, { duration: 0.01 }, LEN - 0.01);
+      window.__timelines["kit-sheet"] = tl;
+    })();
+  </script>
+</template>
