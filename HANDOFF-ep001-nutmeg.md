@@ -1,6 +1,6 @@
 # Handoff: Story of Everything, ep-001 "The nutmeg" (from the 2026-11-18 session)
 
-Read this first, then continue. Not committed (delete it once the new session has taken over).
+Read this first, then continue. Delete it once the new session has taken over.
 
 ## Where things stand
 - **Episode 1 is DONE as final cut v5 (11:55), waiting for the owner's "approved".**
@@ -11,8 +11,11 @@ Read this first, then continue. Not committed (delete it once the new session ha
     Drive folder `G:\My Drive\Old Routes`).
 - The channel was renamed from "Old Routes" to **Story of Everything** (wordmark, outro line).
 
-## Where the work lives (NOT in this folder yet)
-- Workspace: `C:\Users\ash\trade-routes` (local git repo, 2 commits, **no remote**; media/audio/build ignored).
+## Where the work lives
+- The trade-routes workspace (tools, kit, episodes) is merged into THIS repo with its history (2026-11-19),
+  same layout, so the paths below are relative to the repo root. Media, audio and build outputs are git-ignored
+  and exist only on disk in `C:\Users\ash\trade-routes` (renders, narration takes, chapter builds): copy those
+  folders here before running the pipeline from this repo, and keep ONE working copy.
   - Episode: `episodes/ep-001-run-and-manhattan/` — `script_annotated.md` (truth: narration + [VISUAL] cues),
     `script.md`, `facts.md`/`facts2.md`, `sections.json` (per section: narrative "chapter"), `cues_timed.json`,
     `audio/` (narration.wav, timeline.json, words.json, mix.wav, onetake/ takes), `build_r5/c1..c8/proj`
@@ -22,8 +25,7 @@ Read this first, then continue. Not committed (delete it once the new session ha
     `tools/build_review_page.py`, `tools/mix_intelligibility.py`, `tools/lyria_clip.py`, `tools/fetch_sfx.py`.
   - Kit: `kit/assets/kit/kit.js` (+ `kit/KIT_API.md`); sfx palette `assets/sfx/manifest.json`,
     CC BY credits for the video description in `assets/sfx/CREDITS.md`.
-- Open question for the owner: move/copy the trade-routes workspace into this repo (it has a GitHub remote, so it
-  could finally be pushed), or keep trade-routes separate and give it its own remote.
+- ep-002 "cold machine" was started by a parallel session; its text files are in `episodes/ep-002-cold-machine/`.
 
 ## Pipeline (how a round is made)
 script_annotated.md → `tools/strip_script.py` → narration (`tools/tts_onetake.py`, Vertex Gemini TTS, voice
@@ -45,4 +47,4 @@ publish to the same artifact (≤255 files per publish; ≤512 per version; drop
 1. Wait for the owner's notes on v5 (read `notes-v5` on the page) or "approved".
 2. On "approved": the upload kit — title, description (with the CC BY sound credits from `CREDITS.md`),
    YouTube chapter timestamps from `audio/timeline.json` chapter starts, thumbnail.
-3. Ask whether trade-routes should move into this repo (or get its own remote) and push.
+3. Decide whether work continues here or in `C:\Users\ash\trade-routes`, and keep only one working copy.
